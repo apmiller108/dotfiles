@@ -1,0 +1,16 @@
+"============================================================
+"			~ My Vimrc ~
+"============================================================
+"Author: 		Alex Miller <alex-miller.co>
+"Source: 		https/github.com/apmiller108/dotfiles
+"
+"============================================================
+nmap 0 ^
+
+let mapleader = "\<space>"
+
+nmap <leader>vr :vsp $MYVIMRC
+nmap <leader>so :source $MYVIMRC
+set number				"show line numbers
+set expandtab			"convert tab to spaces
+set tabstop=2			"two spaces per tab
