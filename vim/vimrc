@@ -7,6 +7,8 @@
 "============================================================
 nmap 0 ^
 
+nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
+
 let mapleader = "\<space>"
 
 nmap <leader>vr :vsp $MYVIMRC
