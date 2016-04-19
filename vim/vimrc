@@ -1,18 +1,28 @@
 "============================================================
-"			~ My Vimrc ~
+"                  			~ My Vimrc ~
 "============================================================
 "Author: 		Alex Miller <alex-miller.co>
 "Source: 		https/github.com/apmiller108/dotfiles
 "
 "============================================================
-nmap 0 ^
-
-nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
-
-let mapleader = "\<space>"
-
-nmap <leader>vr :vsp $MYVIMRC
-nmap <leader>so :source $MYVIMRC
+set nobackup
+set nowritebackup
+set noswapfile
 set number				"show line numbers
 set expandtab			"convert tab to spaces
 set tabstop=2			"two spaces per tab
+set shiftwidth=2
+set shiftround
+set history=50
+set ruler         "show cursor position all the time
+set textwidth=80
+set colorcolumn=+1
+
+let mapleader = "\<space>"
+nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
+nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
+nmap 0 ^
+nmap <leader>vr :vsp $MYVIMRC
+nmap <leader>so :source $MYVIMRC
+nmap k gk
+nmap j gj
