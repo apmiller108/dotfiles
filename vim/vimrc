@@ -18,11 +18,20 @@ set ruler         "show cursor position all the time
 set textwidth=80
 set colorcolumn=+1
 
+" Make CtrlP use ag for listing the files. Way faster and no useless files.
+let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
+let g:ctrlp_use_caching = 0
 let mapleader = "\<space>"
-nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
 nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
 nmap 0 ^
 nmap <leader>vr :vsp $MYVIMRC
 nmap <leader>so :source $MYVIMRC
 nmap k gk
 nmap j gj
+
+"                          plugins
+call plug#begin('~/.vim/plugged')
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rking/ag.vim'
+Plug 'tpope/vim-surround'
+call plug#end()
