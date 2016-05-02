@@ -7,32 +7,39 @@
 "===============================================================================
 "
 "                                   ~ Set ~ 
-set nocompatible  "this is Vim, not Vi.
+set nocompatible      " this is Vim, not Vi.
 set nobackup
 set nowritebackup
 set noswapfile
-set number				"show line numbers
-set expandtab			"convert tab to spaces
-set tabstop=2			"two spaces per tab
+set number				    " Show line numbers
+set expandtab			    " Convert tab to spaces
+set tabstop=2			    " Two spaces per tab
 set shiftwidth=2
 set shiftround
 set history=50
-set ruler         "show cursor position all the time
+set ruler             " Show cursor position all the time
 set textwidth=80
 set colorcolumn=+1
 set background=dark
+set clipboard=unnamed
 syntax on
+filetype on           " Enable filetype detection
+filetype indent on    " Enable filetype-specific indenting
+filetype plugin on    " Enable filetype-specific plugins
 augroup rubypath
   autocmd!
 
   autocmd FileType ruby setlocal suffixesadd+=.rb
 augroup END
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "
 "                                 ~ Mapping ~
 "
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
 let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
 let g:ctrlp_use_caching = 0
+let g:ctrlp_show_hidden = 1
 let mapleader = "\<space>"
 nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
 nmap 0 ^
@@ -40,6 +47,7 @@ nmap <leader>vr :vsp $MYVIMRC
 nmap <leader>so :source $MYVIMRC
 nmap k gk
 nmap j gj
+map <C-n> :NERDTreeToggle<CR>
 "
 "                                 ~ plugins ~  
 "
@@ -56,8 +64,12 @@ Plug 'tpope/vim-bundler'
 Plug 'vim-ruby/vim-ruby'
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
+Plug 'sidorares/node-vim-debugger'
 call plug#end()
 "
 "
 "
 runtime macros/matchit.vim
+execute pathogen#infect()
