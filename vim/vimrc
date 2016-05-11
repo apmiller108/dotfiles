@@ -7,6 +7,7 @@
 "===============================================================================
 "
 "                                   ~ Set ~ 
+set t_Co=256
 set nocompatible      " this is Vim, not Vi.
 set nobackup
 set nowritebackup
@@ -20,9 +21,20 @@ set history=50
 set ruler             " Show cursor position all the time
 set textwidth=80
 set colorcolumn=+1
-set background=dark
 set clipboard=unnamed
-syntax on
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set term=screen-256color
+syntax enable
+set background=dark
+colo solarized
+let g:solorize_termcolors=256
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_html_tidy_quiet_messages = { "level": "warnings", "type": "syntax" }
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
@@ -32,7 +44,7 @@ augroup rubypath
   autocmd FileType ruby setlocal suffixesadd+=.rb
 augroup END
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 "
 "                                 ~ Mapping ~
 "
@@ -67,6 +79,11 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'sidorares/node-vim-debugger'
+Plug 'scrooloose/syntastic'
+Plug 'mattn/emmet-vim'
+Plug 'Townk/vim-autoclose'
+Plug 'vim-scripts/closetag.vim'
+Plug 'altercation/vim-colors-solarized'
 call plug#end()
 "
 "
