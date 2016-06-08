@@ -1,12 +1,11 @@
-"===============================================================================
-"                  	  		        ~ My Vimrc ~
-"===============================================================================
+"==================================================================
+"                  	  	 ~ My Vimrc ~
+"==================================================================
 "Author: 		Alex Miller <alex-miller.co>
 "Source: 		https/github.com/apmiller108/dotfiles
+"==================================================================
 "
-"===============================================================================
-"
-"                                   ~ Set ~ 
+"                           ~ Set ~ 
 set t_Co=256
 set nocompatible      " this is Vim, not Vi.
 set nobackup
@@ -47,7 +46,7 @@ augroup END
 autocmd StdinReadPre * let s:std_in=1
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 "
-"                                 ~ Mapping ~
+"                         ~ Mapping ~
 "
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
 let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
@@ -60,9 +59,10 @@ nmap <leader>vr :vsp $MYVIMRC
 nmap <leader>so :source $MYVIMRC
 nmap k gk
 nmap j gj
+vmap <F2> :w !pbcopy<CR><CR>
 map <C-n> :NERDTreeToggle<CR>
 "
-"                                 ~ plugins ~  
+"                         ~ plugins ~  
 "
 call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
@@ -85,6 +85,7 @@ Plug 'mattn/emmet-vim'
 Plug 'Townk/vim-autoclose'
 Plug 'vim-scripts/closetag.vim'
 Plug 'altercation/vim-colors-solarized'
+Plug 'henrik/git-grep-vim'
 call plug#end()
 "
 "
