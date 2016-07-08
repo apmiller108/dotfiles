@@ -27,7 +27,13 @@ set statusline+=%*
 set term=screen-256color
 syntax enable
 set background=dark
+set laststatus=2
+set statusline=%f\ \ %m%=%l\,%c\ \ \ \%P\ %L
+set statusline+=%#error#
+set statusline+=%{&paste?'[paste]':''}
+set statusline+=%*
 colo solarized
+" colo molokai
 let g:solorize_termcolors=256
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -35,6 +41,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_html_tidy_quiet_messages = { "level": "warnings", "type": "syntax" }
 let g:syntastic_javascript_jshint_quiet_messages = { "regex": ['require', 'console', 'process', 'setInterval', 'strict', 'esversion: 6'] }
+let g:syntastic_ruby_mri_quiet_messages = { "regex": ['ambiguous\sfirst\sargument;'] }
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
@@ -59,7 +66,10 @@ nmap <leader>vr :vsp $MYVIMRC
 nmap <leader>so :source $MYVIMRC
 nmap k gk
 nmap j gj
-vmap <F2> :w !pbcopy<CR><CR>
+nmap <F2> :.w !pbcopy<CR><CR> " Copy line to clipboard
+vmap <F2> :w !pbcopy<CR><CR>  " Copy visual select to clipboard
+imap <F3> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+nmap <F3> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 map <C-n> :NERDTreeToggle<CR>
 "
 "                         ~ plugins ~  
@@ -85,7 +95,6 @@ Plug 'mattn/emmet-vim'
 Plug 'Townk/vim-autoclose'
 Plug 'vim-scripts/closetag.vim'
 Plug 'altercation/vim-colors-solarized'
-Plug 'henrik/git-grep-vim'
 call plug#end()
 "
 "
