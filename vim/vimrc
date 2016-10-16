@@ -35,6 +35,8 @@ set statusline+=%*
 colo solarized
 " colo molokai
 let g:solorize_termcolors=256
+" 
+"                       ~ Syntax Checkers ~
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -44,6 +46,11 @@ let g:syntastic_javascript_jshint_quiet_messages = { "regex": ['require', 'conso
 let g:syntastic_ruby_mri_quiet_messages = { "regex": ['ambiguous\sfirst\sargument;'] }
 let g:syntastic_enable_elixir_checker = 1
 let g:syntastic_elixir_checkers = ['elixir']
+let g:syntastic_enable_javascript_checker = 1
+let g:syntastic_javascript_checkers = ['jshint'] 
+let g:syntastic_enable_typescript_checker = 1
+let g:syntastic_typescript_checkers = ['tslint']
+"
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
@@ -54,6 +61,7 @@ augroup rubypath
 augroup END
 autocmd StdinReadPre * let s:std_in=1
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 "
 "                         ~ Mapping ~
 "
@@ -73,6 +81,9 @@ vmap <F2> :w !pbcopy<CR><CR>  " Copy visual select to clipboard
 imap <F3> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 nmap <F3> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 map <C-n> :NERDTreeToggle<CR>
+" surround.vim mapping
+let g:surround_61 = "<%= \r\ %>"
+let g:surround_45 = "<% \r\ %>"
 "
 "                         ~ plugins ~  
 "
@@ -86,6 +97,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-dispatch'
 Plug 'vim-ruby/vim-ruby'
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
@@ -98,6 +110,7 @@ Plug 'Townk/vim-autoclose'
 Plug 'vim-scripts/closetag.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'elixir-lang/vim-elixir'
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 "
 "
