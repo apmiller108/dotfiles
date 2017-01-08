@@ -1,0 +1,35 @@
+[user]
+	name = Alex Miller
+	email = apmiller108@yahoo.com
+[push]
+	default = upstream
+[alias]
+	co = checkout
+	a = add -A
+  b = branch
+  d = diff
+  l = log
+  s = status
+ ci = commit -a -m
+ co = checkout
+ la = config --global --get-regex alias
+ l3 = log -3
+ lr3 = log --reverse -3
+ ctags = !.git/hooks/ctags
+	sla = log --oneline --decorate --graph --all
+	uncommit = reset --soft HEAD^
+[color]
+	ui = true
+[core]
+	editor = vim
+	excludesfile = /Users/upgraydd/.gitignore
+[credential]
+	helper = osxkeychain
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[init]
+  templatedir = ~/.git_template
+[fetch]
+  prune = true
