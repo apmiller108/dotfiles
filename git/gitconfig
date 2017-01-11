@@ -20,6 +20,8 @@
   uncommit = reset --soft HEAD^
   dup = !git checkout develop && git pull origin develop && git checkout -
   mup = !git checkout master && git pull && git checkout -
+  browse = !hub browse
+  compare = !hub compare
 [color]
 	ui = true
 [core]
