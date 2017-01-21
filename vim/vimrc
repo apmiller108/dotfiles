@@ -1,13 +1,12 @@
-"==================================================================
-"                  	  	 ~ My Vimrc ~
-"==================================================================
+"===============================================================================
+"                  	  	          ~ My Vimrc ~
+"===============================================================================
 "Author: 		Alex Miller <alex-miller.co>
 "Source: 		https/github.com/apmiller108/dotfiles
-"==================================================================
+"===============================================================================
 "
-"                           ~ Set ~
+"                                   ~ Set ~
 "
-set t_Co=256
 set nocompatible      " this is Vim, not Vi.
 set nobackup
 set nowritebackup
@@ -21,23 +20,34 @@ set history=50
 set ruler             " Show cursor position all the time
 set textwidth=80
 set colorcolumn=+1
-set clipboard=unnamed " Use the system keyboard
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+set clipboard=unnamed " Use the system clipboard
 set term=screen-256color
 syntax enable
 set background=dark
 set laststatus=2
-set statusline=%f\ \ %m%=%l\,%c\ \ \ \%P\ %L
+colo solarized
+" colo molokai
+"
+"                               ~ Status Line ~
+"
+" Get the current git branch name
+function! GitBranch()
+  let branch = system("git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* //'")
+  if branch != ''
+    return substitute(branch, '\n', '', 'g')
+  en  
+  return ''
+endfunction
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set statusline+=%f\ %{GitBranch()}\ %m%=%l\,%c\ \ \ \%P\ %L
 set statusline+=%#error#
 set statusline+=%{&paste?'[paste]':''}
 set statusline+=%*
-colo solarized
-" colo molokai
-let g:solorize_termcolors=256
 "
-"                       ~ Syntax Checkers ~
+"                             ~ Syntax Checkers ~
+"
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -64,7 +74,7 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 "
-"                         ~ Mapping ~
+"                                 ~ Mapping ~
 "
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
 let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
@@ -83,7 +93,7 @@ vmap <F2> :w !pbcopy<CR><CR>  " Copy visual select to clipboard
 imap <F3> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 nmap <F3> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 map <C-n> :NERDTreeToggle<CR>
-" surround.vim mapping
+" surround.vim custom mapping
 let g:surround_61 = "<%= \r\ %>"
 let g:surround_45 = "<% \r\ %>"
 "
