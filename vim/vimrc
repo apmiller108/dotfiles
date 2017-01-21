@@ -21,7 +21,7 @@ set history=50
 set ruler             " Show cursor position all the time
 set textwidth=80
 set colorcolumn=+1
-set clipboard=unnamed
+set clipboard=unnamed " Use the system keyboard
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -75,6 +75,7 @@ nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
 nmap 0 ^
 nmap <leader>vr :vsp $MYVIMRC
 nmap <leader>so :source $MYVIMRC
+nmap <leader>t :call RunCurrentSpecFile()<CR>
 nmap k gk
 nmap j gj
 nmap <F2> :.w !pbcopy<CR><CR> " Copy line to clipboard
@@ -89,8 +90,18 @@ let g:surround_45 = "<% \r\ %>"
 "                         ~ plugins ~
 "
 call plug#begin('~/.vim/plugged')
+Plug 'altercation/vim-colors-solarized'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'kana/vim-textobj-user'
+Plug 'leafgarland/typescript-vim'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'mattn/emmet-vim'
 Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'thoughtbot/vim-rspec'
+Plug 'Townk/vim-autoclose'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
@@ -101,16 +112,7 @@ Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-ruby/vim-ruby'
-Plug 'kana/vim-textobj-user'
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
-Plug 'mattn/emmet-vim'
-Plug 'Townk/vim-autoclose'
 Plug 'vim-scripts/closetag.vim'
-Plug 'altercation/vim-colors-solarized'
-Plug 'elixir-lang/vim-elixir'
-Plug 'leafgarland/typescript-vim'
 call plug#end()
 "
 "
