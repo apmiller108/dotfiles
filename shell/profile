@@ -1,0 +1,21 @@
+export EDITOR="vim"
+# export PATH=/Users/upgraydd/.rvm/gems/ruby-2.2.1/bin:/Users/upgraydd/.rvm/gems/ruby-2.2.1@global/bin:/Users/upgraydd/.rvm/rubies/ruby-2.2.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/upgraydd/.rvm/bin:/Applications/Postgres.app/Contents/Versions/latest/bin
+export PATH=/usr/local/bin:$PATH
+export TERM=xterm-256color
+export GREP_OPTIONS='--color=always' 
+
+alias g="git status"
+alias gaa="git add ."
+alias gc="git commit"
+alias gb="git branch"
+alias gco="git checkout"
+alias hrrc="heroku run rails c"
+alias hlpd="heroku local -f Procfile.dev"
+alias vim="/usr/local/bin/vim"
+alias bex="bundle exec"
+alias dc="docker-compose"
+alias dcr="docker-compose run"
+alias cleandocker="sh ~/development/bash/clean-docker.sh"
+source ~/.gitprompt
+# uncomment if using bash
+# source ~/.git-completion.sh
