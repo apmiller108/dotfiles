@@ -1,12 +1,12 @@
 BASE="$HOME/dotfiles/shell/zsh"
 FIRST=source_first
 
-# these get last first
+# these get sourced first
 for file in "$BASE/$FIRST"/*.zsh; do
   source "$file"
 done
 
-# these get sources last
+# these get sourced last
 for file in "$BASE"/*.zsh; do
   source "$file"
 done
