@@ -26,6 +26,7 @@ syntax enable
 set term=screen-256color
 set background=dark
 colo solarized
+let g:solorize_termcolors=256
 " colo molokai
 "
 "                               ~ Status Line ~
@@ -88,11 +89,12 @@ nmap <leader>so :source $MYVIMRC
 nmap <leader>t :call RunCurrentSpecFile()<CR>
 nmap k gk
 nmap j gj
-nmap <F2> :.w !pbcopy<CR><CR> " Copy line to clipboard
-vmap <F2> :w !pbcopy<CR><CR>  " Copy visual select to clipboard
-imap <F3> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
-nmap <F3> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+" nmap <F2> :.w !pbcopy<CR><CR> " Copy line to clipboard
+" vmap <F2> :w !pbcopy<CR><CR>  " Copy visual select to clipboard
+" imap <F3> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+" nmap <F3> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 map <C-n> :NERDTreeToggle<CR>
+map <leader>r :redraw!
 " surround.vim custom mapping
 let g:surround_61 = "<%= \r\ %>"
 let g:surround_45 = "<% \r\ %>"
