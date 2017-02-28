@@ -18,13 +18,16 @@ alias hlpd="heroku local -f Procfile.dev"
 # Docker
 alias dc="docker-compose"
 alias dcr="docker-compose run"
-alias cleandocker="sh ~/development/bash/clean-docker.sh"
+alias cleandocker="sh ~/development/shell/clean-docker.sh"
 
 # Interactive and verbose for saftey
-
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -iv"
+
+# Elixir and Phoenix
+alias el="elixir"
+alias mps="mix phoenix.server"
 
 # The rest
 alias o="open ."
@@ -32,4 +35,3 @@ alias bex="bundle exec"
 alias ls="ls -F"
 alias df="dh -h"
 alias emacs="ec"
-alias el="elixir"
