@@ -1,7 +1,4 @@
 export EDITOR="vim"
-# export PATH=/Users/upgraydd/.rvm/gems/ruby-2.2.1/bin:/Users/upgraydd/.rvm/gems/ruby-2.2.1@global/bin:/Users/upgraydd/.rvm/rubies/ruby-2.2.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/upgraydd/.rvm/bin:/Applications/Postgres.app/Contents/Versions/latest/bin
-export PATH=/usr/local/bin:$PATH
-# export TERM=xterm-256color
 export GREP_OPTIONS='--color=always' 
 
 alias g="git status"

@@ -1,0 +1,10 @@
+# export PATH=/Users/upgraydd/.rvm/gems/ruby-2.2.1/bin:/Users/upgraydd/.rvm/gems/ruby-2.2.1@global/bin:/Users/upgraydd/.rvm/rubies/ruby-2.2.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/upgraydd/.rvm/bin:/Applications/Postgres.app/Contents/Versions/latest/bin
+export PATH=/usr/local/bin:$PATH
+# I have postres installed as an application. Makes it easier to update.
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+# MacPorts Installer addition on 2016-02-07_at_13:57:27: adding an appropriate PATH variable for use with MacPorts.
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+# Finished adapting your PATH environment variable for use with MacPorts.
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="$HOME/.npm-packages/bin:$PATH" # for npm and npm global packages

@@ -3,9 +3,6 @@ source $HOME/.bash_profile
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# I have postres installed as an application. Makes it easier to update.
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
-
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/upgraydd/.oh-my-zsh
 
