@@ -26,6 +26,7 @@
   brav = branch -vv
   publish = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
   unpublish = !git push origin --delete $(git rev-parse --abbrev-ref HEAD)
+  rim = rebase -i master
 [color]
 	ui = true
 [core]
