@@ -142,9 +142,9 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(sanityinc-solarized-dark
-                         ujelly
-                         dakrone)
+   dotspacemacs-themes '(dakrone,
+                         sanityinc-solarized-dark,
+                         ujelly)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -325,6 +325,17 @@ you should place your code here."
                                                 evil-surround-pairs-alist))
   (global-hl-line-mode -1)
   (global-column-enforce-mode)
+  (indent-guide-global-mode)
+  (setq css-indent-offset 2)
+  (setq json-encoding-default-indentation 2)
+  (setq javascript-indent-level 2)
+  (setq js-indent-level 2)
+  (setq typescript-indent-level 2)
+  (setq web-mode-markup-indent-offset 2) ; web-mode: html tag in html file
+  (setq web-mode-css-indent-offset 2) ; web-mode: css in html file
+  (setq web-mode-code-indent-offset 2) ; web-mode: js code in html file
+  (setq sh-basic-offset 2)
+  (setq sh-indentation 2)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
