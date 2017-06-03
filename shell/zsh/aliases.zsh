@@ -19,7 +19,7 @@ alias hlpd="heroku local -f Procfile.dev"
 alias dc="docker-compose"
 alias dcr="docker-compose run"
 alias cleandocker="sh ~/development/shell/clean-docker.sh"
-alias dpost="docker exec -it `docker ps | grep -oE '\w+postgres_1$'` psql -U postgres"
+# alias dpost="docker exec -it `docker ps | grep -oE '\w+postgres_1$'` psql -U postgres"
 
 # Interactive and verbose for saftey
 alias cp="cp -iv"
@@ -36,3 +36,4 @@ alias bex="bundle exec"
 alias ls="ls -F"
 alias df="dh -h"
 alias emacs="ec"
+alias e="emacsclient --no-wait"

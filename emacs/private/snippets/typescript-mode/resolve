@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Angular resolver
+# key: resolve
+# --
+import { Injectable } from '@angular/core';
+import { Router,
+         Resolve,
+         RouterStateSnapshot,
+         ActivatedRouteSnapshot } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+
+// Services
+
+@Injectable()
+export class $1Resolver implements Resolve<any> {
+    constructor(private service: $2Service, private router: Router) {}
+
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
+      // return this.service.someAction();
+    }
+}
+
