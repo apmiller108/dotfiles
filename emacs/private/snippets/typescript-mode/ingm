@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: import ngModel
-# key: ingm
-# --
-import { NgModule } from '@angular/core';
