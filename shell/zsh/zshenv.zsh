@@ -10,3 +10,5 @@ export PATH="$HOME/.npm-packages/bin:$PATH" # for npm and npm global packages
 export PATH="$PATH:`yarn global bin`" # for Yarn for global packages
 # Build Environment for Angular projects
 export BUILD_ENV=development
+# added by Anaconda3 4.4.0 installer
+export PATH="/Users/upgraydd/anaconda/bin:$PATH"
