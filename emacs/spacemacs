@@ -31,7 +31,6 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     python
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -50,11 +49,13 @@ values."
      markdown
      osx
      org
+     python
      ruby
-     ruby-on-rails
      (ruby :variables
            ruby-version-manager 'rvm
-           ruby-test-runner 'rspec)
+           ruby-test-runner 'rspec
+           ruby-insert-encoding-magic-comment nil)
+     ruby-on-rails
      (spell-checking :variables
                      spell-checking-enable-by-default nil
                      ispell-program-name "/usr/local/bin/aspell")
