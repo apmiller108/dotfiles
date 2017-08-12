@@ -12,3 +12,7 @@ export PATH="$PATH:`yarn global bin`" # for Yarn for global packages
 export BUILD_ENV=development
 # added by Anaconda3 4.4.0 installer
 export PATH="/Users/upgraydd/anaconda/bin:$PATH"
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
