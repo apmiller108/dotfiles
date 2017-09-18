@@ -14,6 +14,7 @@ alias gco="git checkout"
 # Heroku toolbelt
 alias hrrc="heroku run rails c"
 alias hlpd="heroku local -f Procfile.dev"
+alias he="heroku"
 
 # Docker
 alias dc="docker-compose"
