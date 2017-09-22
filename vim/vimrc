@@ -79,6 +79,13 @@ augroup END
 autocmd StdinReadPre * let s:std_in=1
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+"oWhitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 "
 "                                 ~ Mapping ~
 "
