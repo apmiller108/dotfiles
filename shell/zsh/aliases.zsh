@@ -20,7 +20,7 @@ alias he="heroku"
 alias dc="docker-compose"
 alias dcr="docker-compose run"
 alias cleandocker="sh ~/development/shell/clean-docker.sh"
-# alias dpost="docker exec -it `docker ps | grep -oE '\w+postgres_1$'` psql -U postgres"
+alias dpost="docker exec -it `docker ps | grep -oE '\w+postgres_1$'` psql -U postgres"
 alias dss="docker-sync-stack"
 
 # Interactive and verbose for saftey
