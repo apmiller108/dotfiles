@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: iffe
+# key: iffe
+# --
+(function() {
+  $0
+})();
