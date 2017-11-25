@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: $.ajax
+# key: $.ajax
+# --
+$.ajax({
+  url: '/$0',
+  type: 'get',
+  dataType: 'json',
+  contentType: 'application/json',
+  success: function(data) {},
+  error: function(xhr, status, error) {}
+});
