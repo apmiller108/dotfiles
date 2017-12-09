@@ -5,3 +5,7 @@
 **/.#*
 
 .ruby-version
+tags
+
+# Ignore Rails Gem dependencies
+vendor/bundle

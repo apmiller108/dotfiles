@@ -39,6 +39,7 @@ values."
      auto-completion
      c-c++
      colors
+     crystal
      csv
      dash
      elixir
@@ -52,6 +53,7 @@ values."
      osx
      org
      python
+     react
      ruby
      (ruby :variables
            ruby-version-manager 'rbenv
@@ -67,6 +69,11 @@ values."
                      ispell-program-name "/usr/local/bin/aspell")
      sql
      syntax-checking
+     (themes-megapack :packages
+                      molokai-theme
+                      jbeans-theme
+                      naquadah-theme
+                      seti-theme)
      typescript
      yaml
      ;; version-control
@@ -114,7 +121,7 @@ values."
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
    ;; whenever you start Emacs. (default nil)
-   dotspacemacs-check-for-update nil
+   dotspacemacs-check-for-update t
    ;; If non-nil, a form that evaluates to a package directory. For example, to
    ;; use different package directories for different Emacs versions, set this
    ;; to `emacs-version'.
@@ -150,8 +157,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(dakrone,
-                         ir-black)
+   dotspacemacs-themes '(dakrone)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -347,6 +353,7 @@ you should place your code here."
   (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
   (setq ns-use-srgb-colorspace nil)
   (require 'helm-bookmark)
+  (turn-on-fci-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
