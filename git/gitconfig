@@ -31,7 +31,7 @@
 	ui = true
 [core]
 	editor = vim
-	excludesfile = /Users/upgraydd/.gitignore
+	excludesfile = /Users/upgraydd/.gitignore_global
 [credential]
 	helper = osxkeychain
 [filter "lfs"]
