@@ -9,7 +9,7 @@ export EDITOR="vim"
 export GREP_OPTIONS='--color=always' 
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/upgraydd/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set node environment
 export NODE_ENV=development
