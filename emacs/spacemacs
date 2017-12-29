@@ -341,6 +341,7 @@ you should place your code here."
   ;; (global-column-enforce-mode) ;; highlight chars after 80
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
+  (setq fci-rule-color "#274690")
   (indent-guide-global-mode)
   (setq css-indent-offset 2)
   (setq json-encoding-default-indentation 2)
