@@ -339,9 +339,10 @@ you should place your code here."
   (add-hook 'prog-mode-hook 'rainbow-mode)
   (global-hl-line-mode -1)
   ;; (global-column-enforce-mode) ;; highlight chars after 80
-  (add-hook 'prog-mode-hook 'turn-on-fci-mode)
+  (add-hook 'prog-mode-hook 'turn-on-fci-mode) ;; 80 char column line
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
-  (setq fci-rule-color "#274690")
+  (setq fci-rule-color "#274690") ;; 80 char column line color
+  ;; Indentation stuff
   (indent-guide-global-mode)
   (setq css-indent-offset 2)
   (setq json-encoding-default-indentation 2)
@@ -355,6 +356,11 @@ you should place your code here."
   (setq sh-indentation 2)
   (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
   (setq ns-use-srgb-colorspace nil)
+  ;; Show trailing whitespace
+  (require 'whitespace)
+  (setq-default whitespace-style '(face trailing))
+  (setq-default whitespace-line-column 80)
+  (global-whitespace-mode 1)
   (require 'helm-bookmark)
   (turn-on-fci-mode)
   )
