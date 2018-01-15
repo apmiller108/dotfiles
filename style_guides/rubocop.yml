@@ -16,3 +16,9 @@ Style/StringLiterals:
 Metrics/BlockLength:
   Exclude:
     - !ruby/regexp /_spec\.rb$/
+
+Layout/AlignHash:
+  Enabled: true
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+  EnforcedLastArgumentHashStyle: always_inspect
