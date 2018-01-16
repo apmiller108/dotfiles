@@ -1,6 +1,7 @@
 {
     "extends": "airbnb",
     "rules": {
-      "comma-dangle": ["warning", "never"]
+      "comma-dangle": ["error", "never"],
+      "react/jsx-closing-bracket-location": "off"
     }
 }
