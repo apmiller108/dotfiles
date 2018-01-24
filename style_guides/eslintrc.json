@@ -3,6 +3,8 @@
     "rules": {
       "comma-dangle": ["error", "never"],
       "no-param-reassign": ["error", {"props": false}],
-      "react/jsx-closing-bracket-location": "off"
+      "react/jsx-closing-bracket-location": "off",
+      "react/jsx-indent-props": "off",
+      "react/jsx-first-prop-new-line": "off"
     }
 }
