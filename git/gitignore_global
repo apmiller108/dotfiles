@@ -9,3 +9,6 @@ tags
 
 # Ignore Rails Gem dependencies
 vendor/bundle
+
+# Ignore spacemacs private symlinked
+private

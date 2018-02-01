@@ -34,9 +34,9 @@
       (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
       (add-to-list 'auto-mode-alist '("\\.react.js\\'" . rjsx-mode))
       (add-to-list 'auto-mode-alist '("\\index.android.js\\'" . rjsx-mode))
-      (add-to-list 'auto-mode-alist '("\\index.ios.js\\'" . rjsx-mode))
-      (add-to-list 'magic-mode-alist '("/\\*\\* @jsx React\\.DOM \\*/" . rjsx-mode))
-      (add-to-list 'magic-mode-alist '("^import React" . rjsx-mode)))
+      (add-to-list 'auto-mode-alist '("\\index.ios.js\\'" . rjsx-mode)))
+      ;; (add-to-list 'magic-mode-alist '("/\\*\\* @jsx React\\.DOM \\*/" . rjsx-mode))
+      ;; (add-to-list 'magic-mode-alist '("^import React" . rjsx-mode))
     :config
     (progn
       ;; prefixes
