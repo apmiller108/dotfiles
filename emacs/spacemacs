@@ -365,6 +365,7 @@ you should place your code here."
   (global-whitespace-mode 1)
   (require 'helm-bookmark)
   (turn-on-fci-mode)
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
