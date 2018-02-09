@@ -11,4 +11,4 @@ tags
 vendor/bundle
 
 # Ignore spacemacs private symlinked
-private
+# private
