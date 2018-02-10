@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: rcomp
+# key: rcomp
+# --
+import React, { Component } from 'react';
+
+export interface $2 {};
+type State = {};
+
+export default class $1 extends Component<$2, State> {
+  // render() {$0
+  //   return
+  // }
+}
