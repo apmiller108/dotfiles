@@ -17,3 +17,5 @@ export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
 # For rbenv shims
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+# For Amber
+export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
