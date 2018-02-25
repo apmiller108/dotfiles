@@ -321,6 +321,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (setq create-lockfiles nil) ;; Disable lockfiles (eg, `.#somefile.cr`)
   )
 
 (defun dotspacemacs/user-config ()
@@ -366,6 +367,8 @@ you should place your code here."
   (require 'helm-bookmark)
   (turn-on-fci-mode)
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+  (require 'flycheck-crystal)
+  (add-hook 'crystal-mode-hook 'flycheck-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
