@@ -339,11 +339,12 @@ you should place your code here."
   (setq-default evil-surround-pairs-alist (cons '(?= . ("<%= " . " %>"))
                                                 evil-surround-pairs-alist))
   (add-hook 'prog-mode-hook 'rainbow-mode)
-  (global-hl-line-mode -1)
+  (global-hl-line-mode -1) ;; Highlight line on cursor
   ;; (global-column-enforce-mode) ;; highlight chars after 80
   (add-hook 'prog-mode-hook 'turn-on-fci-mode) ;; 80 char column line
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
   (setq fci-rule-color "#274690") ;; 80 char column line color
+  (turn-on-fci-mode)
   ;; Indentation stuff
   (indent-guide-global-mode)
   (setq css-indent-offset 2)
@@ -365,7 +366,6 @@ you should place your code here."
   (setq-default whitespace-line-column 80)
   (global-whitespace-mode 1)
   (require 'helm-bookmark)
-  (turn-on-fci-mode)
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
   (require 'flycheck-crystal)
   (add-hook 'crystal-mode-hook 'flycheck-mode)
