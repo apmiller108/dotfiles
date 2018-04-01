@@ -19,3 +19,6 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 # For Amber
 export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
+# iterm2 shell integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
