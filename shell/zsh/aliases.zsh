@@ -32,6 +32,11 @@ alias rm="rm -iv"
 alias el="elixir"
 alias mps="mix phoenix.server"
 
+# Rails
+alias rpp="rake parallel:prepare"
+alias rps="rake parallel:spec"
+alias rpf="rake parallel:features"
+
 # The rest
 alias o="open ."
 alias bex="bundle exec"
