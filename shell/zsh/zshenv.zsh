@@ -21,4 +21,7 @@ eval "$(rbenv init -)"
 export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
 # iterm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# asdf Elixir and Erland version manager
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
 
