@@ -1,4 +1,9 @@
-echo "omina mea meccum porto"
+quote1="Omina mea meccum porto"
+quote2="Der Teufel scheißt immer auf den größten Haufen"
+echo "$quote1"
+echo "$quote2"
+# echo "Omina mea meccum porto"
+# echo "Der Teufel scheißt immer auf den größten Haufen"
 # Source envs for secret stuff
 source $HOME/.env
 # If you come from bash you might have to change your $PATH.
