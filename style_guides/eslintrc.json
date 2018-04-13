@@ -4,6 +4,7 @@
       "comma-dangle": ["error", "never"],
       "no-param-reassign": ["error", {"props": false}],
       "no-multi-spaces": "off",
+      "function-paren-newline": ["error", "consistent"],
       "react/jsx-closing-bracket-location": "off",
       "react/jsx-indent-props": "off",
       "react/jsx-first-prop-new-line": "off"
