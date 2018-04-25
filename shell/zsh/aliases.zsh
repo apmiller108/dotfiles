@@ -1,5 +1,5 @@
-#                              _ _                     
-#                         __ _| (_) __ _ ___  ___  ___ 
+#                              _ _
+#                         __ _| (_) __ _ ___  ___  ___
 #                        / _` | | |/ _` / __|/ _ \/ __|
 #                       | (_| | | | (_| \__ \  __/\__ \
 #                        \__,_|_|_|\__,_|___/\___||___/
@@ -31,7 +31,7 @@ alias rm="rm -iv"
 # Elixir and Phoenix
 alias el="elixir"
 alias mps="mix phoenix.server"
-
+alias ism="iex -S mix"
 # Rails
 alias rpp="rake parallel:prepare"
 alias rps="rake parallel:spec"
