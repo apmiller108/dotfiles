@@ -7,7 +7,9 @@
       "function-paren-newline": ["error", "consistent"],
       "react/jsx-closing-bracket-location": "off",
       "react/jsx-indent-props": "off",
-      "react/jsx-first-prop-new-line": "off"
+      "react/jsx-first-prop-new-line": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "warn"
     },
     "env": {
       "jquery": true
