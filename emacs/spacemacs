@@ -371,6 +371,7 @@ you should place your code here."
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
   (require 'flycheck-crystal)
   (add-hook 'crystal-mode-hook 'flycheck-mode)
+  (setq flycheck-elixir-credo-strict t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
