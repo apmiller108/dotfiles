@@ -52,16 +52,17 @@ values."
      markdown
      octave
      osx
-     org
+     (org :variables
+          org-enable-reveal-js-support)
      plantuml
      python
      ;; react
-     ruby
      (ruby :variables
            ruby-version-manager 'rbenv
            ruby-test-runner 'rspec
            ruby-insert-encoding-magic-comment nil
-           ruby-enable-ruby-on-rails-support t)
+           ruby-enable-ruby-on-rails-support t
+           ruby-align-chained-calls t)
      ruby-on-rails
      (shell :variables
             shell-default-height 30
