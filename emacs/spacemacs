@@ -325,6 +325,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq create-lockfiles nil) ;; Disable lockfiles (eg, `.#somefile.cr`)
   (setq helm-split-window-inside-p t) ;; Possible fix for Neotree window bug
+  (setq-default flycheck-disabled-checkers '(scss)) ;; disabled checkers
   )
 
 (defun dotspacemacs/user-config ()
