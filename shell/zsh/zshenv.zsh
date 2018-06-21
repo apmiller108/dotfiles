@@ -25,5 +25,5 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 # Browse Down envs
-export BROWSE_DOWN_DIR=/Users/upgraydd/Desktop/markdown_notes
+export BROWSE_DOWN_DIR="/Users/upgraydd/Google Drive/markdown_notes"
 export BROWSE_DOWN_INTERVAL=24
