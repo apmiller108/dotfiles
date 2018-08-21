@@ -2,6 +2,4 @@
 
 \x auto
 
-\set PROMPT1 '%[%033[1m%][%/] # '
-
 \timing
