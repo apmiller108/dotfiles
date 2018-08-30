@@ -170,10 +170,11 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("menlo"
+   dotspacemacs-default-font '("Menlo"
                                :size 18
                                :weight normal
                                :width normal
+                               :powerline-offset: 2
                                :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
@@ -376,6 +377,7 @@ you should place your code here."
   (global-whitespace-mode 1)
   (require 'helm-bookmark)
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+  (add-to-list 'auto-mode-alist '("\\.json\\.erb\\'" . json-mode))
   (require 'flycheck-crystal)
   (add-hook 'crystal-mode-hook 'flycheck-mode)
   (setq flycheck-elixir-credo-strict t)
