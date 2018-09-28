@@ -36,7 +36,7 @@ alias ism="iex -S mix"
 alias rpp="rake parallel:prepare"
 alias rps="rake parallel:spec"
 alias rpf="rake parallel:features"
-alias srpp="rails db:drop db:create db:schema:load RAILS_ENV=test && rake parallel:prepare"
+alias srpp="rails db:drop db:create db:schema:load RAILS_ENV=test && rake parallel:drop parallel:setup"
 
 # The rest
 alias o="open ."
