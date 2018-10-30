@@ -1,7 +1,5 @@
 quote1="Omina mea meccum porto"
-quote2="Der Teufel scheißt immer auf den größten Haufen"
 echo "$quote1"
-echo "$quote2"
 # echo "Omina mea meccum porto"
 # echo "Der Teufel scheißt immer auf den größten Haufen"
 # Source envs for secret stuff
@@ -11,7 +9,7 @@ source $HOME/.env
 
 export EDITOR="vim"
 
-export GREP_OPTIONS='--color=always' 
+export GREP_OPTIONS='--color=always'
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
