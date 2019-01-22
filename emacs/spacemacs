@@ -341,6 +341,12 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  ;; (load-file "./private/local/solargraph.el")
+  ;; (load-file "./private/local/ac-solargraph.el")
+  ;; (require 'solargraph)
+  ;; (require 'ac-solargraph)
+  ;; (define-key evil-insert-state-map (kbd "M-p") 'solargraph:complete)
+  ;; (define-key evil-insert-state-map (kbd "M-p") 'ac-solargraph:complete)
   ;; scroll one line at a time (less "jumpy" than defaults)
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
   (setq mouse-wheel-progressive-speed t) ;; don't accelerate scrolling
