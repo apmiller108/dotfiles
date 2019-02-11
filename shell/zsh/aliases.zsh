@@ -41,6 +41,7 @@ alias srpp="rails db:drop db:create db:schema:load RAILS_ENV=test && rake parall
 # The rest
 alias o="open ."
 alias bex="bundle exec"
+alias brspec="bundle exec rspec"
 alias ls="ls -F"
 alias df="dh -h"
 alias emacs="ec"
