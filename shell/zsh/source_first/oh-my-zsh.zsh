@@ -1,7 +1,6 @@
 quote1="Omina mea meccum porto"
-echo "$quote1"
-# echo "Omina mea meccum porto"
-# echo "Der Teufel scheißt immer auf den größten Haufen"
+quote2="The mind preceeds all phenomena."
+echo "$quote2"
 # Source envs for secret stuff
 source $HOME/.env
 # If you come from bash you might have to change your $PATH.
