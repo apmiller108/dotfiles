@@ -1,6 +1,7 @@
 [user]
 	name = Alex Miller
 	email = apmiller108@yahoo.com
+	signingkey = 7890639D9DDECCA86AA5B379A0450A762424C6DB
 [push]
 	default = upstream
 [alias]
@@ -42,3 +43,5 @@
   templatedir = ~/.git_template
 [fetch]
   prune = true
+[commit]
+	gpgsign = true
