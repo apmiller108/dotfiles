@@ -1,5 +1,5 @@
 quote1="Omina mea meccum porto"
-quote2="The mind preceeds all phenomena."
+quote2="The mind precedes all phenomena"
 echo "$quote2"
 # Source envs for secret stuff
 source $HOME/.env
