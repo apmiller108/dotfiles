@@ -8,7 +8,7 @@
 alias g="git status"
 alias gaa="git add ."
 alias gc="git commit"
-alias gb="git branch"
+alias gb="git branch | cat"
 alias gco="git checkout"
 
 # Heroku toolbelt
