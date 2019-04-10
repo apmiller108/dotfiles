@@ -28,6 +28,7 @@
   publish = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
   unpublish = !git push origin --delete $(git rev-parse --abbrev-ref HEAD)
   freebase = rebase -i master
+  pfwl = push --force-with-lease
 [color]
 	ui = true
 [core]
