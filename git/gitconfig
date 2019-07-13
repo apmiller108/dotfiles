@@ -45,4 +45,4 @@
 [fetch]
   prune = true
 [commit]
-	gpgsign = true
+	# gpgsign = true
