@@ -5,6 +5,8 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH="$HOME/.npm-packages/bin:$PATH" # for npm and npm global packages
 export PATH="$PATH:`yarn global bin`" # for Yarn for global packages
+export PATH="$HOME/.emacs.d/bin:$PATH" # for Doom emacs
+PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH" # for tar
 # Build Environment for Angular projects
 export BUILD_ENV=development
 # added by Anaconda3 4.4.0 installer
@@ -30,3 +32,4 @@ fi
 export BROWSE_DOWN_DIR="/Users/upgraydd/Google Drive/markdown_notes"
 export BROWSE_DOWN_INTERVAL=24
 export DISABLE_SPRING=true
+export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH"
