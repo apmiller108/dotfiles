@@ -11,8 +11,7 @@
       "react/jsx-first-prop-new-line": "off",
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "warn",
-      "jsx-quotes": "off",
-      "key-spacing": ["error", { "align": "value" }]
+      "jsx-quotes": "off"
     },
     "env": {
       "jquery": true
