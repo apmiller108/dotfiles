@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Descriptive Block
+# key: dblock
+# --
+
+/**
+* $0
+* @type {string}
+*/
