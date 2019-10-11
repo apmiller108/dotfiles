@@ -22,6 +22,10 @@ alias dc="docker-compose"
 alias dcr="docker-compose run"
 # alias dpost="docker exec -it `docker ps | grep -oE '\w+postgres_1$'` psql -U postgres"
 alias dss="docker-sync-stack"
+alias de='docker exec -e COLUMNS="$(tput cols)" -e LINES="$(tput lines)" -ti'
+alias da='docker attach'
+alias dps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Command}}\t{{.Image}}"'
+alias dep='de postgres psql -U admin'
 
 # Interactive and verbose for saftey
 alias cp="cp -iv"
