@@ -60,7 +60,7 @@ values."
           org-enable-reveal-js-support t)
      plantuml
      python
-     ;; react
+    ;; react
      (ranger :variables
              ranger-show-preview t)
      (ruby :variables

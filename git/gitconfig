@@ -1,7 +1,6 @@
 [user]
 	name = Alex Miller
-	email = apmiller108@yahoo.com
-	signingkey = 7890639D9DDECCA86AA5B379A0450A762424C6DB # MacBook Pro 2015
+  email = apmiller108@yahoo.com
 [push]
 	default = upstream
 [alias]

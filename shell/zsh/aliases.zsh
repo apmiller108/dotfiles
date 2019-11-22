@@ -10,6 +10,7 @@ alias gaa="git add ."
 alias gc="git commit"
 alias gb="git branch | cat"
 alias gco="git checkout"
+alias gl="git log --graph --pretty=format:\"%C(yellow)%h%C(reset) %G? %C(bold blue)%an%C(reset) %s%C(bold cyan)%d%C(reset) %C(green)%cr.%C(reset)\""
 
 # Heroku toolbelt
 alias hrrc="heroku run rails c"
@@ -26,6 +27,8 @@ alias de='docker exec -e COLUMNS="$(tput cols)" -e LINES="$(tput lines)" -ti'
 alias da='docker attach'
 alias dps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Command}}\t{{.Image}}"'
 alias dep='de postgres psql -U admin'
+alias dl='docker logs'
+alias dse='docker start $(docker ps -a -q -f status=exited)'
 
 # Interactive and verbose for saftey
 alias cp="cp -iv"
