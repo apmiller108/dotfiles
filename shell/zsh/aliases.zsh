@@ -29,6 +29,7 @@ alias dps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Com
 alias dep='de postgres psql -U admin'
 alias dl='docker logs'
 alias dse='docker start $(docker ps -a -q -f status=exited)'
+alias dsr='docker stop $(docker ps -aq)'
 
 # Interactive and verbose for saftey
 alias cp="cp -iv"
