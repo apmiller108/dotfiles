@@ -30,6 +30,7 @@ alias dep='de postgres psql -U admin'
 alias dl='docker logs'
 alias dstartall='docker start $(docker ps -a -q -f status=exited)'
 alias dstopall='docker stop $(docker ps -aq)'
+alias drpuml='docker run -d -p 3333:8080 --name plant_uml plantuml/plantuml-server:jetty'
 
 # Interactive and verbose for saftey
 alias cp="cp -iv"
@@ -52,7 +53,7 @@ alias bex="bundle exec"
 alias brspec="bundle exec rspec"
 alias ls="ls -F"
 alias df="dh -h"
-alias emacs="ec"
+# alias emacs="ec"
 alias cmb="bex cucumber"
 alias ngrok="~/ngrok"
 alias myaliases="cat ~/dotfiles/shell/zsh/aliases.zsh"
