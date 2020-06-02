@@ -20,7 +20,7 @@ Metrics/BlockLength:
   Exclude:
     - !ruby/regexp /_spec\.rb$/
 
-Layout/AlignHash:
+Layout/HashAlignment:
   Enabled: true
   EnforcedColonStyle: table
   EnforcedHashRocketStyle: table

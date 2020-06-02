@@ -9,7 +9,6 @@
       "react/jsx-indent-props": "off",
       "react/jsx-first-prop-new-line": "off",
       "react/react-in-jsx-scope": "off",
-      "react/prop-types": "warn",
       "jsx-quotes": "off"
     },
     "env": {

@@ -44,6 +44,7 @@ values."
      colors
      ;; crystal
      csv
+     dap
      dash
      docker
      (elixir :variables
