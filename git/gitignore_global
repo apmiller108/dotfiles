@@ -3,6 +3,8 @@
 
 # Ignore emacs auto save files
 **/.#*
+# Ignore dir-locals files
+.dir-locals.el
 
 .ruby-version
 tags
