@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: VueJS Component 
+# key: vue-component
+# --
+
+<template>
+</template>
+
+<script>
+import Foo from '@/bar'
+
+export default {
+  name: '$1',
+  components: {},
+  props: {
+    someProp: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    }
+  },
+  data: function () {
+    return {}
+  },
+  computed: {},
+  methods: {}
+}
+</script>
+
+<style lang="scss">
+</style>
