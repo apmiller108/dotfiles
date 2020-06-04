@@ -479,7 +479,7 @@ This function is called at the very end of Spacemacs initialization."
    ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
  '(compilation-message-face (quote default))
  '(evil-want-Y-yank-to-eol nil)
- '(fci-rule-color "#3C3D37" t)
+ '(fci-rule-color "#3C3D37")
  '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
  '(highlight-tail-colors
    (quote
@@ -498,6 +498,19 @@ This function is called at the very end of Spacemacs initialization."
  '(paradox-github-token t)
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
+ '(safe-local-variable-values
+   (quote
+    ((eval setq-local flycheck-javascript-eslint-executable
+           (concat
+            (locate-dominating-file default-directory ".dir-locals.el")
+            "node_modules/.bin/eslint"))
+     (typescript-backend . tide)
+     (typescript-backend . lsp)
+     (javascript-backend . tide)
+     (javascript-backend . tern)
+     (javascript-backend . lsp)
+     (elixir-enable-compilation-checking . t)
+     (elixir-enable-compilation-checking))))
  '(standard-indent 2)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
