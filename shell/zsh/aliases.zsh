@@ -21,8 +21,6 @@ alias hr="heroku run"
 # Docker
 alias dc="docker-compose"
 alias dcr="docker-compose run"
-# alias dpost="docker exec -it `docker ps | grep -oE '\w+postgres_1$'` psql -U postgres"
-alias dss="docker-sync-stack"
 alias de='docker exec -e COLUMNS="$(tput cols)" -e LINES="$(tput lines)" -ti'
 alias da='docker attach'
 alias dps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Command}}\t{{.Image}}"'
@@ -41,11 +39,6 @@ alias rm="rm -iv"
 alias el="elixir"
 alias mps="mix phoenix.server"
 alias ism="iex -S mix"
-# Rails
-alias rpp="rake parallel:prepare"
-alias rps="rake parallel:spec"
-alias rpf="rake parallel:features"
-alias srpp="rails db:drop db:create db:schema:load RAILS_ENV=test && rake parallel:drop parallel:setup"
 
 # The rest
 alias o="open ."
@@ -57,4 +50,7 @@ alias cmb="bex cucumber"
 alias ngrok="~/ngrok"
 alias myaliases="cat ~/dotfiles/shell/zsh/aliases.zsh"
 alias spacemacs="emacs --with-profile spacemacs"
+alias spacemacsbg="spacemacs --daemon=spacemacs"
+alias spacemacsc="emacsclient --create-frame --no-wait --socket-name=spacemacs"
+alias emacskill="emacsclient -e '(kill-emacs)'"
 alias doom="emacs --with-profile doom"
