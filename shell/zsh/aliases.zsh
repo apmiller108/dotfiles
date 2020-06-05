@@ -40,17 +40,18 @@ alias el="elixir"
 alias mps="mix phoenix.server"
 alias ism="iex -S mix"
 
-# The rest
-alias o="open ."
-alias bex="bundle exec"
-alias brspec="bundle exec rspec"
-alias ls="ls -F"
-alias df="dh -h"
-alias cmb="bex cucumber"
-alias ngrok="~/ngrok"
-alias myaliases="cat ~/dotfiles/shell/zsh/aliases.zsh"
+# Emacs
 alias spacemacs="emacs --with-profile spacemacs"
 alias spacemacsbg="spacemacs --daemon=spacemacs"
 alias spacemacsc="emacsclient --create-frame --no-wait --socket-name=spacemacs"
 alias emacskill="emacsclient -e '(kill-emacs)'"
 alias doom="emacs --with-profile doom"
+
+# The rest
+alias bex="bundle exec"
+alias brspec="bundle exec rspec"
+alias ls="ls -F"
+alias df="dh -h"
+alias ngrok="~/ngrok"
+alias myaliases="cat ~/dotfiles/shell/zsh/aliases.zsh"
+alias sourcez="source ~/.zshrc"
