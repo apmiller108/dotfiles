@@ -30,19 +30,13 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(nginx
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
+   '(
      (auto-completion :variables
                       auto-completion-tab-key-behavior 'cycle
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-help-tooltip t)
      c-c++
      colors
-     ;; crystal
      csv
      dap
      dash
@@ -54,19 +48,18 @@ values."
      git
      groovy
      html
-     ;; itome-react
      (javascript :variables
                  javascript-import-tool 'import-js
                  javascript-backend 'lsp
                  javascript-lsp-linter nil)
      markdown
+     nginx
      octave
      osx
      (org :variables
           org-enable-reveal-js-support t)
      plantuml
      python
-    ;; react
      (ranger :variables
              ranger-show-preview t)
      (ruby :variables
@@ -92,7 +85,6 @@ values."
                       seti-theme)
      typescript
      yaml
-     ;; version-control
      (vue :variables
           vue-backend 'lsp)
      )
@@ -103,7 +95,6 @@ values."
    dotspacemacs-additional-packages
    '(
      editorconfig
-     company-tabnine
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -228,7 +219,7 @@ values."
    dotspacemacs-display-default-layout nil
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
-   dotspacemacs-auto-resume-layouts nil
+   dotspacemacs-auto-resume-layouts t
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
@@ -277,7 +268,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -331,6 +322,7 @@ values."
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-mode-line-theme 'spacemacs
    ))
 
 (defun dotspacemacs/user-init ()
@@ -354,11 +346,6 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (global-set-key (kbd "M-b") 'magit-blame-addition)
-  (require 'company-tabnine) ;; https://github.com/TommyX12/company-tabnine
-  (use-package company-tabnine :ensure t)
-  ;; (add-to-list 'company-backends #'company-tabnine)
-  (with-eval-after-load 'company
-    (add-to-list 'company-backends #'company-tabnine))
   (setq ns-use-srgb-colorspace t) ;; fixes the graphic anomaly in the tab bar
   (spacemacs/toggle-highlight-current-line-globally-off) ;; Turns off highlight current line
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
