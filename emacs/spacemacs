@@ -504,7 +504,8 @@ This function is called at the very end of Spacemacs initialization."
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
    (quote
-    ((eval setq-local flycheck-javascript-eslint-executable
+    ((javascript-fmt-tool . prettier)
+     (eval setq-local flycheck-javascript-eslint-executable
            (concat
             (locate-dominating-file default-directory ".dir-locals.el")
             "node_modules/.bin/eslint"))
