@@ -389,6 +389,23 @@ you should place your code here."
   ;; (add-hook 'crystal-mode-hook 'flycheck-mode)
   (setq flycheck-elixir-credo-strict t)
   (global-visual-line-mode 1) ; wrap line by default
+
+  (add-hook 'dap-mode-hook
+            (lambda () (dap-register-debug-template
+                        "Chrome Hubble Vue"
+                        (list :type "chrome"
+                              :cwd nil
+                              :mode "url"
+                              :request "launch"
+                              :webRoot "/Users/apmiller/dev/apps/hubble/client-vue/src"
+                              :sourceMapPathOverrides (list :webpack:///src/* "${webRoot}/*"
+                                                            :webpack:///./src/* "${webRoot}/*"
+                                                            :webpack:///src/* "${webRoot}/*"
+                                                            :webpack:///* "*"
+                                                            :webpack:///./~/* "${webRoot}/node_modules/*")
+                              :url "https://hubble-vue.dev.cmmint.net/"
+                              :name "Chrome Hubble Vue")))
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
