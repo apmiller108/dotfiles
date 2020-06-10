@@ -41,11 +41,16 @@ alias mps="mix phoenix.server"
 alias ism="iex -S mix"
 
 # Emacs
-alias spacemacs="emacs --with-profile spacemacs"
-alias spacemacsbg="spacemacs --daemon=spacemacs"
+alias sm="emacs --with-profile spacemacs"
+alias spacemacsbg="sm --daemon=spacemacs"
 alias spacemacsc="emacsclient --create-frame --no-wait --socket-name=spacemacs"
-alias emacskill="emacsclient -e '(kill-emacs)'"
-alias doom="emacs --with-profile doom"
+alias spacemacs="spacemacsbg && spacemacsc"
+alias spacemacskill="emacsclient --socket-name=spacemacs -e '(kill-emacs)'"
+alias dm="emacs --with-profile doom"
+alias doombg="dm --daemon=doom"
+alias doomc="emacsclient --create-frame --no-wait --socket-name=doom"
+alias doom="doombg && doomc"
+alias doomkill="emacsclient --socket-name=doom -e '(kill-emacs)'"
 
 # The rest
 alias bex="bundle exec"
