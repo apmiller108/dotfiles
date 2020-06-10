@@ -396,12 +396,12 @@ you should place your code here."
                      :cwd nil
                      :mode "url"
                      :request "launch"
-                     :webRoot "/Users/apmiller/dev/apps/hubble/client-vue/src"
-                     :sourceMapPathOverrides (list :webpack:///src/* "${webRoot}/*"
-                                                   :webpack:///./src/* "${webRoot}/*"
-                                                   :webpack:///src/* "${webRoot}/*"
+                     :webRoot "/Users/apmiller/dev/apps/hubble/client-vue/"
+                     :sourceMapPathOverrides (list :webpack:///src/* "${webRoot}/src/*"
+                                                   :webpack:///./src/* "${webRoot}/src/*"
+                                                   :webpack:///src/* "${webRoot}/src/*"
                                                    :webpack:///* "*"
-                                                   :webpack:///./~/* "${webRoot}/node_modules/*")
+                                                   :webpack:///./node_modules/* "${webRoot}/node_modules/*")
                      :url "https://hubble-vue.dev.cmmint.net/"
                      :name "Chrome Hubble Vue")))
   )
