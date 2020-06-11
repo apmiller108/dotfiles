@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- MODE: EMACS-LISP -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -219,7 +219,7 @@ values."
    dotspacemacs-display-default-layout nil
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
-   dotspacemacs-auto-resume-layouts t
+   dotspacemacs-auto-resume-layouts nil
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
@@ -399,25 +399,25 @@ you should place your code here."
   ;; (require 'flycheck-crystal)
   ;; (add-hook 'crystal-mode-hook 'flycheck-mode)
 
-  ;; Functions
+  ;; FUNCTIONS
 
   (defvar my/dap-debug-url nil)
   (defvar my/dap-debug-project-root nil)
 
-  (defun my/debug-hubble-vue ()
+  (defun my/dap-debug-chrome ()
     (interactive)
     (dap-debug (list :type "chrome"
                      :cwd nil
                      :mode "url"
                      :request "launch"
-                     :webRoot "/Users/apmiller/dev/apps/hubble/client-vue/"
+                     :webRoot (or my/dap-debug-project-root (projectile-project-root))
                      :sourceMapPathOverrides (list :webpack:///src/* "${webRoot}/src/*"
                                                    :webpack:///./src/* "${webRoot}/src/*"
                                                    :webpack:///src/* "${webRoot}/src/*"
                                                    :webpack:///* "*"
                                                    :webpack:///./node_modules/* "${webRoot}/node_modules/*")
-                     :url my/dap-debug-url
-                     :name "Chrome Hubble Vue")))
+                     :url (or my/dap-debug-url "http://localhost:8080")
+                     :name "Chrome Javascript Debug Config")))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -516,7 +516,8 @@ This function is called at the very end of Spacemacs initialization."
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
    (quote
-    ((eval setq-local my/dap-debug-url "http://localhost:8080")
+    ((eval setq-local my/dap-debug-url "https://hubble-vue.dev.cmmint.net/")
+     (eval setq-local my/dap-debug-project-root "/Users/apmiller/dev/apps/hubble/client-vue/")
      (javascript-fmt-tool . prettier)
      (eval setq-local flycheck-javascript-eslint-executable
            (concat
