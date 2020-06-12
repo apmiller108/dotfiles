@@ -404,13 +404,16 @@ you should place your code here."
   (defvar my/dap-debug-url nil)
   (defvar my/dap-debug-project-root nil)
 
+  (defun my/dap-debug-determine-project-root ()
+    (or my/dap-debug-project-root (projectile-project-root)))
+
   (defun my/dap-debug-chrome ()
     (interactive)
     (dap-debug (list :type "chrome"
                      :cwd nil
                      :mode "url"
                      :request "launch"
-                     :webRoot (or my/dap-debug-project-root (projectile-project-root))
+                     :webRoot (my/dap-debug-determine-project-root)
                      :sourceMapPathOverrides (list :webpack:///src/* "${webRoot}/src/*"
                                                    :webpack:///./src/* "${webRoot}/src/*"
                                                    :webpack:///src/* "${webRoot}/src/*"
@@ -418,6 +421,17 @@ you should place your code here."
                                                    :webpack:///./node_modules/* "${webRoot}/node_modules/*")
                      :url (or my/dap-debug-url "http://localhost:8080")
                      :name "Chrome Javascript Debug Config")))
+
+  (defun my/dap-debug-mocha-vue ()
+    (interactive)
+    (dap-debug (list :type "node"
+                     :request "launch"
+                     :cwd (or my/dap-debug-project-root (projectile-project-root))
+                     :program (concat (my/dap-debug-determine-project-root) "node_modules/@vue/cli-service/bin/vue-cli-service.js")
+                     :args (list "test:unit" "--inspect-brk" "--watch" "--timeout" "999999")
+                     :port 9229
+                     :console "integratedTerminal"
+                     :name "Node Mocha Vue")))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
