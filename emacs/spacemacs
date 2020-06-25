@@ -68,7 +68,7 @@ values."
            ruby-insert-encoding-magic-comment nil
            ruby-enable-ruby-on-rails-support t
            ruby-align-chained-calls t
-           ruby-backend 'lsp)
+           ruby-backend 'robe)
      ruby-on-rails
      (shell :variables
             shell-default-height 30
