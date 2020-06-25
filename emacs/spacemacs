@@ -432,6 +432,12 @@ you should place your code here."
                      :port 9229
                      :console "integratedTerminal"
                      :name "Node Mocha Vue")))
+
+  (defun my/eslint-fix ()
+    (interactive)
+    (shell-command
+     (concat (my/dap-debug-determine-project-root) "node_modules/.bin/eslint --fix " (buffer-file-name)))
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
