@@ -387,7 +387,10 @@ you should place your code here."
 
   ;; KEY BINDINGS
 
-  (global-set-key (kbd "M-b") 'magit-blame-addition)
+  (spacemacs/declare-prefix-for-mode 'vue-mode "o" "custom")
+  (spacemacs/set-leader-keys-for-major-mode 'vue-mode "oe" 'my/eslint-fix)
+  (spacemacs/declare-prefix-for-mode 'js2-mode "o" "custom")
+  (spacemacs/set-leader-keys-for-major-mode 'js2-mode "oe" 'my/eslint-fix)
 
   ;; GLOBAL AND OTHER SETTINGS
 
@@ -395,9 +398,6 @@ you should place your code here."
   (global-visual-line-mode 1) ; wrap line by default
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
   (add-to-list 'auto-mode-alist '("\\.json\\.erb\\'" . json-mode))
-  ;; (indent-guide-global-mode)
-  ;; (require 'flycheck-crystal)
-  ;; (add-hook 'crystal-mode-hook 'flycheck-mode)
 
   ;; FUNCTIONS
 
@@ -536,7 +536,8 @@ This function is called at the very end of Spacemacs initialization."
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
    (quote
-    ((eval setq-local my/dap-debug-url "http://localhost:8080")
+    ((eval setq-local my/dap-debug-project-root "/Users/apmiller/dev/apps/hubble/client-vue")
+     (eval setq-local my/dap-debug-url "http://localhost:8080")
      (eval setq-local my/dap-debug-url "https://hubble-vue.dev.cmmint.net/")
      (eval setq-local my/dap-debug-project-root "/Users/apmiller/dev/apps/hubble/client-vue/")
      (javascript-fmt-tool . prettier)
