@@ -33,6 +33,7 @@ values."
    '(
      (auto-completion :variables
                       auto-completion-tab-key-behavior 'cycle
+                      auto-completion-return-key-behavior 'complete
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-help-tooltip t)
      c-c++
@@ -398,6 +399,11 @@ you should place your code here."
   (global-visual-line-mode 1) ; wrap line by default
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
   (add-to-list 'auto-mode-alist '("\\.json\\.erb\\'" . json-mode))
+  (custom-set-faces
+   '(company-tooltip-common
+     ((t (:inherit company-tooltip :weight bold :underline nil))))
+   '(company-tooltip-common-selection
+     ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
 
   ;; FUNCTIONS
 
