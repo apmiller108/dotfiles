@@ -60,6 +60,7 @@ values."
      (org :variables
           org-enable-reveal-js-support t)
      plantuml
+     php
      python
      (ranger :variables
              ranger-show-preview t)
@@ -390,6 +391,7 @@ you should place your code here."
 
   (spacemacs/declare-prefix-for-mode 'vue-mode "o" "custom")
   (spacemacs/set-leader-keys-for-major-mode 'vue-mode "oe" 'my/eslint-fix)
+  (spacemacs/set-leader-keys-for-major-mode 'vue-mode "od" 'my/dap-debug-chrome)
   (spacemacs/declare-prefix-for-mode 'js2-mode "o" "custom")
   (spacemacs/set-leader-keys-for-major-mode 'js2-mode "oe" 'my/eslint-fix)
 
@@ -520,6 +522,7 @@ This function is called at the very end of Spacemacs initialization."
  '(ansi-color-names-vector
    ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
  '(compilation-message-face (quote default))
+ '(dap-print-io nil)
  '(evil-want-Y-yank-to-eol nil)
  '(fci-rule-color "#3C3D37")
  '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
