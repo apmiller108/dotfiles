@@ -35,7 +35,9 @@ values."
                       auto-completion-tab-key-behavior 'cycle
                       auto-completion-return-key-behavior 'complete
                       auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-help-tooltip t)
+                      auto-completion-enable-help-tooltip nil
+                      auto-completion-use-company-box nil
+                      auto-completion-enable-sort-by-usage nil)
      c-c++
      colors
      csv
@@ -51,8 +53,9 @@ values."
      html
      (javascript :variables
                  javascript-import-tool 'import-js
-                 javascript-backend 'lsp
-                 javascript-lsp-linter nil)
+                 javascript-backend 'tern
+                 javascript-lsp-linter nil
+                 node-add-modules-path t)
      markdown
      nginx
      octave
@@ -386,6 +389,7 @@ you should place your code here."
   (add-hook 'prog-mode-hook 'rainbow-mode)
   (add-hook 'prog-mode-hook 'turn-on-fci-mode) ;; 80 char column line
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
+  (add-hook 'js2-mode-hook 'spacemacs/toggle-auto-completion-on)
 
   ;; KEY BINDINGS
 
