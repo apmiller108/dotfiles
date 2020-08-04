@@ -398,6 +398,7 @@ you should place your code here."
   (spacemacs/set-leader-keys-for-major-mode 'vue-mode "od" 'my/dap-debug-chrome)
   (spacemacs/declare-prefix-for-mode 'js2-mode "o" "custom")
   (spacemacs/set-leader-keys-for-major-mode 'js2-mode "oe" 'my/eslint-fix)
+  (spacemacs/set-leader-keys-for-major-mode 'js2-mode "od" 'my/dap-debug-mocha-vue)
 
   ;; GLOBAL AND OTHER SETTINGS
 
@@ -442,7 +443,6 @@ you should place your code here."
                      :program (concat (my/dap-debug-determine-project-root) "node_modules/@vue/cli-service/bin/vue-cli-service.js")
                      :args (list "test:unit" "--inspect-brk" "--watch" "--timeout" "999999")
                      :port 9229
-                     :console "integratedTerminal"
                      :name "Node Mocha Vue")))
 
   (defun my/eslint-fix ()

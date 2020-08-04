@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Vue wrapper factory
+# key: wrapperFactory
+# --
+const $2factory = (props = {}, data = {}) => shallowMount($1, {
+  propsData: { ...props },
+  data() {
+    return { ...values }
+  }
+  mocks: {}, //  Component property mocks (ie, $store)
+  stubs: {} // Component stubs (ie `RouterLink`)
+  mixins: []
+})
