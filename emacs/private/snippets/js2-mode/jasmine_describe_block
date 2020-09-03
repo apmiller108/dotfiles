@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
-# name: Jasmine Describe Block
+# name: Describe Block
 # key: desc
 # --
 
-describe('$1', () => {
+describe('$1', function() {
   $2
 });

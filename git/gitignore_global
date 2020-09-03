@@ -16,3 +16,6 @@ vendor/bundle
 # private
 
 .tern-port
+
+# Ignore test determination letters (cmm thang)
+test_determination_letter*.pdf
