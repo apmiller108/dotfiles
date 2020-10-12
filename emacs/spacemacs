@@ -372,7 +372,6 @@ you should place your code here."
   (setq whitespace-global-modes '(not web-mode))
 
   (setq fci-rule-color "#274690") ;; 80 char column line color
-  (turn-on-fci-mode)
 
   (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
   (setq ns-use-srgb-colorspace t) ;; fixes the graphic anomaly in the tab bar
@@ -414,6 +413,7 @@ you should place your code here."
 
   ;; FUNCTIONS
 
+  ;; These vars can be set with .dir-locals file
   (defvar my/dap-debug-url nil)
   (defvar my/dap-debug-project-root nil)
 
@@ -427,11 +427,11 @@ you should place your code here."
                      :mode "url"
                      :request "launch"
                      :webRoot (my/dap-debug-determine-project-root)
-                     :sourceMapPathOverrides (list :webpack:///src/* "${webRoot}/src/*"
-                                                   :webpack:///./src/* "${webRoot}/src/*"
-                                                   :webpack:///src/* "${webRoot}/src/*"
+                     :sourceMapPathOverrides (list :webpack:///src/* (concat (my/dap-debug-determine-project-root) "src/*")
+                                                   :webpack:///./src/* (concat (my/dap-debug-determine-project-root) "src/*")
+                                                   :webpack:///src/* (concat (my/dap-debug-determine-project-root) "src/*")
                                                    :webpack:///* "*"
-                                                   :webpack:///./node_modules/* "${webRoot}/node_modules/*")
+                                                   :webpack:///./node_modules/* (concat (my/dap-debug-determine-project-root) "node_modules/*"))
                      :url (or my/dap-debug-url "http://localhost:8080")
                      :name "Chrome Javascript Debug Config")))
 

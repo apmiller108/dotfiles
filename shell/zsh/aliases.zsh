@@ -60,4 +60,8 @@ alias df="dh -h"
 alias ngrok="~/ngrok"
 alias myaliases="cat ~/dotfiles/shell/zsh/aliases.zsh"
 alias sourcez="source ~/.zshrc"
+
+# CMM
 alias pingplus="cd /Users/apmiller/dev/apps/ping-plus/ && npm run start"
+alias hubblepgdump="pg_dump hubble_development -Fc --data-only --host=postgres --username=admin --file=/Users/apmiller/Desktop/hubble_server.dump"
+alias hubblepgrestore="pg_restore --host=postgres -d hubble_development --data-only --username=admin --disable-triggers ~/Desktop/hubble_server.dump"
