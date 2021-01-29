@@ -397,7 +397,8 @@ you should place your code here."
   (spacemacs/set-leader-keys-for-major-mode 'vue-mode "od" 'my/dap-debug-chrome)
   (spacemacs/declare-prefix-for-mode 'js2-mode "o" "custom")
   (spacemacs/set-leader-keys-for-major-mode 'js2-mode "oe" 'my/eslint-fix)
-  (spacemacs/set-leader-keys-for-major-mode 'js2-mode "od" 'my/dap-debug-mocha-vue)
+  (spacemacs/set-leader-keys-for-major-mode 'js2-mode "om" 'my/dap-debug-mocha-vue)
+  (spacemacs/set-leader-keys-for-major-mode 'js2-mode "od" 'my/dap-debug-chrome)
 
   ;; GLOBAL AND OTHER SETTINGS
 
@@ -439,9 +440,11 @@ you should place your code here."
     (interactive)
     (dap-debug (list :type "node"
                      :request "launch"
+                     :console "internalConsole"
+                     :env (list :NODE_ENV "test")
                      :cwd (or my/dap-debug-project-root (projectile-project-root))
                      :program (concat (my/dap-debug-determine-project-root) "node_modules/@vue/cli-service/bin/vue-cli-service.js")
-                     :args (list "test:unit" "--inspect-brk" "--watch" "--timeout" "999999")
+                     :args (list "test:unit" "--inspect-brk" "--watch" "--timeout" "999999" (buffer-file-name))
                      :port 9229
                      :name "Node Mocha Vue")))
 
@@ -549,7 +552,10 @@ This function is called at the very end of Spacemacs initialization."
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
    (quote
-    ((eval setq-local my/dap-debug-project-root "/Users/apmiller/dev/apps/hubble/client-vue")
+    ((eval setq-local rspec-docker-container "hubble-server")
+     (eval setq-local rspec-docker-command "docker exec")
+     (eval setq-local rspec-use-docker-when-possible t)
+     (eval setq-local my/dap-debug-project-root "/Users/apmiller/dev/apps/hubble/client-vue")
      (eval setq-local my/dap-debug-url "http://localhost:8080")
      (eval setq-local my/dap-debug-url "https://hubble-vue.dev.cmmint.net/")
      (eval setq-local my/dap-debug-project-root "/Users/apmiller/dev/apps/hubble/client-vue/")
@@ -595,5 +601,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:foreground "#fff8dc" :background "#1c1c1c")))))
+ '(default ((t (:foreground "#fff8dc" :background "#1c1c1c"))))
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
 )
