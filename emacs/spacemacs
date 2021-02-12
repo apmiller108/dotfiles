@@ -552,8 +552,9 @@ This function is called at the very end of Spacemacs initialization."
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
    (quote
-    ((eval setq-local rspec-docker-container "hubble-server")
-     (eval setq-local rspec-docker-command "docker exec")
+    ((eval setq-local rspec-docker-file-name "Dockerfile")
+     (eval setq-local rspec-docker-command "docker exec -t")
+     (eval setq-local rspec-docker-container "hubble-server")
      (eval setq-local rspec-use-docker-when-possible t)
      (eval setq-local my/dap-debug-project-root "/Users/apmiller/dev/apps/hubble/client-vue")
      (eval setq-local my/dap-debug-url "http://localhost:8080")
