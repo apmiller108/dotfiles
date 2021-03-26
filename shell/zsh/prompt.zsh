@@ -13,4 +13,4 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 PROMPT='%{$fg[cyan]%}%2~%{$reset_color%}%{$fg[red]%}|%{$reset_color%}$(git_prompt_info)%{$fg[cyan]%}⇒%{$reset_color%} '
 
-export PS1="$([[ ! -z "${UPTERM_ADMIN_SOCKET}"  ]] && echo -e  "\033[0;31mupterm ")$PS1" # Add an emoj
+export PS1="$([[ ! -z "${UPTERM_ADMIN_SOCKET}"  ]] && echo -e  "\033[0;31mupterm ")$PS1"
