@@ -62,7 +62,10 @@ values."
      osx
      (org :variables
           org-enable-reveal-js-support t
-          org-enable-roam-support t)
+          org-enable-roam-support t
+          org-plantuml-jar-path (expand-file-name "~/plantuml.jar")
+          org-ellipsis " ▼"
+          org-image-actual-width nil)
      pandoc
      plantuml
      php
@@ -387,8 +390,6 @@ you should place your code here."
 
   (setq flycheck-elixir-credo-strict t)
 
-  (setq org-plantuml-jar-path
-        (expand-file-name "~/plantuml.jar"))
   (setq org-roam-directory "~/slip-box")
   (setq org-roam-db-location "~/slip-box/db/org-roam.db")
   (setq org-roam-capture-templates '(
@@ -404,6 +405,7 @@ you should place your code here."
   (add-hook 'js2-mode-hook 'spacemacs/toggle-auto-completion-on)
   (eval-after-load "org"
     '(require 'ox-gfm nil t))
+  (add-hook 'org-mode-hook (lambda () (set-face-underline 'org-ellipsis nil)))
 
   ;; KEY BINDINGS
 
