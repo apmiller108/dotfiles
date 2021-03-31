@@ -65,9 +65,14 @@ values."
           org-enable-roam-support t
           org-plantuml-jar-path (expand-file-name "~/plantuml.jar")
           org-ellipsis " ▼"
+          org-agenda-files '("~/slip-box/agenda")
+          org-agenda-start-with-log-mode t
+          org-log-done 'time
+          org-log-into-drawer t
           org-image-actual-width nil)
      pandoc
-     plantuml
+     (plantuml :variables
+               plantuml-default-exec-mode 'jar)
      php
      python
      (ranger :variables
@@ -396,6 +401,7 @@ you should place your code here."
                                      ("d" "default" plain #'org-roam-capture--get-point "%?" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n" :unnarrowed t)
                                      ("c" "cmm" plain #'org-roam-capture--get-point "%?" :file-name "cmm/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)
                                      ))
+  (setq-default fill-column 80)
 
   ;; HOOKS
 
@@ -405,7 +411,10 @@ you should place your code here."
   (add-hook 'js2-mode-hook 'spacemacs/toggle-auto-completion-on)
   (eval-after-load "org"
     '(require 'ox-gfm nil t))
-  (add-hook 'org-mode-hook (lambda () (set-face-underline 'org-ellipsis nil)))
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (set-face-underline 'org-ellipsis nil)
+              (auto-fill-mode 1)))
 
   ;; KEY BINDINGS
 
