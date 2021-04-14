@@ -384,7 +384,6 @@ you should place your code here."
   (setq whitespace-global-modes '(not web-mode))
 
   (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
-  (setq ns-use-srgb-colorspace t) ;; fixes the graphic anomaly in the tab bar
 
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
   (setq mouse-wheel-progressive-speed t) ;; don't accelerate scrolling
@@ -398,13 +397,16 @@ you should place your code here."
   (setq org-roam-capture-templates
         '(("d" "default" plain #'org-roam-capture--get-point "%?" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n" :unnarrowed t)
           ("b" "code block" plain #'org-roam-capture--get-point "\n#+begin_src %^{Language}\n%i\n#+end_src" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n" :unnarrowed t)
-          ("c" "cmm" plain #'org-roam-capture--get-point "%?" :file-name "cmm/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)))
+          ("c" "cmm" plain #'org-roam-capture--get-point "%?" :file-name "cmm/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)
+          ("p" "personal" plain #'org-roam-capture--get-point "%?" :file-name "personal/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)))
 
   (setq-default fill-column 80)
   (set-face-foreground 'fill-column-indicator "#274690") ;; face color for display-fill-column-indicator-mode
   (setq fci-rule-color "#274690") ;; color for fci mode
 
   (setq-default git-magit-status-fullscreen t)
+  (setq magit-repository-directories
+        '(("~/dev/" . 0) ("~/dev/apps/" . 1) ("~/code/" . 1) ("~/dotfiles/" . 0)))
 
   ;; HOOKS
 
@@ -418,6 +420,7 @@ you should place your code here."
             (lambda ()
               (set-face-underline 'org-ellipsis nil)
               (auto-fill-mode 1)
+              (spacemacs/toggle-spelling-checking-on)
               (turn-on-smartparens-mode)))
 
   (setq rspec-use-spring-when-possible nil) ;; define this instead in a .dir-locals
