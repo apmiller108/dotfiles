@@ -65,7 +65,7 @@ values."
           org-enable-roam-support t
           org-plantuml-jar-path (expand-file-name "~/plantuml.jar")
           org-ellipsis " ▼"
-          org-agenda-files '("~/slip-box/agenda")
+          org-agenda-files '("~/slip-box/personal/agenda")
           org-agenda-start-with-log-mode t
           org-log-done 'time
           org-log-into-drawer t
@@ -394,6 +394,7 @@ you should place your code here."
 
   (setq org-roam-directory "~/slip-box")
   (setq org-roam-db-location "~/slip-box/db/org-roam.db")
+  (setq org-roam-tag-sources '(prop vanilla))
   (setq org-roam-capture-templates
         '(("d" "default" plain #'org-roam-capture--get-point "%?" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n" :unnarrowed t)
           ("b" "code block" plain #'org-roam-capture--get-point "\n#+begin_src %^{Language}\n%i\n#+end_src" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n" :unnarrowed t)
@@ -412,15 +413,24 @@ you should place your code here."
 
   (add-hook 'prog-mode-hook 'rainbow-mode)
   (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode) ;; 80 char column line
-  (add-hook 'text-mode-hook 'display-fill-column-indicator-mode)
   (add-hook 'js2-mode-hook 'spacemacs/toggle-auto-completion-on)
+
+  ;; Org-mode
   (eval-after-load "org"
     '(require 'ox-gfm nil t))
+
+  (defun my/org-mode-faces ()
+    "Org-mode face remapping for `org-mode-hook'."
+    (when (string-equal "dakrone" spacemacs--cur-theme)
+      (face-remap-add-relative 'org-level-3
+                              :foreground "dark magenta")))
   (add-hook 'org-mode-hook
             (lambda ()
               (set-face-underline 'org-ellipsis nil)
               (auto-fill-mode 1)
               (spacemacs/toggle-spelling-checking-on)
+              (my/org-mode-faces)
+              (display-fill-column-indicator-mode)
               (turn-on-smartparens-mode)))
 
   (setq rspec-use-spring-when-possible nil) ;; define this instead in a .dir-locals
@@ -496,7 +506,7 @@ you should place your code here."
                      :env (list :NODE_ENV "test")
                      :cwd (or my/dap-debug-project-root (projectile-project-root))
                      :program (concat (my/dap-debug-determine-project-root) "node_modules/@vue/cli-service/bin/vue-cli-service.js")
-                     :args (list "test:unit" "--inspect-brk" "--watch" "--timeout" "999999" (buffer-file-name))
+                     :args (list "test:unit" "--inspect-brk" "--watch" "--timeout" "999999" "--include" "tests/setup.js" (buffer-file-name))
                      :port 9229
                      :name "Node Mocha Vue")))
 
@@ -532,14 +542,34 @@ This function is called at the very end of Spacemacs initialization."
      ("#A75B00" . 70)
      ("#F309DF" . 85)
      ("#3C3D37" . 100)))
+ '(hl-todo-keyword-faces
+   '(("TODO" . "#dc752f")
+     ("NEXT" . "#dc752f")
+     ("THEM" . "#2d9574")
+     ("PROG" . "#4f97d7")
+     ("OKAY" . "#4f97d7")
+     ("DONT" . "#f2241f")
+     ("FAIL" . "#f2241f")
+     ("DONE" . "#86dc2f")
+     ("NOTE" . "#b1951d")
+     ("KLUDGE" . "#b1951d")
+     ("HACK" . "#b1951d")
+     ("TEMP" . "#b1951d")
+     ("FIXME" . "#dc752f")
+     ("XXX+" . "#dc752f")
+     ("\\?\\?\\?+" . "#dc752f")))
+ '(linum-format " %3i ")
  '(magit-diff-use-overlays nil)
  '(package-selected-packages
    '(flyspell-popup nginx-mode upbo karma dockerfile-mode docker tablist docker-tramp origami dash-docs company-tabnine unicode-escape names transient lv treepy graphql ranger company-quickhelp ox-reveal plantuml-mode org-mime rjsx-mode ghub let-alist xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help disaster company-c-headers cmake-mode clang-format winum madhat2r-theme fuzzy flycheck-credo crystal-mode org-category-capture yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic flyspell-correct-helm flyspell-correct auto-dictionary sanityinc-solarized-dark helm-dash dash-at-point toml-mode racer flycheck-rust seq cargo rust-mode csv-mode emoji-cheat-sheet-plus company-emoji web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode sql-indent yaml-mode tide typescript-mode projectile-rails inflections feature-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby solarized-theme editorconfig zenburn-theme zen-and-art-theme web-mode underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme slim-mode seti-theme scss-mode sass-mode reverse-theme rainbow-mode rainbow-identifiers railscasts-theme purple-haze-theme pug-mode professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme org-projectile org-present org-pomodoro alert log4e gntp org-download omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-elixir noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme mmm-mode minimal-theme material-theme markdown-toc markdown-mode majapahit-theme lush-theme light-soap-theme less-css-mode jbeans-theme jazz-theme ir-black-theme inkpot-theme htmlize heroku-theme hemisu-theme helm-css-scss hc-zenburn-theme haml-mode gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gnuplot gh-md gandalf-theme flycheck-pos-tip pos-tip flycheck-mix flycheck flatui-theme flatland-theme farmhouse-theme espresso-theme erlang emmet-mode dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme company-web web-completion-data color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-identifiers-mode clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes alchemist elixir-mode afternoon-theme smeargle orgit org mwim magit-gitflow helm-gitignore helm-company helm-c-yasnippet gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme))
  '(paradox-github-token t)
+ '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
+ '(ruby-deep-indent-paren nil)
  '(safe-local-variable-values
-   '((eval setq-local rspec-use-spring-when-possbile t)
+   '((eval setq-local rspec-docker-command "docker exec -it")
+     (eval setq-local rspec-use-spring-when-possbile t)
      (eval setq-local rspec-docker-container "ruby")
      (eval setq-local rspec-docker-command "docker-compose run --rm")
      (eval setq-local rspec-docker-file-name "Dockerfile")
@@ -591,7 +621,8 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:foreground "#fff8dc" :background "#1c1c1c"))))
+ '(default ((t (:foreground "#fff8dc" :background "#1c1c1c" :family "Menlo" :foundry "nil" :slant normal :weight normal :height 140 :width normal))))
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
+ '(org-level-3 ((t (:foreground "dark magenta" :weight bold :height 1.0)))))
 )
