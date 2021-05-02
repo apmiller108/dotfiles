@@ -65,6 +65,7 @@ values."
           org-enable-roam-support t
           org-plantuml-jar-path (expand-file-name "~/plantuml.jar")
           org-ellipsis " ▼"
+          org-export-date-timestamp-format "Y-%m-%d %H:%M %p"
           org-agenda-files '("~/slip-box/personal/agenda")
           org-agenda-start-with-log-mode t
           org-log-done 'time
@@ -396,9 +397,10 @@ you should place your code here."
   (setq org-roam-db-location "~/slip-box/db/org-roam.db")
   (setq org-roam-tag-sources '(prop vanilla))
   (setq org-roam-capture-templates
-        '(("d" "default" plain #'org-roam-capture--get-point "%?" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n" :unnarrowed t)
+        '(("d" "default" plain #'org-roam-capture--get-point "%?" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n#+updated: \n" :unnarrowed t)
           ("b" "code block" plain #'org-roam-capture--get-point "\n#+begin_src %^{Language}\n%i\n#+end_src" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n" :unnarrowed t)
           ("c" "cmm" plain #'org-roam-capture--get-point "%?" :file-name "cmm/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)
+          ("t" "project" plain #'org-roam-capture--get-point "%?" :file-name "projects/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)
           ("p" "personal" plain #'org-roam-capture--get-point "%?" :file-name "personal/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)))
 
   (setq-default fill-column 80)
@@ -426,6 +428,11 @@ you should place your code here."
                               :foreground "dark magenta")))
   (add-hook 'org-mode-hook
             (lambda ()
+              (setq-local time-stamp-active t
+                          time-stamp-start "#\\+updated: [ \t]*"
+                          time-stamp-end "$"
+                          time-stamp-format "%Y-%m-%d %H:%M %p")
+              (add-hook 'before-save-hook 'time-stamp nil 'local)
               (set-face-underline 'org-ellipsis nil)
               (auto-fill-mode 1)
               (spacemacs/toggle-spelling-checking-on)
