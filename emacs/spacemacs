@@ -354,6 +354,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq create-lockfiles nil) ;; Disable lockfiles (eg, `.#somefile.cr`)
   (setq helm-split-window-inside-p t) ;; Possible fix for Neotree window bug
   (setq-default flycheck-disabled-checkers '(scss)) ;; disabled checkers
+  (setq org-roam-directory "~/slip-box") ;; sets org-roam dir
   )
 
 (defun dotspacemacs/user-config ()
@@ -393,7 +394,7 @@ you should place your code here."
 
   (setq flycheck-elixir-credo-strict t)
 
-  (setq org-roam-directory "~/slip-box")
+  ;; org-roam-directory set in user-init function. See https://github.com/syl20bnr/spacemacs/issues/14477#issuecomment-815164427
   (setq org-roam-db-location "~/slip-box/db/org-roam.db")
   (setq org-roam-tag-sources '(prop vanilla))
   (setq org-roam-capture-templates
