@@ -457,11 +457,13 @@ you should place your code here."
   (spacemacs/declare-prefix-for-mode 'vue-mode "o" "custom")
   (spacemacs/set-leader-keys-for-major-mode 'vue-mode "oe" 'my/eslint-fix)
   (spacemacs/set-leader-keys-for-major-mode 'vue-mode "od" 'my/dap-debug-chrome)
+  (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ot" 'my/run-current-vuejs-unit-test)
 
   (spacemacs/declare-prefix-for-mode 'js2-mode "o" "custom")
   (spacemacs/set-leader-keys-for-major-mode 'js2-mode "oe" 'my/eslint-fix)
-  (spacemacs/set-leader-keys-for-major-mode 'js2-mode "om" 'my/dap-debug-mocha-vue)
   (spacemacs/set-leader-keys-for-major-mode 'js2-mode "od" 'my/dap-debug-chrome)
+  (spacemacs/set-leader-keys-for-major-mode 'js2-mode "om" 'my/dap-debug-mocha-vue)
+  (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ot" 'my/run-current-vuejs-unit-test)
 
   ;; GLOBAL AND OTHER SETTINGS
 
@@ -479,50 +481,31 @@ you should place your code here."
 
   ;; FUNCTIONS
 
+  ;; Load dap-mode functions
+  (get-buffer (find-file "~/slip-box/20200605164846-dap-mode.org"))
+  (setq-local org-confirm-babel-evaluate nil)
+  (org-babel-execute-buffer)
+  (previous-buffer)
+
+  (defun my/run-current-vuejs-unit-test ()
+    (interactive)
+    (async-shell-command
+     (concat
+      (if my/docker-container-name (concat "docker exec" my/docker-container-name "node_modules/@vue/cli-service/bin/vue-cli-service.js")
+        (concat (my/dap-debug-determine-project-root) "node_modules/@vue/cli-service/bin/vue-cli-service.js"))
+      (file-relative-name buffer-file-name my/dap-debug-project-root))
+     "VueJS Unit Test Run"
+     "VueJS Unit Test Error"))
+
   (defun my/super-highlight-region ()
+    "Darken the region and lighten the selected text"
     (interactive)
-    (set-face-attribute 'region nil :background "#666" :foreground "#ffffff") ;; Darken the region and lighten the selected text
-    )
-
-  ;; These vars can be set with .dir-locals file
-  (defvar my/dap-debug-url nil)
-  (defvar my/dap-debug-project-root nil)
-
-  (defun my/dap-debug-determine-project-root ()
-    (or my/dap-debug-project-root (projectile-project-root)))
-
-  (defun my/dap-debug-chrome ()
-    (interactive)
-    (dap-debug (list :type "chrome"
-                     :cwd nil
-                     :mode "url"
-                     :request "launch"
-                     :webRoot (my/dap-debug-determine-project-root)
-                     :sourceMapPathOverrides (list :webpack:///src/* (concat (my/dap-debug-determine-project-root) "src/*")
-                                                   :webpack:///./src/* (concat (my/dap-debug-determine-project-root) "src/*")
-                                                   :webpack:///src/* (concat (my/dap-debug-determine-project-root) "src/*")
-                                                   :webpack:///* "*"
-                                                   :webpack:///./node_modules/* (concat (my/dap-debug-determine-project-root) "node_modules/*"))
-                     :url (or my/dap-debug-url "http://localhost:8080")
-                     :name "Chrome Javascript Debug Config")))
-
-  (defun my/dap-debug-mocha-vue ()
-    (interactive)
-    (dap-debug (list :type "node"
-                     :request "launch"
-                     :console "internalConsole"
-                     :env (list :NODE_ENV "test")
-                     :cwd (or my/dap-debug-project-root (projectile-project-root))
-                     :program (concat (my/dap-debug-determine-project-root) "node_modules/@vue/cli-service/bin/vue-cli-service.js")
-                     :args (list "test:unit" "--inspect-brk" "--watch" "--timeout" "999999" "--include" "tests/setup.js" (buffer-file-name))
-                     :port 9229
-                     :name "Node Mocha Vue")))
+    (set-face-attribute 'region nil :background "#666" :foreground "#ffffff"))
 
   (defun my/eslint-fix ()
     (interactive)
     (shell-command
-     (concat (my/dap-debug-determine-project-root) "node_modules/.bin/eslint --fix " (buffer-file-name)))
-    )
+     (concat (my/dap-debug-determine-project-root) "node_modules/.bin/eslint --fix " (buffer-file-name))))
   )
 
 (defun dotspacemacs/emacs-custom-settings ()
