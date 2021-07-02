@@ -74,7 +74,6 @@ values."
      pandoc
      (plantuml :variables
                plantuml-default-exec-mode 'jar)
-     php
      python
      (ranger :variables
              ranger-show-preview t)
@@ -491,8 +490,9 @@ you should place your code here."
     (interactive)
     (async-shell-command
      (concat
-      (if my/docker-container-name (concat "docker exec" my/docker-container-name "node_modules/@vue/cli-service/bin/vue-cli-service.js")
-        (concat (my/dap-debug-determine-project-root) "node_modules/@vue/cli-service/bin/vue-cli-service.js"))
+      (if my/docker-container-name (concat "docker exec " my/docker-container-name " node_modules/@vue/cli-service/bin/vue-cli-service.js ")
+        (concat (my/dap-debug-determine-project-root) "node_modules/@vue/cli-service/bin/vue-cli-service.js "))
+      "test:unit --include tests/setup.js "
       (file-relative-name buffer-file-name my/dap-debug-project-root))
      "VueJS Unit Test Run"
      "VueJS Unit Test Error"))
@@ -571,6 +571,7 @@ This function is called at the very end of Spacemacs initialization."
      (eval setq-local my/dap-debug-url "http://localhost:8080")
      (eval setq-local my/dap-debug-url "https://hubble-vue.dev.cmmint.net/")
      (eval setq-local my/dap-debug-project-root "/Users/apmiller/dev/apps/hubble/client-vue/")
+     (eval setq-local my/docker-container-name "hubble-vue")
      (javascript-fmt-tool . prettier)
      (eval setq-local flycheck-javascript-eslint-executable
            (concat
