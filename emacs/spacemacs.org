@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-07-09 13:17 PM
+#+updated: 2021-07-09 14:27 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -15,7 +15,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
   :END:
 
   By setting the ~:HEADER-ARGS:~ to ~:tangle ~/.spacemacs~, the code blocks are
-  "tangled" (by calling ~org-babel-tangle~) together and written to ~/.spacemacs~
+  "tangled" (by calling ~org-babel-tangle~) together and written to ~~/.spacemacs~
   #+begin_src emacs-lisp +n
     ;; -*- MODE: EMACS-LISP -*-
     ;; This file is loaded by Spacemacs at startup.
@@ -32,6 +32,14 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         ;; Base distribution to use. This is a layer contained in the directory
         ;; `+distribution'. For now available distributions are `spacemacs-base'
         ;; or `spacemacs'. (default 'spacemacs)
+   #+end_src
+
+   #+BEGIN_QUOTE
+    Everything should be made as simple as possible,
+    but not any simpler ---Albert Einstein
+   #+END_QUOTE
+   
+   #+begin_src emacs-lisp +n
         dotspacemacs-distribution 'spacemacs
         ;; Lazy installation of layers (i.e. layers are installed only when a file
         ;; with a supported type is opened). Possible values are `all', `unused'
@@ -60,7 +68,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                            auto-completion-enable-help-tooltip nil
                            auto-completion-use-company-box nil
                            auto-completion-enable-sort-by-usage nil)
-          c-c++
           colors
           csv
           dap
@@ -80,7 +87,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                       node-add-modules-path t)
           markdown
           nginx
-          octave
           osx
           (org :variables
                org-enable-reveal-js-support t
