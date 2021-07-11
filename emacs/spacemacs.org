@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-07-09 15:58 PM
+#+updated: 2021-07-11 11:06 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -484,18 +484,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
        (spacemacs/declare-prefix "o" "custom")
        (spacemacs/set-leader-keys "on" 'org-roam-find-file)
-       (spacemacs/set-leader-keys "oh" 'my/super-highlight-region)
 
        (spacemacs/declare-prefix-for-mode 'vue-mode "o" "custom")
-       (spacemacs/set-leader-keys-for-major-mode 'vue-mode "oe" 'my/eslint-fix)
-       (spacemacs/set-leader-keys-for-major-mode 'vue-mode "od" 'my/dap-debug-chrome)
-       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ot" 'my/run-current-vuejs-unit-test)
-
        (spacemacs/declare-prefix-for-mode 'js2-mode "o" "custom")
-       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "oe" 'my/eslint-fix)
-       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "od" 'my/dap-debug-chrome)
-       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "om" 'my/dap-debug-mocha-vue)
-       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ot" 'my/run-current-vuejs-unit-test)
 
        ;; GLOBAL AND OTHER SETTINGS
 
@@ -537,6 +528,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
      Setting up the links to source map files is a pain in the arse, but so far
      this worked for me.
      #+begin_src emacs-lisp +n
+       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "od" 'my/dap-debug-chrome)
+       (spacemacs/set-leader-keys-for-major-mode 'vue-mode "od" 'my/dap-debug-chrome)
+
        (defun my/dap-debug-chrome ()
          (interactive)
          (require 'dap-chrome)
@@ -555,6 +549,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
      #+end_src
 **** Mocha test runner debug configuration (VueJS)
      #+begin_src emacs-lisp
+       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "om" 'my/dap-debug-mocha-vue)
+
        (defun my/dap-debug-mocha-vue ()
          (interactive)
          (require 'dap-node)
@@ -574,6 +570,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
     fails with ~ERROR  command "test:unit" does not exist.~ when running the
     tests locally with this function (ie, not in docker)
     #+begin_src emacs-lisp +n
+      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ot" 'my/run-current-vuejs-unit-test)
+
       (defun my/run-current-vuejs-unit-test ()
         (interactive)
         (async-shell-command
@@ -586,11 +584,27 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           (file-relative-name buffer-file-name my/dap-debug-project-root))
          "VueJS Unit Test Run"
          "VueJS Unit Test Error"))
+#+end_src
+
+*** Super highlighting
+    My default visual select (region) highlight is kind of light and hard to see in
+    bright rooms. This makes it very visible.
+
+
+    #+begin_src emacs-lisp +n 
+      (spacemacs/set-leader-keys "oh" 'my/super-highlight-region)
 
       (defun my/super-highlight-region ()
         "Darken the region and lighten the selected text"
         (interactive)
         (set-face-attribute 'region nil :background "#666" :foreground "#ffffff"))
+#+end_src
+
+*** Eslint fix up
+    Calls the project's eslint binary to fix up the current buffer.
+    #+begin_src emacs-lisp
+      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "oe" 'my/eslint-fix)
+      (spacemacs/set-leader-keys-for-major-mode 'vue-mode "oe" 'my/eslint-fix)
 
       (defun my/eslint-fix ()
         (interactive)
