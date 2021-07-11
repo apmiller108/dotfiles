@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-07-11 11:06 AM
+#+updated: 2021-07-11 11:18 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -566,9 +566,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
      #+end_src
 
 *** Running VueJS unit tests
-    I need to figure out why using the full path to the ~vue-cli-service.js~
-    fails with ~ERROR  command "test:unit" does not exist.~ when running the
-    tests locally with this function (ie, not in docker)
+    If ~my/docker-container-name~ is specified in the project's ~.dir-locals.el~
+    (or wherever), delegate the test run to it, otherwise run it locally.
+
     #+begin_src emacs-lisp +n
       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ot" 'my/run-current-vuejs-unit-test)
 
@@ -579,12 +579,12 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           (cond (my/docker-container-name
                  (concat "docker exec " my/docker-container-name " node_modules/@vue/cli-service/bin/vue-cli-service.js "))
                 (t
-                 (concat (my/dap-debug-determine-project-root) "node_modules/@vue/cli-service/bin/vue-cli-service.js ")))
+                 (concat "cd " (my/dap-debug-determine-project-root) " && " "node_modules/@vue/cli-service/bin/vue-cli-service.js ")))
           "test:unit --include tests/setup.js "
           (file-relative-name buffer-file-name my/dap-debug-project-root))
          "VueJS Unit Test Run"
          "VueJS Unit Test Error"))
-#+end_src
+    #+end_src
 
 *** Super highlighting
     My default visual select (region) highlight is kind of light and hard to see in
