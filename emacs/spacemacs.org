@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-07-16 10:02 AM
+#+updated: 2021-07-16 15:52 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -65,7 +65,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                            auto-completion-enable-sort-by-usage nil)
           colors
           csv
-          dap
+          (dap :variables
+               dap-auto-configure-features '(expressions repl))
           dash
           docker
           (elixir :variables
@@ -506,6 +507,11 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 *** dap-mode helper functions
     See also [[https://notes.alex-miller.co/20200605164846-dap-mode/][my dap-mode notes]].
 
+    Automatically open ~dap-hydra~ when a breakpoint is triggered.
+    #+begin_src emacs-lisp +n
+      (add-hook 'dap-stopped-hook '(lambda (arg) (call-interactively #'dap-hydra)))
+    #+end_src
+
     Some projects I work on need special configurations. I declare a couple
     variables here that can optionally be set in a [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][.dir-locals.el]] file.
 
@@ -600,7 +606,12 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         "Darken the region and lighten the selected text"
         (interactive)
         (set-face-attribute 'region nil :background "#666" :foreground "#ffffff"))
-#+end_src
+    #+end_src
+*** Fill region
+    Key binding to wrap text.
+    #+begin_src emacs-lisp +n
+      (spacemacs/set-leader-keys "of" 'fill-region)
+    #+end_src
 
 *** Eslint fix up
     Calls the project's eslint binary to fix up the current buffer.
@@ -611,6 +622,5 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       (defun my/eslint-fix ()
         (interactive)
         (shell-command
-         (concat (my/dap-debug-determine-project-root) "node_modules/.bin/eslint --fix " (buffer-file-name))))
-      )
+         (concat (my/dap-debug-determine-project-root) "node_modules/.bin/eslint --fix " (buffer-file-name)))))
     #+end_src
