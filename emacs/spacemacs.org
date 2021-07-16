@@ -1,10 +1,10 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-07-16 15:52 PM
+#+updated: 2021-07-16 15:54 PM
 
 This is my ~.spacemacs~ configuration.
 
-This is a self-documenting dotfile file whereby the code blocks below are
+This is a self-documenting dotfile file whereby the code blocks below
 comprise the actual dotfile configuration. This is also known as "Literate
 Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs]] and [[https://orgmode.org/][org-mode]]. See
 [[https://orgmode.org/manual/Extracting-Source-Code.html][Extracing Source Code org-mode docs]] for more on how this works.
