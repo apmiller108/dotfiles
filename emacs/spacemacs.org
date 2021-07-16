@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-07-11 11:18 AM
+#+updated: 2021-07-16 10:02 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -504,6 +504,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
    #+end_src 
 
 *** dap-mode helper functions
+    See also [[https://notes.alex-miller.co/20200605164846-dap-mode/][my dap-mode notes]].
+
     Some projects I work on need special configurations. I declare a couple
     variables here that can optionally be set in a [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][.dir-locals.el]] file.
 
