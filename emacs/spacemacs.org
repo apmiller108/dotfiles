@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-07-20 08:38 AM
+#+updated: 2021-07-20 14:46 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -95,6 +95,13 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                org-log-done 'time
                org-log-into-drawer t
                org-image-actual-width nil)
+          
+          #+end_src
+          
+          See [[https://develop.spacemacs.org/layers/+tools/pandoc/README.html][pandoc layer]] for more. Basically, I have this so I can export
+          [[https://pandoc.org/installing.html][pandoc]] program installed.
+          
+          #+begin_src emacs-lisp
           pandoc
           (plantuml :variables
                     plantuml-default-exec-mode 'jar)
