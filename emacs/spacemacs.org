@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-07-20 14:46 PM
+#+updated: 2021-08-27 13:09 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -14,13 +14,14 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
   :HEADER-ARGS: :tangle ~/.spacemacs
   :END:
 
-  By setting the ~:HEADER-ARGS:~ to ~:tangle ~/.spacemacs~, the code blocks are
-  "tangled" (by calling ~org-babel-tangle~) together and written to ~~/.spacemacs~
   #+begin_src emacs-lisp +n
     ;; -*- MODE: EMACS-LISP -*-
     ;; This file is loaded by Spacemacs at startup.
     ;; It must be stored in your home directory.
   #+end_src
+  
+  By setting the ~:HEADER-ARGS:~ to ~:tangle ~/.spacemacs~, the code blocks are
+  "tangled" (by calling ~org-babel-tangle~) together and written to ~~/.spacemacs~
 
 ** layers
    There are many [[https://develop.spacemacs.org/layers/LAYERS.html][layers]] available. These are what I use along with some
@@ -95,14 +96,16 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                org-log-done 'time
                org-log-into-drawer t
                org-image-actual-width nil)
-          
+          #+end_src
+               
+          #+begin_src emacs-lisp
+          pandoc
           #+end_src
           
           See [[https://develop.spacemacs.org/layers/+tools/pandoc/README.html][pandoc layer]] for more. Basically, I have this so I can export
           [[https://pandoc.org/installing.html][pandoc]] program installed.
           
           #+begin_src emacs-lisp
-          pandoc
           (plantuml :variables
                     plantuml-default-exec-mode 'jar)
           python
@@ -434,16 +437,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
        (setq flycheck-elixir-credo-strict t)
 
-       ;; org-roam-directory set in user-init function. See https://github.com/syl20bnr/spacemacs/issues/14477#issuecomment-815164427
-       (setq org-roam-db-location "~/slip-box/db/org-roam.db")
-       (setq org-roam-tag-sources '(prop vanilla))
-       (setq org-roam-capture-templates
-             '(("d" "default" plain #'org-roam-capture--get-point "%?" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n#+updated: \n" :unnarrowed t)
-               ("b" "code block" plain #'org-roam-capture--get-point "\n#+begin_src %^{Language}\n%i\n#+end_src" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n" :unnarrowed t)
-               ("c" "cmm" plain #'org-roam-capture--get-point "%?" :file-name "cmm/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)
-               ("t" "project" plain #'org-roam-capture--get-point "%?" :file-name "projects/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)
-               ("p" "personal" plain #'org-roam-capture--get-point "%?" :file-name "personal/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)))
-
        (setq-default fill-column 80)
        (set-face-foreground 'fill-column-indicator "#274690") ;; face color for display-fill-column-indicator-mode
        (setq fci-rule-color "#274690") ;; color for fci mode
@@ -457,29 +450,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        (add-hook 'prog-mode-hook 'rainbow-mode)
        (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode) ;; 80 char column line
        (add-hook 'js2-mode-hook 'spacemacs/toggle-auto-completion-on)
-
-       ;; Org-mode
-       (eval-after-load "org"
-         '(require 'ox-gfm nil t))
-
-       (defun my/org-mode-faces ()
-         "Org-mode face remapping for `org-mode-hook'."
-         (when (string-equal "dakrone" spacemacs--cur-theme)
-           (face-remap-add-relative 'org-level-3
-                                    :foreground "dark magenta")))
-       (add-hook 'org-mode-hook
-                 (lambda ()
-                   (setq-local time-stamp-active t
-                               time-stamp-start "#\\+updated: [ \t]*"
-                               time-stamp-end "$"
-                               time-stamp-format "%Y-%m-%d %H:%M %p")
-                   (add-hook 'before-save-hook 'time-stamp nil 'local)
-                   (set-face-underline 'org-ellipsis nil)
-                   (auto-fill-mode 1)
-                   (spacemacs/toggle-spelling-checking-on)
-                   (my/org-mode-faces)
-                   (display-fill-column-indicator-mode)
-                   (turn-on-smartparens-mode)))
 
        (setq rspec-use-spring-when-possible nil) ;; define this instead in a .dir-locals
        (eval-after-load 'rspec-mode
@@ -509,6 +479,79 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
 
        (add-to-list 'load-path "~/.emacs.d/lisp/") ;; Put custom pacakages here.
+      #+end_src
+*** typescript-mode
+    Apply multiple checkers for typescript-mode.
+    See https://www.flycheck.org/en/27/_downloads/flycheck.html#Applying-multiple-checkers
+    #+begin_src emacs-lisp
+      (defun my/setup-typescript-mode-checkers ()
+        "Adds eslint as the next flycheck checker to lsp"
+        (interactive)
+        (flycheck-add-next-checker 'lsp '(warning . javascript-eslint)))
+
+      (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "oc" 'my/setup-typescript-mode-checkers)
+    #+end_src
+
+    I seem to have performance issues with typescript (using LSP) and
+    ~idel-change~ linting.
+    #+begin_src emacs-lisp
+      (add-hook 'typescript-mode-hook
+                (lambda()
+                  (setq-local flycheck-check-syntax-automatically '(mode-enabled save new-line))))
+    #+end_src
+*** org-mode
+    With pandoc, I can use ~ox-gfm~ to export org files to GitHub Flavor Markdown
+    #+begin_src emacs-lisp
+      (eval-after-load "org"
+        '(require 'ox-gfm nil t))
+    #+end_src
+
+    Override the 3rd level heading color.
+    #+begin_src emacs-lisp
+      (defun my/org-mode-faces ()
+        "Org-mode face remapping for `org-mode-hook'."
+        (when (string-equal "dakrone" spacemacs--cur-theme)
+          (face-remap-add-relative 'org-level-3
+                                   :foreground "dark magenta")))
+    #+end_src
+
+    - Automatically set the ~#+updated:~ file property before save.
+    - Turn off underline ellipsis. It looks weird.
+    - Auto wrap text.
+    - Spell check my org notes.
+    #+begin_src emacs-lisp
+      (add-hook 'org-mode-hook
+                (lambda ()
+                  (setq-local time-stamp-active t
+                              time-stamp-start "#\\+updated: [ \t]*"
+                              time-stamp-end "$"
+                              time-stamp-format "%Y-%m-%d %H:%M %p")
+                  (add-hook 'before-save-hook 'time-stamp nil 'local)
+                  (set-face-underline 'org-ellipsis nil)
+                  (auto-fill-mode 1)
+                  (spacemacs/toggle-spelling-checking-on)
+                  (my/org-mode-faces)
+                  (display-fill-column-indicator-mode)
+                  (turn-on-smartparens-mode)))
+    #+end_src
+
+*** org-roam
+   ~org-roam-directory~ set in ~user-init~ function. See
+   https://github.com/syl20bnr/spacemacs/issues/14477#issuecomment-815164427
+
+   The capture templates map to different directories most of which are backed
+   by different git repos. Some are public, some are not.
+
+   #+begin_src emacs-lisp
+     (setq org-roam-db-location "~/slip-box/db/org-roam.db")
+     (setq org-roam-tag-sources '(prop vanilla))
+     (setq org-roam-capture-templates
+           '(("d" "default" plain #'org-roam-capture--get-point "%?" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n#+updated: \n" :unnarrowed t)
+             ("b" "code block" plain #'org-roam-capture--get-point "\n#+begin_src %^{Language}\n%i\n#+end_src" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n" :unnarrowed t)
+             ("c" "cmm" plain #'org-roam-capture--get-point "%?" :file-name "cmm/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)
+             ("t" "project" plain #'org-roam-capture--get-point "%?" :file-name "projects/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)
+             ("p" "personal" plain #'org-roam-capture--get-point "%?" :file-name "personal/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)))
+
    #+end_src 
 
 *** dap-mode helper functions
@@ -565,6 +608,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 **** Mocha test runner debug configuration (VueJS)
      #+begin_src emacs-lisp
        (spacemacs/set-leader-keys-for-major-mode 'js2-mode "om" 'my/dap-debug-mocha-vue)
+       (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "om" 'my/dap-debug-mocha-vue)
 
        (defun my/dap-debug-mocha-vue ()
          (interactive)
@@ -586,6 +630,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
     #+begin_src emacs-lisp +n
       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ot" 'my/run-current-vuejs-unit-test)
+      (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "ot" 'my/run-current-vuejs-unit-test)
 
       (defun my/run-current-vuejs-unit-test ()
         (interactive)
@@ -625,6 +670,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
     #+begin_src emacs-lisp
       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "oe" 'my/eslint-fix)
       (spacemacs/set-leader-keys-for-major-mode 'vue-mode "oe" 'my/eslint-fix)
+      (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "oe" 'my/eslint-fix)
 
       (defun my/eslint-fix ()
         (interactive)
