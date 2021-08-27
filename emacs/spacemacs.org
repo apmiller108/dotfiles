@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-08-27 13:09 PM
+#+updated: 2021-08-27 14:52 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -395,6 +395,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        (setq-default flycheck-disabled-checkers '(scss)) ;; disabled checkers
        (setq org-roam-directory "~/slip-box") ;; sets org-roam dir
        (setq custom-file "~/spacemacs/.cache/.custom-settings") ;; place to store emacs custom settings https://github.com/syl20bnr/spacemacs/issues/7891
+       (setq dotspacemacs-read-process-output-max (* 1024 1024 3)) ;; 3mb
        )
    #+end_src
 
@@ -490,14 +491,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         (flycheck-add-next-checker 'lsp '(warning . javascript-eslint)))
 
       (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "oc" 'my/setup-typescript-mode-checkers)
-    #+end_src
-
-    I seem to have performance issues with typescript (using LSP) and
-    ~idel-change~ linting.
-    #+begin_src emacs-lisp
-      (add-hook 'typescript-mode-hook
-                (lambda()
-                  (setq-local flycheck-check-syntax-automatically '(mode-enabled save new-line))))
     #+end_src
 *** org-mode
     With pandoc, I can use ~ox-gfm~ to export org files to GitHub Flavor Markdown
