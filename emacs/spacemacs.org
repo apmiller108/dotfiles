@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-08-27 14:52 PM
+#+updated: 2021-09-03 14:19 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -395,7 +395,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        (setq-default flycheck-disabled-checkers '(scss)) ;; disabled checkers
        (setq org-roam-directory "~/slip-box") ;; sets org-roam dir
        (setq custom-file "~/spacemacs/.cache/.custom-settings") ;; place to store emacs custom settings https://github.com/syl20bnr/spacemacs/issues/7891
-       (setq dotspacemacs-read-process-output-max (* 1024 1024 3)) ;; 3mb
+       (setq dotspacemacs-read-process-output-max (* 1024 1024)) ;; 1mb to help with handling LSP server communication
+       (setq native-comp-async-report-warnings-errors nil) ;; For emacs28 with native comp so it doesn't spam warnings (can also be silent)
        )
    #+end_src
 
@@ -408,9 +409,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
      This is the place where most of your configurations should be done. Unless it is
      explicitly specified that a variable should be set before a package is loaded,
      you should place your code here."
-
+     
        ;; VARIABLES
-
+     
        (setq css-indent-offset 2)
        (setq json-encoding-default-indentation 2)
        (setq javascript-indent-level 2)
@@ -423,35 +424,40 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        (setq web-mode-attr-indent-offset 2)
        (setq sh-basic-offset 2)
        (setq sh-indentation 2)
-
+     
        (require 'whitespace)
        (setq-default whitespace-style '(face trailing))
        (setq-default whitespace-line-column 80)
        (setq whitespace-global-modes '(not web-mode))
-
+     
        (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
-
+     
        (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
        (setq mouse-wheel-progressive-speed t) ;; don't accelerate scrolling
        (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
        (setq scroll-step 1) ;; keyboard scroll one line at a time
-
+     
        (setq flycheck-elixir-credo-strict t)
-
+     
        (setq-default fill-column 80)
        (set-face-foreground 'fill-column-indicator "#274690") ;; face color for display-fill-column-indicator-mode
        (setq fci-rule-color "#274690") ;; color for fci mode
-
+     
        (setq-default git-magit-status-fullscreen t)
        (setq magit-repository-directories
              '(("~/dev/" . 0) ("~/dev/apps/" . 1) ("~/code/" . 1) ("~/dotfiles/" . 0)))
-
+     
        ;; HOOKS
-
-       (add-hook 'prog-mode-hook 'rainbow-mode)
-       (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode) ;; 80 char column line
-       (add-hook 'js2-mode-hook 'spacemacs/toggle-auto-completion-on)
-
+     
+       (add-hook 'js2-mode-hook
+                 (lambda ()
+                   (spacemacs/toggle-auto-completion-on)))
+       (add-hook 'prog-mode-hook
+                 (lambda ()
+                   (display-fill-column-indicator-mode) ;; For 80 char column line
+                   (rainbow-mode)
+                   (setq display-line-numbers t)))
+     
        (setq rspec-use-spring-when-possible nil) ;; define this instead in a .dir-locals
        (eval-after-load 'rspec-mode
          ;; Override this function to just use spring if the variable is set and not
@@ -460,15 +466,15 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
          '(defun rspec-spring-p () 'rspec-use-spring-when-possible)
          )
        ;; KEY BINDINGS
-
+     
        (spacemacs/declare-prefix "o" "custom")
        (spacemacs/set-leader-keys "on" 'org-roam-find-file)
-
+     
        (spacemacs/declare-prefix-for-mode 'vue-mode "o" "custom")
        (spacemacs/declare-prefix-for-mode 'js2-mode "o" "custom")
-
+     
        ;; GLOBAL AND OTHER SETTINGS
-
+     
        (spacemacs/toggle-highlight-current-line-globally-off) ;; Turns off highlight current line
        (global-visual-line-mode 1) ; wrap line by default
        (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
@@ -478,7 +484,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           ((t (:inherit company-tooltip :weight bold :underline nil))))
         '(company-tooltip-common-selection
           ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
-
+     
        (add-to-list 'load-path "~/.emacs.d/lisp/") ;; Put custom pacakages here.
       #+end_src
 *** typescript-mode
@@ -551,8 +557,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
     See also [[https://notes.alex-miller.co/20200605164846-dap-mode/][my dap-mode notes]].
 
     Automatically open ~dap-hydra~ when a breakpoint is triggered.
+    (Commenting this out for now...not sure I really like this)
     #+begin_src emacs-lisp +n
-      (add-hook 'dap-stopped-hook '(lambda (arg) (call-interactively #'dap-hydra)))
+      ;; (add-hook 'dap-stopped-hook' (lambda (arg) (call-interactively #'dap-hydra)))
     #+end_src
 
     Some projects I work on need special configurations. I declare a couple
@@ -618,18 +625,18 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
      #+end_src
 
 *** Running VueJS unit tests
-    If ~my/docker-container-name~ is specified in the project's ~.dir-locals.el~
+    If ~my/run-js-tests-in-docker~ is specified in the project's ~.dir-locals.el~
     (or wherever), delegate the test run to it, otherwise run it locally.
 
     #+begin_src emacs-lisp +n
       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ot" 'my/run-current-vuejs-unit-test)
       (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "ot" 'my/run-current-vuejs-unit-test)
-
+      
       (defun my/run-current-vuejs-unit-test ()
         (interactive)
         (async-shell-command
          (concat
-          (cond (my/docker-container-name
+          (cond (my/run-js-tests-in-docker
                  (concat "docker exec " my/docker-container-name " node_modules/@vue/cli-service/bin/vue-cli-service.js "))
                 (t
                  (concat "cd " (my/dap-debug-determine-project-root) " && " "node_modules/@vue/cli-service/bin/vue-cli-service.js ")))
