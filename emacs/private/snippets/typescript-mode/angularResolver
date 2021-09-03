@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Angular resolver
-# key: resolve
+# key: aresolve
 # --
 import { Injectable } from '@angular/core';
 import { Router,

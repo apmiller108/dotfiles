@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Angular component
-# key: comp
+# key: acomp
 # --
 import { Component } from '@angular/core';
 

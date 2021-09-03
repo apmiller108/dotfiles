@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Angular module
-# key: module
+# key: amodule
 # --
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
