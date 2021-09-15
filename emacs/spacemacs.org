@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-09-03 14:19 PM
+#+updated: 2021-09-15 12:49 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -221,7 +221,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         ;; List of themes, the first of the list is loaded when spacemacs starts.
         ;; Press <SPC> T n to cycle to the next theme in the list (works great
         ;; with 2 themes variants, one dark and one light)
-        dotspacemacs-themes '(dakrone)
+        dotspacemacs-themes '(spacemacs-dark)
         ;; If non nil the cursor color matches the state color in GUI Emacs.
         dotspacemacs-colorize-cursor-according-to-state t
         ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -395,7 +395,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        (setq-default flycheck-disabled-checkers '(scss)) ;; disabled checkers
        (setq org-roam-directory "~/slip-box") ;; sets org-roam dir
        (setq custom-file "~/spacemacs/.cache/.custom-settings") ;; place to store emacs custom settings https://github.com/syl20bnr/spacemacs/issues/7891
-       (setq dotspacemacs-read-process-output-max (* 1024 1024)) ;; 1mb to help with handling LSP server communication
+       (setq dotspacemacs-read-process-output-max (* 1024 1024 2)) ;; 2mb to help with handling LSP server communication
        (setq native-comp-async-report-warnings-errors nil) ;; For emacs28 with native comp so it doesn't spam warnings (can also be silent)
        )
    #+end_src
@@ -532,6 +532,15 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                   (my/org-mode-faces)
                   (display-fill-column-indicator-mode)
                   (turn-on-smartparens-mode)))
+    #+end_src
+
+    Darken src block background a little
+
+    #+begin_src emacs-lisp
+      (require 'color)
+      (set-face-attribute 'org-block nil :background
+                          (color-darken-name
+                          (face-attribute 'default :background) 3))
     #+end_src
 
 *** org-roam

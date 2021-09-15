@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: before block (Mocha)
-# key: before
-# --
-before(function() {
-
-});
