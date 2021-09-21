@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-09-15 12:49 PM
+#+updated: 2021-09-20 20:51 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -532,15 +532,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                   (my/org-mode-faces)
                   (display-fill-column-indicator-mode)
                   (turn-on-smartparens-mode)))
-    #+end_src
-
-    Darken src block background a little
-
-    #+begin_src emacs-lisp
-      (require 'color)
-      (set-face-attribute 'org-block nil :background
-                          (color-darken-name
-                          (face-attribute 'default :background) 3))
     #+end_src
 
 *** org-roam
