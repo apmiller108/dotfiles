@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-09-20 20:56 PM
+#+updated: 2021-09-24 14:22 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -469,7 +469,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
          ;; Override this function to just use spring if the variable is set and not
          ;; do all this extra checking the see if spring can be used on the host.
          ;; This is problematic for using spring with Docker.
-         '(defun rspec-spring-p () 'rspec-use-spring-when-possible)
+         '(defun rspec-spring-p () rspec-use-spring-when-possible)
          )
        ;; KEY BINDINGS
      
