@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-09-24 14:22 PM
+#+updated: 2021-09-30 17:53 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -125,7 +125,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                  shell-default-position 'bottom)
           (spell-checking :variables
                           spell-checking-enable-by-default nil
-                          ispell-program-name "/usr/local/bin/aspell")
+                          ispell-program-name "aspell")
           sql
           syntax-checking
           (themes-megapack :packages
