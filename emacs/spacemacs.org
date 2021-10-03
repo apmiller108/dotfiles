@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-09-30 17:53 PM
+#+updated: 2021-10-02 20:49 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -148,7 +148,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           sqlite3
           )
         ;; A list of packages that cannot be updated.
-        dotspacemacs-frozen-packages '(org-roam)
+        dotspacemacs-frozen-packages '()
         ;; A list of packages that will not be installed and loaded.
         dotspacemacs-excluded-packages '()
         ;; Defines the behaviour of Spacemacs when installing packages.
@@ -399,6 +399,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        (setq create-lockfiles nil) ;; Disable lockfiles (eg, `.#somefile.cr`)
        (setq helm-split-window-inside-p t) ;; Possible fix for Neotree window bug
        (setq-default flycheck-disabled-checkers '(scss)) ;; disabled checkers
+       (setq org-roam-v2-ack t) ;; Disable V2 migration warning
        (setq org-roam-directory "~/slip-box") ;; sets org-roam dir
        (setq custom-file "~/spacemacs/.cache/.custom-settings") ;; place to store emacs custom settings https://github.com/syl20bnr/spacemacs/issues/7891
        (setq dotspacemacs-read-process-output-max (* 1024 1024 2)) ;; 2mb to help with handling LSP server communication
@@ -474,7 +475,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        ;; KEY BINDINGS
      
        (spacemacs/declare-prefix "o" "custom")
-       (spacemacs/set-leader-keys "on" 'org-roam-find-file)
+       (spacemacs/set-leader-keys "on" 'org-roam-node-find)
      
        (spacemacs/declare-prefix-for-mode 'vue-mode "o" "custom")
        (spacemacs/declare-prefix-for-mode 'js2-mode "o" "custom")
@@ -551,12 +552,18 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
      (setq org-roam-db-location "~/slip-box/db/org-roam.db")
      (setq org-roam-tag-sources '(prop vanilla))
      (setq org-roam-capture-templates
-           '(("d" "default" plain #'org-roam-capture--get-point "%?" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n#+updated: \n" :unnarrowed t)
-             ("b" "code block" plain #'org-roam-capture--get-point "\n#+begin_src %^{Language}\n%i\n#+end_src" :file-name "%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n" :unnarrowed t)
-             ("c" "cmm" plain #'org-roam-capture--get-point "%?" :file-name "cmm/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)
-             ("t" "project" plain #'org-roam-capture--get-point "%?" :file-name "projects/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)
-             ("p" "personal" plain #'org-roam-capture--get-point "%?" :file-name "personal/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}\n" :unnarrowed t)))
-
+           '(("d" "default" plain "%?"
+              :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n#+updated: \n")
+              :unnarrowed t)
+             ("c" "cmm" plain "%?"
+              :target (file+head "cmm/%<%Y%m%d%H%M%S>-${slug}.org"
+                               "#+title: ${title}\n")
+              :unnarrowed t)
+             ("p" "personal" plain "%?"
+              :target (file+head "personal/%<%Y%m%d%H%M%S>-${slug}.org"
+                               "#+title: ${title}\n")
+              :unnarrowed t)))
    #+end_src 
 
 *** dap-mode helper functions
