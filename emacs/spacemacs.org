@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-10-02 20:49 PM
+#+updated: 2021-10-08 14:23 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -676,6 +676,19 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
     Key binding to wrap text.
     #+begin_src emacs-lisp +n
       (spacemacs/set-leader-keys "of" 'fill-region)
+    #+end_src
+
+    Unfilling is useful. This comes from the [[https://www.emacswiki.org/emacs/UnfillRegion][Emacs Wiki]].
+    #+begin_src emacs-lisp
+      (defun unfill-region (beg end)
+        "Unfill the region, joining text paragraphs into a single
+          logical line.  This is useful, e.g., for use with
+          `visual-line-mode'."
+        (interactive "*r")
+        (let ((fill-column (point-max)))
+          (fill-region beg end)))
+      
+      (spacemacs/set-leader-keys "ou" 'fill-region)
     #+end_src
 
 *** Eslint fix up
