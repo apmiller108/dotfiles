@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-10-08 14:23 PM
+#+updated: 2021-10-15 08:36 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -688,7 +688,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         (let ((fill-column (point-max)))
           (fill-region beg end)))
       
-      (spacemacs/set-leader-keys "ou" 'fill-region)
+      (spacemacs/set-leader-keys "ou" 'unfill-region)
     #+end_src
 
 *** Eslint fix up
