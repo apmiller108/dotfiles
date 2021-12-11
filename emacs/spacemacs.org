@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2021-10-15 08:36 AM
+#+updated: 2021-12-11 11:37 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -563,6 +563,10 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
              ("p" "personal" plain "%?"
               :target (file+head "personal/%<%Y%m%d%H%M%S>-${slug}.org"
                                "#+title: ${title}\n")
+              :unnarrowed t)
+             ("l" "local" plain "%?"
+              :target (file+head "local/%<%Y%m%d%H%M%S>-${slug}.org"
+                                 "#+title: ${title}\n")
               :unnarrowed t)))
    #+end_src 
 
