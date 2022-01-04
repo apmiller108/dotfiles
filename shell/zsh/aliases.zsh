@@ -53,15 +53,8 @@ alias doom="doombg && doomc"
 alias doomkill="emacsclient --socket-name=doom -e '(kill-emacs)'"
 
 # The rest
-alias bex="bundle exec"
-alias brspec="bundle exec rspec"
 alias ls="ls -F"
 alias df="dh -h"
 alias ngrok="~/ngrok"
 alias myaliases="cat ~/dotfiles/shell/zsh/aliases.zsh"
 alias sourcez="source ~/.zshrc"
-
-# CMM
-alias pingplus="cd /Users/apmiller/dev/apps/ping-plus/ && npm run start"
-alias hubblepgdump="pg_dump hubble_development -Fc --data-only --host=postgres --username=admin --file=/Users/apmiller/Desktop/hubble_server.dump"
-alias hubblepgrestore="pg_restore --host=postgres -d hubble_development --data-only --username=admin --disable-triggers ~/Desktop/hubble_server.dump"
