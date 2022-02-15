@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2022-02-12 09:35 AM
+#+updated: 2022-02-15 11:06 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -75,7 +75,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           emacs-lisp
           erlang
           git
-          groovy
+          (groovy :variables
+                  groovy-backend 'company-groovy
+                  groovy-indent-offset 2)
           html
           (javascript :variables
                       javascript-import-tool 'import-js
