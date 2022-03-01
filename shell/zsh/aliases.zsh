@@ -29,6 +29,7 @@ alias dl='docker logs'
 alias dstartall='docker start $(docker ps -a -q -f status=exited)'
 alias dstopall='docker stop $(docker ps -aq)'
 alias drpuml='docker run -d -p 3333:8080 --name plant_uml plantuml/plantuml-server:jetty'
+alias dserve='docker run --rm -p 8080:80 --name="myapache" -v "$PWD":/usr/local/apache2/htdocs/ httpd'
 
 # Interactive and verbose for saftey
 alias cp="cp -iv"
