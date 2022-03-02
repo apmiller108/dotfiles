@@ -27,3 +27,10 @@ fi
 
 # iterm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# kubectl
+if command -v kubectl &> /dev/null
+then
+  # Enable autocompletion
+  source <(kubectl completion zsh)
+fi
