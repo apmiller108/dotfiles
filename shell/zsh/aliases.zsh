@@ -42,7 +42,7 @@ alias mps="mix phoenix.server"
 alias ism="iex -S mix"
 
 # Emacs
-alias sm="emacs --with-profile spacemacs"
+alias sm="emacs --with-profile spacemacs &"
 alias spacemacsbg="sm --daemon=spacemacs"
 alias spacemacsc="emacsclient --create-frame --no-wait --socket-name=spacemacs"
 alias spacemacs="spacemacsbg && spacemacsc"
@@ -59,3 +59,4 @@ alias df="dh -h"
 alias ngrok="~/ngrok"
 alias myaliases="cat ~/dotfiles/shell/zsh/aliases.zsh"
 alias sourcez="source ~/.zshrc"
+alias tiltt="/usr/local/bin/tilt"
