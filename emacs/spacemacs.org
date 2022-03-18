@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2022-03-18 08:47 AM
+#+updated: 2022-03-18 09:32 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -510,10 +510,12 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
      #+end_src
 *** load-path
-    Folder for custom pacakages.
+    Folder for custom pacakages like...
     - https://github.com/bazelbuild/emacs-bazel-mode
-     #+begin_src emacs-lisp
-       (add-to-list 'load-path "~/.emacs.d/lisp/") ;; Put custom pacakages here.
+
+      
+      #+begin_src emacs-lisp
+        (add-to-list 'load-path "~/.emacs.d/lisp/") ;; Put custom pacakages here.
       #+end_src
 *** typescript-mode
     Apply multiple checkers for typescript-mode.
