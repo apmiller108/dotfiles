@@ -21,14 +21,15 @@ alias hr="heroku run"
 # Docker
 alias dc="docker-compose"
 alias dcr="docker-compose run"
-alias de='docker exec -e COLUMNS="$(tput cols)" -e LINES="$(tput lines)" -ti'
+alias de='docker exec -e COLUMNS="$(tput cols)" -e LINES="$(tput lines)" -it'
+alias dgo='docker run -e COLUMNS="$(tput cols)" -e LINES="$(tput lines)" -it --rm -v "$PWD":/app -w "/app"'
+alias dgoruby3='dgo ruby:3.1.0 bash'
 alias da='docker attach'
 alias dps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Command}}\t{{.Image}}"'
 alias dep='de postgres psql -U admin'
 alias dl='docker logs'
 alias dstartall='docker start $(docker ps -a -q -f status=exited)'
 alias dstopall='docker stop $(docker ps -aq)'
-alias drpuml='docker run -d -p 3333:8080 --name plant_uml plantuml/plantuml-server:jetty'
 alias dserve='docker run --rm -p 8080:80 --name="myapache" -v "$PWD":/usr/local/apache2/htdocs/ httpd'
 
 # Interactive and verbose for saftey

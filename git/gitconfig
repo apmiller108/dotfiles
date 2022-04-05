@@ -41,6 +41,7 @@
 	required = true
 [init]
   templatedir = ~/.git_template
+	defaultBranch = main
 [fetch]
   prune = true
 [commit]
