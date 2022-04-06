@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: jsdoc
+# key: jsdoc
+# --
+/**
+ * Returns the sum of a and b $1
+ * @param {number} a
+ * @param {number} b
+ * @param {boolean} retArr If set to true, the function will return an array
+ * @returns {(number|Array)} Sum of a and b or an array that contains a, b and the sum of a and b.
+ */
