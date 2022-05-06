@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2022-03-18 09:32 AM
+#+updated: 2022-05-06 15:03 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -97,7 +97,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
           Most of the time I would use [[https://github.com/victorhge/iedit][iedit]], but it's occasionally useful to
           be able to create multiple cursors. With ~evil-mc~, I ~g r I~ creates
-          cursors to visually selected regions.
+          cursors to visually selected regions. ~g r q~ to remove them.
           
           #+begin_src emacs-lisp
           nginx
