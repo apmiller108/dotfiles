@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2022-05-06 15:03 PM
+#+updated: 2022-05-13 16:07 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -730,3 +730,28 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         (shell-command
          (concat (my/dap-debug-determine-project-root) "node_modules/.bin/eslint --fix " (buffer-file-name)))))
     #+end_src
+
+*** RSpec tests in Kubernetes cluster
+    This depends on having ~kubectl~ cli utility installed and the following
+    variables defined (preferably in a ~.dir-locals.el~)
+    - ~my/kube-namespace~
+    - ~my/kube-container~
+      
+    #+begin_src emacs-lisp
+      (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "ob" 'my/rspec-verify-kube)
+      
+      (defun my/rspec-verify-kube ()
+        (interactive)
+        (compile
+         (concat "kubectl exec -it $(kubectl get po --template '{{range.items}}{{.metadata.name}}{{end}}' -n "
+                 my/kube-namespace
+                 " --selector=component="
+                 my/kube-container
+                 ") -c "
+                 my/kube-container
+                 " -- bash -c 'bundle exec rspec "
+                 (file-relative-name buffer-file-name my/dap-debug-project-root)
+                 "'")
+         t))
+    #+end_src
+    
