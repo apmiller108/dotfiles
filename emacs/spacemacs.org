@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2022-05-13 16:07 PM
+#+updated: 2022-05-17 11:13 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -21,7 +21,10 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
   #+end_src
   
   By setting the ~:HEADER-ARGS:~ to ~:tangle ~/.spacemacs~, the code blocks are
-  "tangled" (by calling ~org-babel-tangle~) together and written to ~~/.spacemacs~
+  "tangled" (by calling ~org-babel-tangle~) together and written to
+  ~~/.spacemacs~
+
+  Then, use ~SPC f e R~ to reload the config.
 
 ** layers
    There are many [[https://develop.spacemacs.org/layers/LAYERS.html][layers]] available. These are what I use along with some
@@ -736,22 +739,46 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
     variables defined (preferably in a ~.dir-locals.el~)
     - ~my/kube-namespace~
     - ~my/kube-container~
+    - ~my/dap-debug-project-root~
+
+
+    It's a little silly. This kinda re-implements some of what [[https://github.com/pezra/rspec-mode/blob/master/rspec-mode.el][rspec-mode]]
+    already does, albeit in a simpler way.
+
+    TODO: add spring
+    TODO: add --only-failures
       
     #+begin_src emacs-lisp
-      (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "ob" 'my/rspec-verify-kube)
+      (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "ob" 'my/rspec-verify-k8s)
+      (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "ot" 'my/rspec-verify-single-k8s)
       
-      (defun my/rspec-verify-kube ()
+      (defun my/rspec-k8s-cmd (file options)
+        (concat "kubectl exec -it $(kubectl get po --template '{{range.items}}{{.metadata.name}}{{end}}' -n "
+                my/kube-namespace
+                " --selector=component="
+                my/kube-container
+                ") -c "
+                my/kube-container
+                " -- bash -c 'bundle exec rspec "
+                file
+                "'"))
+      
+      (defun my/rspec-verify-k8s ()
+        "Run the specs in the current buffer"
         (interactive)
         (compile
-         (concat "kubectl exec -it $(kubectl get po --template '{{range.items}}{{.metadata.name}}{{end}}' -n "
-                 my/kube-namespace
-                 " --selector=component="
-                 my/kube-container
-                 ") -c "
-                 my/kube-container
-                 " -- bash -c 'bundle exec rspec "
-                 (file-relative-name buffer-file-name my/dap-debug-project-root)
-                 "'")
+         (my/rspec-k8s-cmd (file-relative-name buffer-file-name my/dap-debug-project-root) "")
+         t))
+      
+      (defun my/rspec-verify-single-k8s ()
+        "Run the specs at point in the current buffer"
+        (interactive)
+        (compile
+         (my/rspec-k8s-cmd
+          (concat (file-relative-name buffer-file-name my/dap-debug-project-root)
+                  ":"
+                  (number-to-string (line-number-at-pos)))
+          "")
          t))
     #+end_src
     
