@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2022-05-17 11:13 AM
+#+updated: 2022-05-18 08:29 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -731,7 +731,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       (defun my/eslint-fix ()
         (interactive)
         (shell-command
-         (concat (my/dap-debug-determine-project-root) "node_modules/.bin/eslint --fix " (buffer-file-name)))))
+         (concat (my/dap-debug-determine-project-root) "node_modules/.bin/eslint --fix " (buffer-file-name))))
     #+end_src
 
 *** RSpec tests in Kubernetes cluster
@@ -781,4 +781,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           "")
          t))
     #+end_src
-    
+
+*** End of ~user-config~ function
+#+begin_src emacs-lisp
+)
+#+end_src
