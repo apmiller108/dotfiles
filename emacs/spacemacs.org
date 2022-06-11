@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2022-05-18 08:29 AM
+#+updated: 2022-06-10 23:36 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -67,6 +67,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                            auto-completion-enable-help-tooltip nil
                            auto-completion-use-company-box nil
                            auto-completion-enable-sort-by-usage nil)
+          c-c++
           colors
           csv
           (dap :variables
@@ -253,7 +254,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                                     :powerline-offset: 2
                                     :powerline-scale 1.1)
                                     ("Fira Code"
-                                     :size 32
+                                     :size 14
                                      :weight normal
                                      :width normal
                                      :powerline-offset: 2

@@ -1,5 +1,8 @@
 export PATH=/usr/local/bin:$PATH
 
+# For https://github.com/robbert-vdh/yabridge (run Windows VSTs on Linux)
+export PATH=$HOME/.local/share/yabridge:$PATH
+
 # NPM and Yarn
 if command -v npm &> /dev/null
 then
