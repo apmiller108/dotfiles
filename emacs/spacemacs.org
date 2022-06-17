@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2022-06-10 23:36 PM
+#+updated: 2022-06-17 11:30 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -751,18 +751,23 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       
     #+begin_src emacs-lisp
       (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "ob" 'my/rspec-verify-k8s)
+      (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "or" 'my/rspec-rerun-k8s)
       (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "ot" 'my/rspec-verify-single-k8s)
       
+      (defvar my/rspec-last-command nil)
+      
       (defun my/rspec-k8s-cmd (file options)
-        (concat "kubectl exec -it $(kubectl get po --template '{{range.items}}{{.metadata.name}}{{end}}' -n "
-                my/kube-namespace
-                " --selector=component="
-                my/kube-container
-                ") -c "
-                my/kube-container
-                " -- bash -c 'bundle exec rspec "
-                file
-                "'"))
+        (setq my/rspec-last-command
+          (concat "kubectl exec -it $(kubectl get po --template '{{range.items}}{{.metadata.name}}{{end}}' -n "
+                  my/kube-namespace
+                  " --selector=component="
+                  my/kube-container
+                  ") -c "
+                  my/kube-container
+                  " -- bash -c 'bundle exec rspec "
+                  file
+                  "'"))
+        my/rspec-last-command)
       
       (defun my/rspec-verify-k8s ()
         "Run the specs in the current buffer"
@@ -781,6 +786,14 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                   (number-to-string (line-number-at-pos)))
           "")
          t))
+      
+      (defun my/rspec-rerun-k8s ()
+        "Re-run the last RSpec command"
+        (interactive)
+        (if (not my/rspec-last-command)
+            (error "No last command to run")
+          (compile my/rspec-last-command t))
+        )
     #+end_src
 
 *** End of ~user-config~ function
