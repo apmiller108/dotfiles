@@ -16,6 +16,8 @@ fi
 
 export PATH="$HOME/.emacs.d/bin:$PATH" # for Doom emacs
 
+export PATH="$HOME/bin:$PATH"
+
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -37,3 +39,4 @@ then
   # Enable autocompletion
   source <(kubectl completion zsh)
 fi
+
