@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2022-07-18 10:52 AM
+#+updated: 2022-10-04 11:56 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -477,6 +477,15 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        (setq-default git-magit-status-fullscreen t)
        (setq magit-repository-directories
              '(("~/dev/" . 0) ("~/dev/apps/" . 1) ("~/code/" . 1) ("~/dotfiles/" . 0)))
+     
+       ;; Files to open with the OS' default or custom program
+       (setq org-file-apps
+             '((auto-mode . emacs)
+               (directory . emacs)
+               ("\\.mm\\'" . default)
+               ("\\.x?html?\\'" . default)
+               ("\\.pdf\\'" . default)
+               ("\\.docx\\'" . default)))
      
        ;; HOOKS
      
