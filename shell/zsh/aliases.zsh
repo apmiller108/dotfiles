@@ -55,7 +55,6 @@ alias doomkill="emacsclient --socket-name=doom -e '(kill-emacs)'"
 
 # The rest
 alias ls="ls -F"
-alias df="dh -h"
 alias ngrok="~/ngrok"
 alias myaliases="cat ~/dotfiles/shell/zsh/aliases.zsh"
 alias sourcez="source ~/.zshrc"

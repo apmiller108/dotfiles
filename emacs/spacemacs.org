@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2023-04-14 12:12 PM
+#+updated: 2023-04-16 12:30 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -608,7 +608,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
               :unnarrowed t)
              ("p" "personal" plain "%?"
               :target (file+head "personal/%<%Y%m%d%H%M%S>-${slug}.org"
-                               "#+title: ${title}\n")
+                               "#+title: ${title}\n#+date: %<%Y-%m-%d %H:%M %p>\n#+updated: \n")
               :unnarrowed t)
              ("l" "local" plain "%?"
               :target (file+head "local/%<%Y%m%d%H%M%S>-${slug}.org"
