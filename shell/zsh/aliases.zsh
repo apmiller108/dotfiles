@@ -23,7 +23,7 @@ alias dc="docker-compose"
 alias dcr="docker-compose run"
 alias de='docker exec -e COLUMNS="$(tput cols)" -e LINES="$(tput lines)" -it'
 alias dgo='docker run -e COLUMNS="$(tput cols)" -e LINES="$(tput lines)" -it --rm -v "$PWD":/app -w "/app"'
-alias dgoruby3='dgo ruby:3.1.0 bash'
+alias dgoruby3='dgo ruby:3 bash'
 alias da='docker attach'
 alias dps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Command}}\t{{.Image}}"'
 alias dep='de postgres psql -U admin'
