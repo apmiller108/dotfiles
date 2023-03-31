@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2022-10-04 11:56 AM
+#+updated: 2023-03-31 15:43 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -19,7 +19,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
     ;; This file is loaded by Spacemacs at startup.
     ;; It must be stored in your home directory.
   #+end_src
-  
+
   By setting the ~:HEADER-ARGS:~ to ~:tangle ~/.spacemacs~, the code blocks are
   "tangled" (by calling ~org-babel-tangle~) together and written to
   ~~/.spacemacs~
@@ -93,19 +93,19 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                       node-add-modules-path t)
           markdown
           #+end_src
-          
+
           #+begin_src emacs-lisp
           (multiple-cursors :variables
                             multiple-cursors-backend 'evil-mc)
           #+end_src
-          
+
           See [[https://github.com/gabesoft/evil-mc][evil-mc]]
           See also [[https://practical.li/spacemacs/spacemacs-basics/evil-tools/multiple-cursors.html][this tutorial post]]
 
           Most of the time I would use [[https://github.com/victorhge/iedit][iedit]], but it's occasionally useful to
           be able to create multiple cursors. With ~evil-mc~, I ~g r I~ creates
           cursors to visually selected regions. ~g r q~ to remove them.
-          
+
           #+begin_src emacs-lisp
           nginx
           osx
@@ -121,14 +121,14 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                org-log-into-drawer t
                org-image-actual-width nil)
           #+end_src
-               
+
           #+begin_src emacs-lisp
           pandoc
           #+end_src
-          
+
           See [[https://develop.spacemacs.org/layers/+tools/pandoc/README.html][pandoc layer]] for more. Basically, I have this so I can export
           [[https://pandoc.org/installing.html][pandoc]] program installed.
-          
+
           #+begin_src emacs-lisp
           (plantuml :variables
                     plantuml-default-exec-mode 'jar)
@@ -141,7 +141,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                 ruby-insert-encoding-magic-comment nil
                 ruby-enable-ruby-on-rails-support t
                 ruby-align-chained-calls t
-                ruby-backend 'robe)
+                ruby-backend 'lsp)
           ruby-on-rails
           (shell :variables
                  shell-default-shell 'vterm
@@ -428,6 +428,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        (setq custom-file "~/spacemacs/.cache/.custom-settings") ;; place to store emacs custom settings https://github.com/syl20bnr/spacemacs/issues/7891
        (setq dotspacemacs-read-process-output-max (* 1024 1024 2)) ;; 2mb to help with handling LSP server communication
        (setq native-comp-async-report-warnings-errors nil) ;; For emacs28 with native comp so it doesn't spam warnings (can also be silent)
+       (setq rbenv-installation-dir "/usr/local/") ;; rbenv location
        )
    #+end_src
 
@@ -440,9 +441,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
      This is the place where most of your configurations should be done. Unless it is
      explicitly specified that a variable should be set before a package is loaded,
      you should place your code here."
-     
+
        ;; VARIABLES
-     
+
        (setq css-indent-offset 2)
        (setq json-encoding-default-indentation 2)
        (setq javascript-indent-level 2)
@@ -455,29 +456,29 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        (setq web-mode-attr-indent-offset 2)
        (setq sh-basic-offset 2)
        (setq sh-indentation 2)
-     
+
        (require 'whitespace)
        (setq-default whitespace-style '(face trailing))
        (setq-default whitespace-line-column 80)
        (setq whitespace-global-modes '(not web-mode))
-     
+
        (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
-     
+
        (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
        (setq mouse-wheel-progressive-speed t) ;; don't accelerate scrolling
        (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
        (setq scroll-step 1) ;; keyboard scroll one line at a time
-     
+
        (setq flycheck-elixir-credo-strict t)
-     
+
        (setq-default fill-column 80)
        (set-face-foreground 'fill-column-indicator "#274690") ;; face color for display-fill-column-indicator-mode
        (setq fci-rule-color "#274690") ;; color for fci mode
-     
+
        (setq-default git-magit-status-fullscreen t)
        (setq magit-repository-directories
              '(("~/dev/" . 0) ("~/dev/apps/" . 1) ("~/code/" . 1) ("~/dotfiles/" . 0)))
-     
+
        ;; Files to open with the OS' default or custom program
        (setq org-file-apps
              '((auto-mode . emacs)
@@ -486,9 +487,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                ("\\.x?html?\\'" . default)
                ("\\.pdf\\'" . default)
                ("\\.docx\\'" . default)))
-     
+
        ;; HOOKS
-     
+
        (add-hook 'js2-mode-hook
                  (lambda ()
                    (spacemacs/toggle-auto-completion-on)))
@@ -497,7 +498,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                    (display-fill-column-indicator-mode) ;; For 80 char column line
                    (rainbow-mode)
                    (setq display-line-numbers t)))
-     
+
        (setq rspec-use-spring-when-possible nil) ;; define this instead in a .dir-locals
        (eval-after-load 'rspec-mode
          ;; Override this function to just use spring if the variable is set and not
@@ -506,15 +507,15 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
          '(defun rspec-spring-p () rspec-use-spring-when-possible)
          )
        ;; KEY BINDINGS
-     
+
        (spacemacs/declare-prefix "o" "custom")
        (spacemacs/set-leader-keys "on" 'org-roam-node-find)
-     
+
        (spacemacs/declare-prefix-for-mode 'vue-mode "o" "custom")
        (spacemacs/declare-prefix-for-mode 'js2-mode "o" "custom")
-     
+
        ;; GLOBAL AND OTHER SETTINGS
-     
+
        (spacemacs/toggle-highlight-current-line-globally-off) ;; Turns off highlight current line
        (global-visual-line-mode 1) ; wrap line by default
        (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
@@ -524,14 +525,45 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           ((t (:inherit company-tooltip :weight bold :underline nil))))
         '(company-tooltip-common-selection
           ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+#+end_src
+*** OpenAI stuff (codegpt)
+    - This adds the [[https://github.com/jcs-emacs/jcs-elpa#-how-to-use][jcs-elpa]] archive and sets the priority below melpa
+    - Adds the [[https://github.com/emacs-openai/codegpt][codegpt]] package. This will also include the [[https://github.com/emacs-openai/openai][openai]] library.
+
+      Setup with the following:
+
+      - ~(setq openai-key "OPENAI_API_KEY")~
+      - ~(setq openai-user "[YOUR USER UID]")~ if you need it
+
+      Customize these variables:
+
+      - codegpt-tunnel : API you want to use (completion or chat). completion
+        means text completion, chat means chat completion.
+      - codegpt-model : ID of the model to use. See https://platform.openai.com/docs/models
+      - codegpt-max-tokens : The maximum number of tokens to generate in the completion.
+      - codegpt-temperature : What sampling temperature to use.
+
+#+begin_src emacs-lisp
+       ;; openai stuff
+       (add-to-list 'package-archives '( "jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/") t)
+       (setq package-archive-priorities '(("melpa"    . 5)
+                                          ("jcs-elpa" . 0)))
+       (use-package codegpt :ensure t)
+       (setq codegpt-tunnel 'completion            ; The default is 'completion. Can set to 'chat.
+             codegpt-model "text-davinci-003")     ; You can pick any model you want!
      #+end_src
 *** load-path
     Folder for custom pacakages like...
     - https://github.com/bazelbuild/emacs-bazel-mode
 
-      
+    Or anything I just want to manually install. You can optionally require them
+    as well. Or just eval ~(require 'bazel)~ to load on demand.
+
+    This will add the ~/.emacs.d/lisp~ and all sub directories to the load-path
+
       #+begin_src emacs-lisp
-        (add-to-list 'load-path "~/.emacs.d/lisp/") ;; Put custom pacakages here.
+        (let ((default-directory  "~/.emacs.d/lisp/")) ;; Put custom pacakages here.
+          (normal-top-level-add-subdirs-to-load-path))
       #+end_src
 *** typescript-mode
     Apply multiple checkers for typescript-mode.
@@ -607,7 +639,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
               :target (file+head "local/%<%Y%m%d%H%M%S>-${slug}.org"
                                  "#+title: ${title}\n")
               :unnarrowed t)))
-   #+end_src 
+     (setq org-roam-node-display-template
+           (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+   #+end_src
 
 *** dap-mode helper functions
     See also [[https://notes.alex-miller.co/20200605164846-dap-mode/][my dap-mode notes]].
@@ -652,6 +686,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                           :cwd nil
                           :mode "url"
                           :request "launch"
+                          :userDataDir: nil
                           :webRoot (my/dap-debug-determine-project-root)
                           :sourceMapPathOverrides (list :webpack:///src/* (concat (my/dap-debug-determine-project-root) "src/*")
                                                         :webpack:///./src/* (concat (my/dap-debug-determine-project-root) "src/*")
@@ -687,7 +722,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
     #+begin_src emacs-lisp +n
       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ot" 'my/run-current-vuejs-unit-test)
       (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "ot" 'my/run-current-vuejs-unit-test)
-      
+
       (defun my/run-current-vuejs-unit-test ()
         (interactive)
         (async-shell-command
@@ -707,7 +742,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
     bright rooms. This makes it very visible.
 
 
-    #+begin_src emacs-lisp +n 
+    #+begin_src emacs-lisp +n
       (spacemacs/set-leader-keys "oh" 'my/super-highlight-region)
 
       (defun my/super-highlight-region ()
@@ -730,7 +765,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         (interactive "*r")
         (let ((fill-column (point-max)))
           (fill-region beg end)))
-      
+
       (spacemacs/set-leader-keys "ou" 'unfill-region)
     #+end_src
 
@@ -760,14 +795,14 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
     TODO: add spring
     TODO: add --only-failures
-      
+
     #+begin_src emacs-lisp
       (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "ob" 'my/rspec-verify-k8s)
       (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "or" 'my/rspec-rerun-k8s)
       (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "ot" 'my/rspec-verify-single-k8s)
-      
+
       (defvar my/rspec-last-command nil)
-      
+
       (defun my/rspec-k8s-cmd (file options)
         (setq my/rspec-last-command
           (concat "kubectl exec -it $(kubectl get po --template '{{range.items}}{{.metadata.name}}{{end}}' -n "
@@ -778,18 +813,18 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                   my/kube-container
                   " -n "
                   my/kube-namespace
-                  " -- bash -c 'bundle exec rspec "
+                  " -- bash -c 'bundle exec spring rspec "
                   file
                   "'"))
         my/rspec-last-command)
-      
+
       (defun my/rspec-verify-k8s ()
         "Run the specs in the current buffer"
         (interactive)
         (compile
          (my/rspec-k8s-cmd (file-relative-name buffer-file-name my/dap-debug-project-root) "")
          t))
-      
+
       (defun my/rspec-verify-single-k8s ()
         "Run the specs at point in the current buffer"
         (interactive)
@@ -800,7 +835,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                   (number-to-string (line-number-at-pos)))
           "")
          t))
-      
+
       (defun my/rspec-rerun-k8s ()
         "Re-run the last RSpec command"
         (interactive)

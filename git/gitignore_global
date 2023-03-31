@@ -19,3 +19,6 @@ vendor/bundle
 
 # Ignore test determination letters (cmm thang)
 test_determination_letter*.pdf
+
+# Ingnore solar graph configuration file
+.solargraph.yml
