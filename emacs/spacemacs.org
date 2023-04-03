@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2023-03-31 15:43 PM
+#+updated: 2023-04-03 08:04 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -526,22 +526,18 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         '(company-tooltip-common-selection
           ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
 #+end_src
-*** OpenAI stuff (codegpt)
+*** AI stuff (openai and codegpt)
     - This adds the [[https://github.com/jcs-emacs/jcs-elpa#-how-to-use][jcs-elpa]] archive and sets the priority below melpa
     - Adds the [[https://github.com/emacs-openai/codegpt][codegpt]] package. This will also include the [[https://github.com/emacs-openai/openai][openai]] library.
-
-      Setup with the following:
-
+**** Set the API Key
       - ~(setq openai-key "OPENAI_API_KEY")~
       - ~(setq openai-user "[YOUR USER UID]")~ if you need it
-
-      Customize these variables:
-
-      - codegpt-tunnel : API you want to use (completion or chat). completion
+**** Customization
+      - ~codegpt-tunnel~ : API you want to use (completion or chat). completion
         means text completion, chat means chat completion.
-      - codegpt-model : ID of the model to use. See https://platform.openai.com/docs/models
-      - codegpt-max-tokens : The maximum number of tokens to generate in the completion.
-      - codegpt-temperature : What sampling temperature to use.
+      - ~codegpt-model~ : ID of the model to use. See https://platform.openai.com/docs/models
+      - ~codegpt-max-tokens~ : The maximum number of tokens to generate in the completion.
+      - ~codegpt-temperature~ : What sampling temperature to use.
 
 #+begin_src emacs-lisp
        ;; openai stuff
