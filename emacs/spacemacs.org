@@ -788,12 +788,11 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
     - ~my/kube-namespace~
     - ~my/kube-container~
     - ~my/dap-debug-project-root~
-
+    - ~my/use-spring~
 
     It's a little silly. This kinda re-implements some of what [[https://github.com/pezra/rspec-mode/blob/master/rspec-mode.el][rspec-mode]]
     already does, albeit in a simpler way.
 
-    TODO: add spring
     TODO: add --only-failures
 
     #+begin_src emacs-lisp
@@ -813,7 +812,11 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                   my/kube-container
                   " -n "
                   my/kube-namespace
-                  " -- bash -c 'bundle exec spring rspec "
+                  " -- bash -c 'bundle exec "
+                  (if my/use-spring
+                      "spring "
+                      "")
+                  "rspec "
                   file
                   "'"))
         my/rspec-last-command)
