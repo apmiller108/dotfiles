@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2023-04-03 09:30 AM
+#+updated: 2023-04-14 12:12 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -56,7 +56,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         ;; If non-nil layers with lazy install support are lazy installed.
         ;; List of additional paths where to look for configuration layers.
         ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
-        dotspacemacs-configuration-layer-path '()
+        dotspacemacs-configuration-layer-path '("~/spacemacs/private/layers/")
         ;; List of configuration layers to load.
         dotspacemacs-configuration-layers
         '(
@@ -107,19 +107,20 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           cursors to visually selected regions. ~g r q~ to remove them.
 
           #+begin_src emacs-lisp
-          nginx
-          osx
-          (org :variables
-               org-enable-reveal-js-support t
-               org-enable-roam-support t
-               org-plantuml-jar-path (expand-file-name "~/plantuml.jar")
-               org-ellipsis " ▼"
-               org-export-date-timestamp-format "Y-%m-%d %H:%M %p"
-               org-agenda-files '("~/slip-box/personal/agenda")
-               org-agenda-start-with-log-mode t
-               org-log-done 'time
-               org-log-into-drawer t
-               org-image-actual-width nil)
+            nginx
+            openai-layer ;; See https://github.com/apmiller108/openai-layer
+            osx
+            (org :variables
+                 org-enable-reveal-js-support t
+                 org-enable-roam-support t
+                 org-plantuml-jar-path (expand-file-name "~/plantuml.jar")
+                 org-ellipsis " ▼"
+                 org-export-date-timestamp-format "Y-%m-%d %H:%M %p"
+                 org-agenda-files '("~/slip-box/personal/agenda")
+                 org-agenda-start-with-log-mode t
+                 org-log-done 'time
+                 org-log-into-drawer t
+                 org-image-actual-width nil)
           #+end_src
 
           #+begin_src emacs-lisp
@@ -141,7 +142,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                 ruby-insert-encoding-magic-comment nil
                 ruby-enable-ruby-on-rails-support t
                 ruby-align-chained-calls t
-                ruby-backend 'lsp)
+                ruby-backend 'robe)
           ruby-on-rails
           (shell :variables
                  shell-default-shell 'vterm
@@ -526,32 +527,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         '(company-tooltip-common-selection
           ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
 #+end_src
-*** AI stuff (openai and codegpt)
-    - This adds the [[https://github.com/jcs-emacs/jcs-elpa#-how-to-use][jcs-elpa]] archive and sets the priority below melpa
-    - Adds the [[https://github.com/emacs-openai/codegpt][codegpt]] package. This will also include the [[https://github.com/emacs-openai/openai][openai]] library.
-**** Set the API Key
-      - ~(setq openai-key "OPENAI_API_KEY")~
-      - ~(setq openai-user "[YOUR USER UID]")~ if you need it
-**** Customization
-      - ~codegpt-tunnel~ : API you want to use (completion or chat). completion
-        means text completion, chat means chat completion.
-      - ~codegpt-model~ : ID of the model to use. See https://platform.openai.com/docs/models
-      - ~codegpt-max-tokens~ : The maximum number of tokens to generate in the completion.
-      - ~codegpt-temperature~ : What sampling temperature to use.
-**** Usage
-     See https://github.com/emacs-openai/codegpt#-usage
-#+begin_src emacs-lisp
-  ;; openai stuff
-  (add-to-list 'package-archives '( "jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/") t)
-  (setq package-archive-priorities '(("melpa"    . 5)
-                                     ("jcs-elpa" . 0)))
-  (use-package codegpt :ensure t)
-  (setq codegpt-tunnel 'completion            ; The default is 'completion. Can set to 'chat.
-        codegpt-model "text-davinci-003"      ; Completion or chat modekl
-        codegpt-max-tokens 500                ; Default is 2000
-        codegpt-temperature 0.2)              ; Number between 0 and 2. Higher the value to more radomization.
-
-     #+end_src
 *** load-path
     Folder for custom pacakages like...
     - https://github.com/bazelbuild/emacs-bazel-mode
