@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2023-04-16 12:30 PM
+#+updated: 2023-05-17 07:58 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -108,7 +108,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
           #+begin_src emacs-lisp
             nginx
-            openai-layer ;; See https://github.com/apmiller108/openai-layer
+            (openai-layer :variables
+                          openai-layer-codegpt-tunnel 'chat
+                          openai-layer-codegpt-model "gpt-3.5-turbo") ;; See https://github.com/apmiller108/openai-layer
             osx
             (org :variables
                  org-enable-reveal-js-support t
@@ -145,23 +147,24 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                 ruby-backend 'robe)
           ruby-on-rails
           (shell :variables
-                 shell-default-shell 'vterm
-                 shell-default-height 30
-                 shell-default-position 'bottom)
+                  shell-default-shell 'vterm
+                  shell-default-height 30
+                  shell-default-position 'bottom)
           (spell-checking :variables
                           spell-checking-enable-by-default nil
                           ispell-program-name "aspell")
           sql
           syntax-checking
           (themes-megapack :packages
-                           molokai-theme
-                           jbeans-theme
-                           naquadah-theme
-                           seti-theme)
+                            molokai-theme
+                            jbeans-theme
+                            naquadah-theme
+                            seti-theme)
           typescript
           yaml
           (vue :variables
-               vue-backend 'lsp)
+                vue-backend 'lsp
+                node-add-modules-path t)
           )
         ;; List of additional packages that will be installed without being
         ;; wrapped in a layer. If you need some configuration for these
@@ -756,7 +759,20 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         (shell-command
          (concat (my/dap-debug-determine-project-root) "node_modules/.bin/eslint --fix " (buffer-file-name))))
     #+end_src
+*** Eslint check
+    #+begin_src emacs-lisp
+      (spacemacs/set-leader-keys-for-major-mode 'vue-mode "ol" 'my/eslint-check-buffer)
 
+      (defun my/eslint-check-buffer ()
+        "run eslint on current buffer"
+        (interactive)
+        (compile
+         (concat
+          (my/dap-debug-determine-project-root)
+          "node_modules/.bin/eslint "
+          (buffer-file-name))
+         t))
+    #+end_src
 *** RSpec tests in Kubernetes cluster
     This depends on having ~kubectl~ cli utility installed and the following
     variables defined (preferably in a ~.dir-locals.el~)
