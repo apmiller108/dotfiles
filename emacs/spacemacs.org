@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2023-05-17 07:58 AM
+#+updated: 2023-05-17 14:56 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -144,7 +144,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                 ruby-insert-encoding-magic-comment nil
                 ruby-enable-ruby-on-rails-support t
                 ruby-align-chained-calls t
-                ruby-backend 'robe)
+                ruby-backend 'lsp)
           ruby-on-rails
           (shell :variables
                   shell-default-shell 'vterm
@@ -779,7 +779,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
     - ~my/kube-namespace~
     - ~my/kube-container~
     - ~my/dap-debug-project-root~
-    - ~my/use-spring~
+    - ~rspec-use-spring-when-possible~
 
     It's a little silly. This kinda re-implements some of what [[https://github.com/pezra/rspec-mode/blob/master/rspec-mode.el][rspec-mode]]
     already does, albeit in a simpler way.
@@ -804,7 +804,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                   " -n "
                   my/kube-namespace
                   " -- bash -c 'bundle exec "
-                  (if my/use-spring
+                  (if rspec-use-spring-when-possible
                       "spring "
                       "")
                   "rspec "
