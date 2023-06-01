@@ -22,3 +22,6 @@ test_determination_letter*.pdf
 
 # Ingnore solar graph configuration file
 .solargraph.yml
+
+# Ignore vetur.config.js https://vuejs.github.io/vetur/reference/#example
+vetur.config.js
