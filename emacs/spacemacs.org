@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2023-05-17 14:56 PM
+#+updated: 2023-07-25 09:12 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -674,7 +674,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                           :url (or my/dap-debug-url "http://localhost:8080")
                           :name "Chrome Javascript Debug Config")))
      #+end_src
-**** Mocha test runner debug configuration (VueJS)
+**** Mocha test runner debug configuration
      #+begin_src emacs-lisp
        (spacemacs/set-leader-keys-for-major-mode 'js2-mode "om" 'my/dap-debug-mocha-vue)
        (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "om" 'my/dap-debug-mocha-vue)
@@ -690,9 +690,33 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                           :program (concat (my/dap-debug-determine-project-root) "node_modules/@vue/cli-service/bin/vue-cli-service.js")
                           :args (list "test:unit" "--inspect-brk" "--watch" "--timeout" "999999" "--include" "tests/setup.js" (buffer-file-name))
                           :port 9229
-                          :name "Node Mocha Vue")))
+                          :name "Node Mocha Current File")))
      #+end_src
 
+**** Vitest unit tests
+     This kills the previous test run buffers if they exist, otherwise they just
+     stack up. See [[https://www.gnu.org/software/emacs/manual/html_node/cl/Loop-Examples.html][loop examples]]. Then it runs dap-debug with a configuration
+     for running vitest. Output is displayed in a small buffer at the bottom.
+     #+begin_src emacs-lisp
+       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ov" 'my/dap-debug-vitest)
+       (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "ov" 'my/dap-debug-vitest)
+
+       (defun my/dap-debug-vitest ()
+         (interactive)
+         (require 'dap-node)
+         (require 'cl-lib)
+         (cl-loop for buffer in (buffer-list)
+            when (string-prefix-p "*Vitest Current File" (buffer-name buffer))
+            do (kill-buffer buffer))
+         (dap-debug (list :type "node"
+                          :request "launch"
+                          :console "internalConsole"
+                          :env (list :NODE_ENV "test")
+                          :cwd (or my/dap-debug-project-root (projectile-project-root))
+                          :program (concat (my/dap-debug-determine-project-root) "node_modules/vitest/vitest.mjs")
+                          :args (list "run" (file-relative-name buffer-file-name my/dap-debug-project-root))
+                          :name "Vitest Current File")))
+     #+end_src
 *** Running VueJS unit tests
     If ~my/run-js-tests-in-docker~ is specified in the project's ~.dir-locals.el~
     (or wherever), delegate the test run to it, otherwise run it locally.
