@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2023-07-25 09:12 AM
+#+updated: 2023-07-27 08:41 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -503,6 +503,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                    (rainbow-mode)
                    (setq display-line-numbers t)))
 
+       (add-hook 'compilation-filter-hook 'ansi-color-for-comint-mode-on) ;; color support compiliation output
+
        (setq rspec-use-spring-when-possible nil) ;; define this instead in a .dir-locals
        (eval-after-load 'rspec-mode
          ;; Override this function to just use spring if the variable is set and not
@@ -710,11 +712,14 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
             do (kill-buffer buffer))
          (dap-debug (list :type "node"
                           :request "launch"
-                          :console "internalConsole"
+                          :console "integratedTerminal"
+                          :autoAttachChildProcesses t
+                          :smartStep t
                           :env (list :NODE_ENV "test")
                           :cwd (or my/dap-debug-project-root (projectile-project-root))
                           :program (concat (my/dap-debug-determine-project-root) "node_modules/vitest/vitest.mjs")
-                          :args (list "run" (file-relative-name buffer-file-name my/dap-debug-project-root))
+                          :args (list "run --inspect-brk --single-thread" buffer-file-name)
+                          :port 9229
                           :name "Vitest Current File")))
      #+end_src
 *** Running VueJS unit tests
@@ -727,16 +732,15 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
       (defun my/run-current-vuejs-unit-test ()
         (interactive)
-        (async-shell-command
+        (compile
          (concat
           (cond (my/run-js-tests-in-docker
-                 (concat "docker exec " my/docker-container-name " node_modules/@vue/cli-service/bin/vue-cli-service.js "))
+                 (concat "docker exec " my/docker-container-name " ./node_modules/vitest/vitest.mjs "))
                 (t
-                 (concat "cd " (my/dap-debug-determine-project-root) " && " "node_modules/@vue/cli-service/bin/vue-cli-service.js ")))
-          "test:unit --include tests/setup.js "
+                 (concat "cd " (my/dap-debug-determine-project-root) " && " "./node_modules/vitest/vitest.mjs ")))
+          "run "
           (file-relative-name buffer-file-name my/dap-debug-project-root))
-         "VueJS Unit Test Run"
-         "VueJS Unit Test Error"))
+          t))
     #+end_src
 
 *** Super highlighting
@@ -786,6 +790,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 *** Eslint check
     #+begin_src emacs-lisp
       (spacemacs/set-leader-keys-for-major-mode 'vue-mode "ol" 'my/eslint-check-buffer)
+      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ol" 'my/eslint-check-buffer)
 
       (defun my/eslint-check-buffer ()
         "run eslint on current buffer"
