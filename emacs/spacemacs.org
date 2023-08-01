@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2023-07-27 08:41 AM
+#+updated: 2023-08-01 09:09 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -14,17 +14,19 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
   :HEADER-ARGS: :tangle ~/.spacemacs
   :END:
 
+** Usage
+  By setting the ~:HEADER-ARGS:~ to ~:tangle ~/.spacemacs~, the code blocks are
+  "tangled" (by calling ~org-babel-tangle~) together and written to
+  ~~/.spacemacs~.
+
+  After re-tangling, use ~SPC f e R~ to reload the config.
+
+** Opening Comment
   #+begin_src emacs-lisp +n
     ;; -*- MODE: EMACS-LISP -*-
     ;; This file is loaded by Spacemacs at startup.
     ;; It must be stored in your home directory.
   #+end_src
-
-  By setting the ~:HEADER-ARGS:~ to ~:tangle ~/.spacemacs~, the code blocks are
-  "tangled" (by calling ~org-babel-tangle~) together and written to
-  ~~/.spacemacs~
-
-  Then, use ~SPC f e R~ to reload the config.
 
 ** layers
    There are many [[https://develop.spacemacs.org/layers/LAYERS.html][layers]] available. These are what I use along with some
@@ -663,16 +665,13 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
          (interactive)
          (require 'dap-chrome)
          (dap-debug (list :type "chrome"
-                          :cwd nil
+                          :cwd (or my/dap-debug-project-root (projectile-project-root))
                           :mode "url"
                           :request "launch"
                           :userDataDir: nil
+                          :localRoot (my/dap-debug-determine-project-root)
+                          :remoteRoot (concat my/dap-debug-url "v2/")
                           :webRoot (my/dap-debug-determine-project-root)
-                          :sourceMapPathOverrides (list :webpack:///src/* (concat (my/dap-debug-determine-project-root) "src/*")
-                                                        :webpack:///./src/* (concat (my/dap-debug-determine-project-root) "src/*")
-                                                        :webpack:///src/* (concat (my/dap-debug-determine-project-root) "src/*")
-                                                        :webpack:///* "*"
-                                                        :webpack:///./node_modules/* (concat (my/dap-debug-determine-project-root) "node_modules/*"))
                           :url (or my/dap-debug-url "http://localhost:8080")
                           :name "Chrome Javascript Debug Config")))
      #+end_src
@@ -699,6 +698,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
      This kills the previous test run buffers if they exist, otherwise they just
      stack up. See [[https://www.gnu.org/software/emacs/manual/html_node/cl/Loop-Examples.html][loop examples]]. Then it runs dap-debug with a configuration
      for running vitest. Output is displayed in a small buffer at the bottom.
+
+     This is broken. Dap-mode doesn't yet support the newest VSCode debugging
+     tools. https://github.com/emacs-lsp/dap-mode/pull/736.
      #+begin_src emacs-lisp
        (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ov" 'my/dap-debug-vitest)
        (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "ov" 'my/dap-debug-vitest)
@@ -715,14 +717,13 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                           :console "integratedTerminal"
                           :autoAttachChildProcesses t
                           :smartStep t
-                          :env (list :NODE_ENV "test")
                           :cwd (or my/dap-debug-project-root (projectile-project-root))
                           :program (concat (my/dap-debug-determine-project-root) "node_modules/vitest/vitest.mjs")
-                          :args (list "run --inspect-brk --single-thread" buffer-file-name)
+                          :args (list "run" (file-relative-name buffer-file-name my/dap-debug-project-root))
                           :port 9229
                           :name "Vitest Current File")))
      #+end_src
-*** Running VueJS unit tests
+*** Running Vitest tests
     If ~my/run-js-tests-in-docker~ is specified in the project's ~.dir-locals.el~
     (or wherever), delegate the test run to it, otherwise run it locally.
 
@@ -742,7 +743,15 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           (file-relative-name buffer-file-name my/dap-debug-project-root))
           t))
     #+end_src
-
+*** Open project file in VScode
+    Open file in VScode using the projectile project root as the folder (ie,
+    where a .vscode directory lives). I use this where I need to debug node
+    applications since dap-mode doesn't work at the moment.
+    #+begin_src emacs-lisp
+      (defun my/open-in-code ()
+        (interactive)
+        (call-process-shell-command (concat "code " "-a " (projectile-project-root) " " buffer-file-name) nil 0))
+    #+end_src
 *** Super highlighting
     My default visual select (region) highlight is kind of light and hard to see in
     bright rooms. This makes it very visible.
