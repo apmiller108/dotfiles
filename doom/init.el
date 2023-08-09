@@ -12,18 +12,21 @@
        ;;chinese
        ;;japanese
 
+       :checkers
+       (spell +aspell)    ;https://github.com/doomemacs/doomemacs/tree/master/modules/checkers/spell
+       (syntax +flymake)  ;https://github.com/doomemacs/doomemacs/tree/master/modules/checkers/syntax
+
        :completion
-       company           ; the ultimate code completion backend
-       ;;helm              ; the *other* search engine for love and life
-       ;;ido               ; the other *other* search engine...
-       ivy               ; a search engine for love and life
+       (company +tng)     ; https://github.com/doomemacs/doomemacs/blob/master/modules/completion/company/README.org
+       (ivy +icons)       ; https://github.com/doomemacs/doomemacs/tree/master/modules/completion/ivy
+                          ; https://oremacs.com/swiper/
 
        :ui
        ;;deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       ;;fill-column       ; a `fill-column' indicator
+       fill-column       ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE tags
        ;;indent-guides     ; highlighted indent columns
        modeline          ; snazzy, Atom-inspired modeline, plus API
@@ -40,7 +43,7 @@
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
-       workspaces        ; tab emulation, persistence & separate workspaces
+       workspaces        ; https://github.com/doomemacs/doomemacs/tree/master/modules/ui/workspaces
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
@@ -90,6 +93,7 @@
        ;;rgb               ; creating color strings
        ;;terraform         ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
+       tree-sitter
        ;;upload            ; map local to remote projects via ssh/ftp
        ;;wakatime
 
@@ -100,7 +104,7 @@
        ;;clojure           ; java with a lisp
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
-       crystal           ; ruby at the speed of c
+       ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
        data              ; config/data formats
        erlang            ; an elegant language for a more civilized age
@@ -115,7 +119,8 @@
        ;;idris             ;
        ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
        (javascript
-        +lsp)              ; all(hope(abandon(ye(who(enter(here))))))
+        +tree-sitter
+        +lsp)              ; https://github.com/doomemacs/doomemacs/tree/master/modules/lang/javascript
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        ;;latex             ; writing papers in Emacs has never been so fun
@@ -129,7 +134,8 @@
         +dragndrop       ; file drag & drop support
         +ipython         ; ipython support for babel
         +pandoc          ; pandoc integration into org's exporter
-        +present)        ; using Emacs for presentations
+        +present         ; using Emacs for presentations
+        +roam2)          ; org-roam
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
@@ -141,7 +147,8 @@
        (ruby
         +lsp
         +rails
-        +rbenv)              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+        +rbenv
+        +tree-sitter)              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        sh                ; she sells {ba,z,fi}sh shells on the C xor
