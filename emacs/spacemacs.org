@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2023-08-01 09:09 AM
+#+updated: 2023-08-15 16:12 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -175,6 +175,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         dotspacemacs-additional-packages
         '(
           editorconfig
+          color-theme-sanityinc-tomorrow
           sqlite3
           )
         ;; A list of packages that cannot be updated.
@@ -400,8 +401,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         dotspacemacs-persistent-server nil
         ;; List of search tool executable names. Spacemacs uses the first installed
         ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
-        ;; (default '("ag" "pt" "ack" "grep"))
-        dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+        ;; (default '("rg" "ag" "pt" "ack" "grep"))
+        dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
         ;; The default package repository used if no explicit repository has been
         ;; specified with an installed package.
         ;; Not used for now. (default nil)
@@ -429,7 +430,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        (setq create-lockfiles nil) ;; Disable lockfiles (eg, `.#somefile.cr`)
        (setq helm-split-window-inside-p t) ;; Possible fix for Neotree window bug
        (setq-default flycheck-disabled-checkers '(scss)) ;; disabled checkers
-       (setq org-roam-v2-ack t) ;; Disable V2 migration warning
        (setq org-roam-directory "~/slip-box") ;; sets org-roam dir
        (setq custom-file "~/spacemacs/.cache/.custom-settings") ;; place to store emacs custom settings https://github.com/syl20bnr/spacemacs/issues/7891
        (setq dotspacemacs-read-process-output-max (* 1024 1024 2)) ;; 2mb to help with handling LSP server communication
@@ -565,7 +565,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         '(require 'ox-gfm nil t))
     #+end_src
 
-    Override the 3rd level heading color.
+    Override the 3rd level heading color for dakrone theme
     #+begin_src emacs-lisp
       (defun my/org-mode-faces ()
         "Org-mode face remapping for `org-mode-hook'."
@@ -575,6 +575,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
     #+end_src
 
     - Automatically set the ~#+updated:~ file property before save.
+    - Hide bold, italics and code markers
     - Turn off underline ellipsis. It looks weird.
     - Auto wrap text.
     - Spell check my org notes.
@@ -584,7 +585,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                   (setq-local time-stamp-active t
                               time-stamp-start "#\\+updated: [ \t]*"
                               time-stamp-end "$"
-                              time-stamp-format "%Y-%m-%d %H:%M %p")
+                              time-stamp-format "%Y-%m-%d %H:%M %p"
+                              org-hide-emphasis-markers t)
                   (add-hook 'before-save-hook 'time-stamp nil 'local)
                   (set-face-underline 'org-ellipsis nil)
                   (auto-fill-mode 1)
