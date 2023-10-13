@@ -30,6 +30,14 @@ then
   eval "$(rbenv init -)"
 fi
 
+# For pyenv https://github.com/pyenv/pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+if command -v pyenv >/dev/null
+then
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
 # iterm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
