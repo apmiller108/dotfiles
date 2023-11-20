@@ -19,8 +19,7 @@ alias he="heroku"
 alias hr="heroku run"
 
 # Docker
-alias dc="docker-compose"
-alias dcr="docker-compose run"
+alias dc="docker compose"
 alias de='docker exec -e COLUMNS="$(tput cols)" -e LINES="$(tput lines)" -it'
 alias dgo='docker run -e COLUMNS="$(tput cols)" -e LINES="$(tput lines)" -it --rm -p 4567:4567 -v "$PWD":/app -w "/app"'
 alias dgoruby3='dgo ruby:3 bash'
