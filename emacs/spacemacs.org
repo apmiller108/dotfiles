@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2023-08-15 16:12 PM
+#+updated: 2024-01-05 15:06 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -447,55 +447,76 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
      This is the place where most of your configurations should be done. Unless it is
      explicitly specified that a variable should be set before a package is loaded,
      you should place your code here."
+    #+end_src
+*** Variables
+    #+begin_src emacs-lisp
 
-       ;; VARIABLES
+      (setq css-indent-offset 2)
+      (setq json-encoding-default-indentation 2)
+      (setq javascript-indent-level 2)
+      (setq js2-mode-show-strict-warnings nil)
+      (setq js-indent-level 2)
+      (setq typescript-indent-level 2)
+      (setq web-mode-markup-indent-offset 2) ; web-mode: html tag in html file
+      (setq web-mode-css-indent-offset 2) ; web-mode: css in html file
+      (setq web-mode-code-indent-offset 2) ; web-mode: js code in html file
+      (setq web-mode-attr-indent-offset 2)
+      (setq sh-basic-offset 2)
+      (setq sh-indentation 2)
 
-       (setq css-indent-offset 2)
-       (setq json-encoding-default-indentation 2)
-       (setq javascript-indent-level 2)
-       (setq js2-mode-show-strict-warnings nil)
-       (setq js-indent-level 2)
-       (setq typescript-indent-level 2)
-       (setq web-mode-markup-indent-offset 2) ; web-mode: html tag in html file
-       (setq web-mode-css-indent-offset 2) ; web-mode: css in html file
-       (setq web-mode-code-indent-offset 2) ; web-mode: js code in html file
-       (setq web-mode-attr-indent-offset 2)
-       (setq sh-basic-offset 2)
-       (setq sh-indentation 2)
+      (require 'whitespace)
+      (setq-default whitespace-style '(face trailing))
+      (setq-default whitespace-line-column 80)
+      (setq whitespace-global-modes '(not web-mode))
 
-       (require 'whitespace)
-       (setq-default whitespace-style '(face trailing))
-       (setq-default whitespace-line-column 80)
-       (setq whitespace-global-modes '(not web-mode))
+      (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
 
-       (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
+      (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+      (setq mouse-wheel-progressive-speed t) ;; don't accelerate scrolling
+      (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+      (setq scroll-step 1) ;; keyboard scroll one line at a time
 
-       (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-       (setq mouse-wheel-progressive-speed t) ;; don't accelerate scrolling
-       (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-       (setq scroll-step 1) ;; keyboard scroll one line at a time
+      (setq flycheck-elixir-credo-strict t)
 
-       (setq flycheck-elixir-credo-strict t)
+      (setq-default fill-column 80)
+      (set-face-foreground 'fill-column-indicator "#274690") ;; face color for display-fill-column-indicator-mode
+      (setq fci-rule-color "#274690") ;; color for fci mode
 
-       (setq-default fill-column 80)
-       (set-face-foreground 'fill-column-indicator "#274690") ;; face color for display-fill-column-indicator-mode
-       (setq fci-rule-color "#274690") ;; color for fci mode
+      (setq-default git-magit-status-fullscreen t)
+      (setq magit-repository-directories
+            '(("~/dev/" . 0) ("~/dev/apps/" . 1) ("~/code/" . 1) ("~/dotfiles/" . 0)))
 
-       (setq-default git-magit-status-fullscreen t)
-       (setq magit-repository-directories
-             '(("~/dev/" . 0) ("~/dev/apps/" . 1) ("~/code/" . 1) ("~/dotfiles/" . 0)))
+      ;; Files to open with the OS' default or custom program
+      (setq org-file-apps
+            '((auto-mode . emacs)
+              (directory . emacs)
+              ("\\.mm\\'" . default)
+              ("\\.x?html?\\'" . default)
+              ("\\.pdf\\'" . default)
+              ("\\.docx\\'" . default)))
+      ;; Tree-Sitter
+      (setq treesit-language-source-alist
+         '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+           (css "https://github.com/tree-sitter/tree-sitter-css")
+           (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+           (html "https://github.com/tree-sitter/tree-sitter-html")
+           (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+           (json "https://github.com/tree-sitter/tree-sitter-json")
+           (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+           (org "https://github.com/tree-sitter/tree-sitter-org")
+           (ruby "https://github.com/ikatyang/tree-sitter-ruby")
+           (scss "https://github.com/ikatyang/tree-sitter-scss")
+           (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+           (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+           (vue "https://github.com/ikatyang/tree-sitter-vue")
+           (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
-       ;; Files to open with the OS' default or custom program
-       (setq org-file-apps
-             '((auto-mode . emacs)
-               (directory . emacs)
-               ("\\.mm\\'" . default)
-               ("\\.x?html?\\'" . default)
-               ("\\.pdf\\'" . default)
-               ("\\.docx\\'" . default)))
-
-       ;; HOOKS
-
+      ;; Map major modes to TS major modes
+      ;; (setq major-mode-remap-alist
+      ;;       '((typescript-mode . typescript-ts-mode)))
+    #+end_src
+*** Hooks
+    #+begin_src emacs-lisp
        (add-hook 'js2-mode-hook
                  (lambda ()
                    (spacemacs/toggle-auto-completion-on)))
@@ -514,16 +535,18 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
          ;; This is problematic for using spring with Docker.
          '(defun rspec-spring-p () rspec-use-spring-when-possible)
          )
-       ;; KEY BINDINGS
-
+       #+end_src
+*** Keys
+       #+begin_src emacs-lisp
        (spacemacs/declare-prefix "o" "custom")
        (spacemacs/set-leader-keys "on" 'org-roam-node-find)
 
        (spacemacs/declare-prefix-for-mode 'vue-mode "o" "custom")
        (spacemacs/declare-prefix-for-mode 'js2-mode "o" "custom")
 
-       ;; GLOBAL AND OTHER SETTINGS
-
+       #+end_src
+*** Other settings
+       #+begin_src emacs-lisp
        (spacemacs/toggle-highlight-current-line-globally-off) ;; Turns off highlight current line
        (global-visual-line-mode 1) ; wrap line by default
        (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
