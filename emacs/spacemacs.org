@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2024-01-05 15:06 PM
+#+updated: 2024-01-09 13:29 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -94,6 +94,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                       javascript-lsp-linter nil
                       node-add-modules-path t)
           markdown
+          (mermaid-layer :variables
+                         mermaid-layer-cli-path "~/node_modules/.bin/mmdc")
           #+end_src
 
           #+begin_src emacs-lisp
@@ -109,22 +111,22 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           cursors to visually selected regions. ~g r q~ to remove them.
 
           #+begin_src emacs-lisp
-            nginx
-            (openai-layer :variables
-                          openai-layer-codegpt-tunnel 'chat
-                          openai-layer-codegpt-model "gpt-3.5-turbo") ;; See https://github.com/apmiller108/openai-layer
-            osx
-            (org :variables
-                 org-enable-reveal-js-support t
-                 org-enable-roam-support t
-                 org-plantuml-jar-path (expand-file-name "~/plantuml.jar")
-                 org-ellipsis " ▼"
-                 org-export-date-timestamp-format "Y-%m-%d %H:%M %p"
-                 org-agenda-files '("~/slip-box/personal/agenda")
-                 org-agenda-start-with-log-mode t
-                 org-log-done 'time
-                 org-log-into-drawer t
-                 org-image-actual-width nil)
+          nginx
+          (openai-layer :variables
+                        openai-layer-codegpt-tunnel 'chat
+                        openai-layer-codegpt-model "gpt-3.5-turbo") ;; See https://github.com/apmiller108/openai-layer
+          osx
+          (org :variables
+                org-enable-reveal-js-support t
+                org-enable-roam-support t
+                org-plantuml-jar-path (expand-file-name "~/plantuml.jar")
+                org-ellipsis " ▼"
+                org-export-date-timestamp-format "Y-%m-%d %H:%M %p"
+                org-agenda-files '("~/slip-box/personal/agenda")
+                org-agenda-start-with-log-mode t
+                org-log-done 'time
+                org-log-into-drawer t
+                org-image-actual-width nil)
           #+end_src
 
           #+begin_src emacs-lisp
