@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2024-01-09 13:29 PM
+#+updated: 2024-01-26 08:27 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -513,9 +513,12 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
            (vue "https://github.com/ikatyang/tree-sitter-vue")
            (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
-      ;; Map major modes to TS major modes
+      ;; Map major modes to TS major modes. Enable this to use TS
       ;; (setq major-mode-remap-alist
       ;;       '((typescript-mode . typescript-ts-mode)))
+
+      ;; Fixes issues when resizing the emacs window in some window managers (ie, MacOS)
+      (setq frame-resize-pixelwise t)
     #+end_src
 *** Hooks
     #+begin_src emacs-lisp
