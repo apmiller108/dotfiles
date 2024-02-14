@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2024-01-26 08:27 AM
+#+updated: 2024-02-14 11:28 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -90,9 +90,10 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           html
           (javascript :variables
                       javascript-import-tool 'import-js
-                      javascript-backend 'tern
+                      javascript-backend 'lsp
                       javascript-lsp-linter nil
                       node-add-modules-path t)
+          lsp
           markdown
           (mermaid-layer :variables
                          mermaid-layer-cli-path "~/node_modules/.bin/mmdc")
@@ -137,61 +138,62 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           [[https://pandoc.org/installing.html][pandoc]] program installed.
 
           #+begin_src emacs-lisp
-          (plantuml :variables
-                    plantuml-default-exec-mode 'jar)
-          python
-          (ranger :variables
-                  ranger-show-preview t)
-          (ruby :variables
-                ruby-version-manager 'rbenv
-                ruby-test-runner 'rspec
-                ruby-insert-encoding-magic-comment nil
-                ruby-enable-ruby-on-rails-support t
-                ruby-align-chained-calls t
-                ruby-backend 'lsp)
-          ruby-on-rails
-          (shell :variables
-                  shell-default-shell 'vterm
-                  shell-default-height 30
-                  shell-default-position 'bottom)
-          (spell-checking :variables
-                          spell-checking-enable-by-default nil
-                          ispell-program-name "aspell")
-          sql
-          syntax-checking
-          (themes-megapack :packages
-                            molokai-theme
-                            jbeans-theme
-                            naquadah-theme
-                            seti-theme)
-          typescript
-          yaml
-          (vue :variables
-                vue-backend 'lsp
-                node-add-modules-path t)
-          )
-        ;; List of additional packages that will be installed without being
-        ;; wrapped in a layer. If you need some configuration for these
-        ;; packages, then consider creating a layer. You can also put the
-        ;; configuration in `dotspacemacs/user-config'.
-        dotspacemacs-additional-packages
-        '(
-          editorconfig
-          color-theme-sanityinc-tomorrow
-          sqlite3
-          )
-        ;; A list of packages that cannot be updated.
-        dotspacemacs-frozen-packages '()
-        ;; A list of packages that will not be installed and loaded.
-        dotspacemacs-excluded-packages '()
-        ;; Defines the behaviour of Spacemacs when installing packages.
-        ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
-        ;; `used-only' installs only explicitly used packages and uninstall any
-        ;; unused packages as well as their unused dependencies.
-        ;; `used-but-keep-unused' installs only the used packages but won't uninstall
-        ;; them if they become unused. `all' installs *all* packages supported by
-        ;; Spacemacs and never uninstall them. (default is `used-only')
-        dotspacemacs-install-packages 'used-only))
+              (plantuml :variables
+                        plantuml-default-exec-mode 'jar)
+              python
+              (ranger :variables
+                      ranger-show-preview t)
+              (ruby :variables
+                    ruby-version-manager 'rbenv
+                    ruby-test-runner 'rspec
+                    ruby-insert-encoding-magic-comment nil
+                    ruby-enable-ruby-on-rails-support t
+                    ruby-align-chained-calls t
+                    ruby-backend 'lsp)
+              ruby-on-rails
+              (shell :variables
+                      shell-default-shell 'vterm
+                      shell-default-height 30
+                      shell-default-position 'bottom)
+              (spell-checking :variables
+                              spell-checking-enable-by-default nil
+                              ispell-program-name "aspell")
+              sql
+              syntax-checking
+              (themes-megapack :packages
+                                molokai-theme
+                                jbeans-theme
+                                naquadah-theme
+                                seti-theme)
+              (typescript :variables
+                          typescript-backend 'lsp)
+              yaml
+              (vue :variables
+                    vue-backend 'lsp
+                    node-add-modules-path t)
+              )
+            ;; List of additional packages that will be installed without being
+            ;; wrapped in a layer. If you need some configuration for these
+            ;; packages, then consider creating a layer. You can also put the
+            ;; configuration in `dotspacemacs/user-config'.
+            dotspacemacs-additional-packages
+            '(
+              editorconfig
+              color-theme-sanityinc-tomorrow
+              sqlite3
+              )
+            ;; A list of packages that cannot be updated.
+            dotspacemacs-frozen-packages '()
+            ;; A list of packages that will not be installed and loaded.
+            dotspacemacs-excluded-packages '()
+            ;; Defines the behaviour of Spacemacs when installing packages.
+            ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
+            ;; `used-only' installs only explicitly used packages and uninstall any
+            ;; unused packages as well as their unused dependencies.
+            ;; `used-but-keep-unused' installs only the used packages but won't uninstall
+            ;; them if they become unused. `all' installs *all* packages supported by
+            ;; Spacemacs and never uninstall them. (default is `used-only')
+            dotspacemacs-install-packages 'used-only))
    #+end_src
 
 ** init
@@ -522,24 +524,28 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
     #+end_src
 *** Hooks
     #+begin_src emacs-lisp
-       (add-hook 'js2-mode-hook
-                 (lambda ()
-                   (spacemacs/toggle-auto-completion-on)))
-       (add-hook 'prog-mode-hook
-                 (lambda ()
-                   (display-fill-column-indicator-mode) ;; For 80 char column line
-                   (rainbow-mode)
-                   (setq display-line-numbers t)))
+      (add-hook 'js2-mode-hook
+                (lambda ()
+                  (spacemacs/toggle-auto-completion-on)))
+      (add-hook 'vue-mode-hook
+                (lambda ()
+                  (flycheck-add-mode 'javascript-eslint 'vue-mode))) ;; Add eslint as a selectable checker in vue-mode
+      (add-hook 'prog-mode-hook
+                (lambda ()
+                  (display-fill-column-indicator-mode) ;; For 80 char column line
+                  (rainbow-mode)
+                  (setq display-line-numbers t)))
 
-       (add-hook 'compilation-filter-hook 'ansi-color-for-comint-mode-on) ;; color support compiliation output
+      (require 'ansi-color)
+      (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter) ;; color support compiliation output
 
-       (setq rspec-use-spring-when-possible nil) ;; define this instead in a .dir-locals
-       (eval-after-load 'rspec-mode
-         ;; Override this function to just use spring if the variable is set and not
-         ;; do all this extra checking the see if spring can be used on the host.
-         ;; This is problematic for using spring with Docker.
-         '(defun rspec-spring-p () rspec-use-spring-when-possible)
-         )
+      (setq rspec-use-spring-when-possible nil) ;; define this instead in a .dir-locals
+      (eval-after-load 'rspec-mode
+        ;; Override this function to just use spring if the variable is set and not
+        ;; do all this extra checking the see if spring can be used on the host.
+        ;; This is problematic for using spring with Docker.
+        '(defun rspec-spring-p () rspec-use-spring-when-possible)
+        )
        #+end_src
 *** Keys
        #+begin_src emacs-lisp
