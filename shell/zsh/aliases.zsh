@@ -42,6 +42,7 @@ alias doombg="dm --daemon=doom"
 alias doomc="emacsclient --create-frame --no-wait --socket-name=doom"
 alias doom="doombg && doomc"
 alias doomkill="emacsclient --socket-name=doom -e '(kill-emacs)'"
+alias eksigusr2="ps aux | grep -ie emacs | grep -v grep | awk '{print $2}' | xargs kill -SIGUSR2"
 
 # The rest
 alias ls="ls -F"
