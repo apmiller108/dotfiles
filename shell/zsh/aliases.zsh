@@ -45,7 +45,7 @@ alias doomkill="emacsclient --socket-name=doom -e '(kill-emacs)'"
 alias eksigusr2="ps aux | grep -ie emacs | grep -v grep | awk '{print $2}' | xargs kill -SIGUSR2"
 
 # The rest
-alias ls="ls -F"
+alias ls="ls -alhF"  #include dotfiles, list files in "long format", human readable file sizes, denote dirs, symlinks, executables, etc
 alias ngrok="~/ngrok"
 alias myaliases="cat ~/dotfiles/shell/zsh/aliases.zsh"
 alias sourcez="source ~/.zshrc"
