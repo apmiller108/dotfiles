@@ -49,6 +49,7 @@ alias ls="ls -F"
 alias ngrok="~/ngrok"
 alias myaliases="cat ~/dotfiles/shell/zsh/aliases.zsh"
 alias sourcez="source ~/.zshrc"
+alias rpw="systemctl --user restart wireplumber pipewire pipewire-pulse"
 
 # Project dev
 
