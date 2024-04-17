@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2024-02-14 11:28 AM
+#+updated: 2024-04-17 14:17 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -924,7 +924,15 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           (compile my/rspec-last-command t))
         )
     #+end_src
-
+*** Vue
+    This is forces lsp-mode to find typescript where it should be
+    #+begin_src emacs-lisp
+      ;; https://github.com/emacs-lsp/lsp-mode/issues/4313#issuecomment-2051461893
+      (with-eval-after-load 'lsp-volar
+        (lsp-dependency 'typescript
+                        '(:npm :package "typescript"
+                              :path "tsserver")))
+    #+end_src
 *** End of ~user-config~ function
 #+begin_src emacs-lisp
 )
