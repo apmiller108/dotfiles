@@ -442,6 +442,18 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        )
    #+end_src
 
+** user-env
+    #+begin_src emacs-lisp +n
+      (defun dotspacemacs/user-env ()
+          "Environment variables setup.
+        This function defines the environment variables for your Emacs session. By
+        default it calls `spacemacs/load-spacemacs-env' which loads the environment
+        variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
+        See the header of this file for more information."
+          (spacemacs/load-spacemacs-env)
+       )
+    #+end_src
+
 ** user-config
    #+begin_src emacs-lisp +n
      (defun dotspacemacs/user-config ()
