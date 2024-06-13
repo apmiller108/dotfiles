@@ -35,6 +35,7 @@ alias rm="rm -iv"
 # Emacs
 alias spacemacsbg="emacs --with-profile spacemacs --daemon=spacemacs"
 alias spacemacsc="emacsclient --create-frame --no-wait --socket-name=spacemacs"
+alias sm="emacsclient --socket-name=spacemacs -nw"
 alias spacemacs="emacs --with-profile spacemacs -nw"
 alias spacemacskill="emacsclient --socket-name=spacemacs -e '(kill-emacs)'"
 alias dm="emacs --with-profile doom -nw"
