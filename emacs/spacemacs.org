@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2024-04-17 14:17 PM
+#+updated: 2024-05-18 18:12 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -121,7 +121,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                 org-enable-reveal-js-support t
                 org-enable-roam-support t
                 org-plantuml-jar-path (expand-file-name "~/plantuml.jar")
-                org-ellipsis " ▼"
                 org-export-date-timestamp-format "Y-%m-%d %H:%M %p"
                 org-agenda-files '("~/slip-box/personal/agenda")
                 org-agenda-start-with-log-mode t
@@ -611,14 +610,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         '(require 'ox-gfm nil t))
     #+end_src
 
-    Override the 3rd level heading color for dakrone theme
-    #+begin_src emacs-lisp
-      (defun my/org-mode-faces ()
-        "Org-mode face remapping for `org-mode-hook'."
-        (when (string-equal "dakrone" spacemacs--cur-theme)
-          (face-remap-add-relative 'org-level-3
-                                   :foreground "dark magenta")))
-    #+end_src
 
     - Automatically set the ~#+updated:~ file property before save.
     - Hide bold, italics and code markers
