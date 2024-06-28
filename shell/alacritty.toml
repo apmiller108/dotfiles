@@ -56,3 +56,4 @@ save_to_clipboard = true
 [window]
 padding.x = 10
 padding.y = 0
+option_as_alt = "Both" # Mac only; Need this so I can use ALT as Meta in Emacs
