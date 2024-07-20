@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2024-05-18 18:12 PM
+#+updated: 2024-07-20 09:24 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -628,7 +628,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                   (set-face-underline 'org-ellipsis nil)
                   (auto-fill-mode 1)
                   (spacemacs/toggle-spelling-checking-on)
-                  (my/org-mode-faces)
                   (display-fill-column-indicator-mode)
                   (turn-on-smartparens-mode)))
     #+end_src
