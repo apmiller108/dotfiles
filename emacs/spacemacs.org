@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2024-07-20 09:24 AM
+#+updated: 2024-07-30 11:10 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -505,6 +505,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       (setq org-file-apps
             '((auto-mode . emacs)
               (directory . emacs)
+              ("\\.png\\'" . default)
+              ("\\.jpe?g\\'" . default)
               ("\\.mm\\'" . default)
               ("\\.x?html?\\'" . default)
               ("\\.pdf\\'" . default)
