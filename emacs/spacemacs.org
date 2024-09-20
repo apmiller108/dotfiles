@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2024-07-30 11:10 AM
+#+updated: 2024-09-20 10:27 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -870,6 +870,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
     TODO: add --only-failures
 
+  kubectl -n hubble get pods -o=jsonpath='{range .items..metadata}{.name}{"\n"}{end}' | fgrep --color=never web | head -n1
     #+begin_src emacs-lisp
       (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "ob" 'my/rspec-verify-k8s)
       (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "or" 'my/rspec-rerun-k8s)
@@ -879,13 +880,11 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
       (defun my/rspec-k8s-cmd (file options)
         (setq my/rspec-last-command
-          (concat "kubectl exec -it $(kubectl get po --template '{{range.items}}{{.metadata.name}}{{end}}' -n "
+          (concat "kubectl exec -it $(kubectl get pods -o=jsonpath='{range .items..metadata}{.name}{\"\\n\"}{end}' -n "
                   my/kube-namespace
-                  " --selector=component="
+                  " | fgrep --color=never "
                   my/kube-container
-                  ") -c "
-                  my/kube-container
-                  " -n "
+                  " | head -n1) -n "
                   my/kube-namespace
                   " -- bash -c 'bundle exec "
                   (if rspec-use-spring-when-possible
