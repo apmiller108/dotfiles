@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2024-09-20 10:27 AM
+#+updated: 2024-09-20 10:28 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -870,7 +870,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
     TODO: add --only-failures
 
-  kubectl -n hubble get pods -o=jsonpath='{range .items..metadata}{.name}{"\n"}{end}' | fgrep --color=never web | head -n1
     #+begin_src emacs-lisp
       (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "ob" 'my/rspec-verify-k8s)
       (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "or" 'my/rspec-rerun-k8s)
