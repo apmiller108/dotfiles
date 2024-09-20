@@ -543,6 +543,12 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       (add-hook 'vue-mode-hook
                 (lambda ()
                   (flycheck-add-mode 'javascript-eslint 'vue-mode))) ;; Add eslint as a selectable checker in vue-mode
+      ;; LSP mode insists on setting lsp as the checker. Fine, but I want to
+      ;; also use ruby-rubocop when major mode is ruby-mode.
+      (add-hook 'lsp-mode-hook
+                (lambda ()
+                  (if (eq major-mode 'ruby-mode)
+                      (flycheck-add-next-checker 'lsp 'ruby-rubocop)))) 
       (add-hook 'prog-mode-hook
                 (lambda ()
                   (display-fill-column-indicator-mode) ;; For 80 char column line
