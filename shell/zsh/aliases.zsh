@@ -55,6 +55,6 @@ alias rpw="systemctl --user restart wireplumber pipewire pipewire-pulse"
 # Project dev
 
 # TMP
-alias twd="dc exec -it web"
-alias twt="dc exec web rspec"
+alias twd="dc exec -it app"
+alias twt="dc exec app rspec"
 alias tdd="dc exec -it database psql -U postgres -d tmp_development"
