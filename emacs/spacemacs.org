@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2024-09-20 10:28 AM
+#+updated: 2024-10-11 10:49 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -94,6 +94,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                       javascript-lsp-linter nil
                       node-add-modules-path t)
           lsp
+          major-modes ;; adds support for "extra languages" including arduino
           markdown
           (mermaid-layer :variables
                          mermaid-layer-cli-path "~/node_modules/.bin/mmdc")
