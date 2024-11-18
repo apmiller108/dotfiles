@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2024-10-11 10:49 AM
+#+updated: 2024-11-17 18:03 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -138,40 +138,49 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           [[https://pandoc.org/installing.html][pandoc]] program installed.
 
           #+begin_src emacs-lisp
-              (plantuml :variables
-                        plantuml-default-exec-mode 'jar)
-              python
-              (ranger :variables
-                      ranger-show-preview t)
-              (ruby :variables
-                    ruby-version-manager 'rbenv
-                    ruby-test-runner 'rspec
-                    ruby-insert-encoding-magic-comment nil
-                    ruby-enable-ruby-on-rails-support t
-                    ruby-align-chained-calls t
-                    ruby-backend 'lsp)
-              ruby-on-rails
-              (shell :variables
-                      shell-default-shell 'vterm
-                      shell-default-height 30
-                      shell-default-position 'bottom)
-              (spell-checking :variables
-                              spell-checking-enable-by-default nil
-                              ispell-program-name "aspell")
-              sql
-              syntax-checking
-              (themes-megapack :packages
-                                molokai-theme
-                                jbeans-theme
-                                naquadah-theme
-                                seti-theme)
-              (typescript :variables
-                          typescript-backend 'lsp)
-              yaml
-              (vue :variables
-                    vue-backend 'lsp
-                    node-add-modules-path t)
-              )
+            (plantuml :variables
+                      plantuml-default-exec-mode 'jar)
+            python
+            (ranger :variables
+                    ranger-show-preview t)
+            (ruby :variables
+                  ruby-version-manager 'rbenv
+                  ruby-test-runner 'rspec
+                  ruby-insert-encoding-magic-comment nil
+                  ruby-enable-ruby-on-rails-support t
+                  ruby-align-chained-calls t
+                  ruby-backend 'lsp)
+            ruby-on-rails
+            (shell :variables
+                   shell-default-shell 'vterm
+                   shell-default-height 30
+                   shell-default-position 'bottom)
+            (spell-checking :variables
+                            spell-checking-enable-by-default nil
+                            ispell-program-name "aspell")
+            sql
+            syntax-checking
+            (themes-megapack :packages
+                             molokai-theme
+                             jbeans-theme
+                             naquadah-theme
+                             seti-theme)
+            (typescript :variables
+                        typescript-backend 'lsp)
+            (vue :variables
+                 vue-backend 'lsp
+                 node-add-modules-path t)
+          #+end_src
+
+          To help with copy paste form/to emacs in terminal mode
+          https://develop.spacemacs.org/layers/+tools/xclipboard/README.html
+          #+begin_src emacs-lisp
+            xclipboard
+          #+end_src
+
+          #+begin_src emacs-lisp
+            yaml
+            )
             ;; List of additional packages that will be installed without being
             ;; wrapped in a layer. If you need some configuration for these
             ;; packages, then consider creating a layer. You can also put the
@@ -194,7 +203,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
             ;; them if they become unused. `all' installs *all* packages supported by
             ;; Spacemacs and never uninstall them. (default is `used-only')
             dotspacemacs-install-packages 'used-only))
-   #+end_src
+          #+end_src
 
 ** init
    #+begin_src emacs-lisp +n
