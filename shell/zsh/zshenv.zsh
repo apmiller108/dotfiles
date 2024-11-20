@@ -50,3 +50,9 @@ fi
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
+
+# if on linux setup linuxbrew
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  # Linux-specific commands
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
