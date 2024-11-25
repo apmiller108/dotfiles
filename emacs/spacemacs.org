@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2024-11-17 18:03 PM
+#+updated: 2024-11-25 09:55 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -558,7 +558,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       (add-hook 'lsp-mode-hook
                 (lambda ()
                   (if (eq major-mode 'ruby-mode)
-                      (flycheck-add-next-checker 'lsp 'ruby-rubocop)))) 
+                      (flycheck-add-next-checker 'lsp 'ruby-rubocop))))
       (add-hook 'prog-mode-hook
                 (lambda ()
                   (display-fill-column-indicator-mode) ;; For 80 char column line
