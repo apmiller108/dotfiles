@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2024-11-25 09:55 AM
+#+updated: 2024-11-26 11:19 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -544,6 +544,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
       ;; Fixes issues when resizing the emacs window in some window managers (ie, MacOS)
       (setq frame-resize-pixelwise t)
+
+      ;; Only show the warnings buffer for error level and up
+      (setq warning-minimum-level :error)
     #+end_src
 *** Hooks
     #+begin_src emacs-lisp
