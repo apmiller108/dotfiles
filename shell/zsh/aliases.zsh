@@ -47,7 +47,6 @@ alias eksigusr2="ps aux | grep -ie emacs | grep -v grep | awk '{print $2}' | xar
 
 # The rest
 alias ls="ls -alhF"  #include dotfiles, list files in "long format", human readable file sizes, denote dirs, symlinks, executables, etc
-alias ngrok="~/ngrok"
 alias myaliases="cat ~/dotfiles/shell/zsh/aliases.zsh"
 alias sourcez="source ~/.zshrc"
 alias rpw="systemctl --user restart wireplumber pipewire pipewire-pulse"
@@ -58,3 +57,4 @@ alias rpw="systemctl --user restart wireplumber pipewire pipewire-pulse"
 alias twd="dc exec -it app"
 alias twt="dc exec app rspec"
 alias tdd="dc exec -it database psql -U postgres -d tmp_development"
+alias twa="dc attach app"
