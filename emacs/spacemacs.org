@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2025-01-27 21:11 PM
+#+updated: 2025-05-03 16:03 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -559,6 +559,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       ;; also use ruby-rubocop when major mode is ruby-mode.
       (add-hook 'lsp-mode-hook
                 (lambda ()
+                  (add-to-list 'lsp-disabled-clients 'ruby-ls)
+                  (add-to-list 'lsp-disabled-clients 'rubocop-ls)
                   (if (eq major-mode 'ruby-mode)
                       (flycheck-add-next-checker 'lsp 'ruby-rubocop))))
       (add-hook 'prog-mode-hook
