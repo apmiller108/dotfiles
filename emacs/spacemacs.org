@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2025-05-03 16:03 PM
+#+updated: 2025-05-05 09:19 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -92,6 +92,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                       javascript-import-tool 'import-js
                       javascript-backend 'lsp
                       javascript-lsp-linter nil)
+          (llm-client :variable llm-client-enable-gptel t)
           lsp
           major-modes ;; adds support for "extra languages" including arduino
           markdown
@@ -113,9 +114,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
           #+begin_src emacs-lisp
           nginx
-          (openai-layer :variables
-                        openai-layer-codegpt-tunnel 'chat
-                        openai-layer-codegpt-model "gpt-3.5-turbo") ;; See https://github.com/apmiller108/openai-layer
           osx
           (org :variables
                 org-enable-reveal-js-support t
