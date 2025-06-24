@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2025-05-05 09:19 AM
+#+updated: 2025-06-24 10:55 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -79,10 +79,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                dap-auto-configure-features '(expressions repl))
           dash
           docker
-          (elixir :variables
-                  elixir-backend 'alchemist)
           emacs-lisp
-          erlang
           git
           (groovy :variables
                   groovy-backend 'company-groovy
@@ -187,6 +184,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
               editorconfig
               color-theme-sanityinc-tomorrow
               sqlite3
+              zeal-at-point
+              xclip
               )
             ;; A list of packages that cannot be updated.
             dotspacemacs-frozen-packages '()
