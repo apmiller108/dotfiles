@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2025-06-24 10:55 AM
+#+updated: 2025-07-08 13:54 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -81,6 +81,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           docker
           emacs-lisp
           git
+          github-copilot
           (groovy :variables
                   groovy-backend 'company-groovy
                   groovy-indent-offset 2)
@@ -497,8 +498,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
       (setq scroll-step 1) ;; keyboard scroll one line at a time
 
-      (setq flycheck-elixir-credo-strict t)
-
       (setq-default fill-column 80)
       (set-face-foreground 'fill-column-indicator "#274690") ;; face color for display-fill-column-indicator-mode
       (setq fci-rule-color "#274690") ;; color for fci mode
@@ -543,6 +542,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
       ;; Only show the warnings buffer for error level and up
       (setq warning-minimum-level :error)
+
+      ;; lsp-mode
+      (setq lsp-signature-auto-activate nil) ;; disables auto signature help. See https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
     #+end_src
 *** Hooks
     #+begin_src emacs-lisp
