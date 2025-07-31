@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2025-07-18 11:45 AM
+#+updated: 2025-07-31 09:01 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -567,6 +567,11 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                   (display-fill-column-indicator-mode) ;; For 80 char column line
                   (rainbow-mode)
                   (setq display-line-numbers t)))
+
+      ;; The automatic adding of "end" that pairs with "def" interferes with copilot autocompletion
+      (add-hook 'ruby-mode-hook
+                (lambda ()
+                  (sp-local-pair 'ruby-mode "def" "end" :actions '(wrap navigate))))
 
       (require 'ansi-color)
       (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter) ;; color support compiliation output
