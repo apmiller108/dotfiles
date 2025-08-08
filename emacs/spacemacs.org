@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2025-07-31 09:01 AM
+#+updated: 2025-08-08 14:48 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -138,6 +138,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
             python
             (ranger :variables
                     ranger-show-preview t)
+            (react)
             (ruby :variables
                   ruby-version-manager 'rbenv
                   ruby-test-runner 'rspec
