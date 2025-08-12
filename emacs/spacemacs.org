@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2025-08-08 14:48 PM
+#+updated: 2025-08-11 15:58 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -587,16 +587,16 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        #+end_src
 *** Keys
        #+begin_src emacs-lisp
-         (spacemacs/declare-prefix "o" "custom")
-         (spacemacs/set-leader-keys "on" 'org-roam-node-find)
+        (spacemacs/declare-prefix "o" "custom")
+        (spacemacs/set-leader-keys "on" 'org-roam-node-find)
 
-         (spacemacs/declare-prefix-for-mode 'vue-mode "o" "custom")
-         (spacemacs/declare-prefix-for-mode 'js2-mode "o" "custom")
+        (spacemacs/declare-prefix-for-mode 'vue-mode "o" "custom")
+        (spacemacs/declare-prefix-for-mode 'js2-mode "o" "custom")
 
-         ;; Copilot mode keys
-         (global-set-key (kbd "C-c RET") 'copilot-accept-completion)
-         (global-set-key (kbd "C-c C-n") 'copilot-next-completion)
-         (global-set-key (kbd "C-c C-p") 'copilot-previous-completion)
+        ;; Copilot mode keys
+        (define-key copilot-mode-map (kbd "M-/") 'copilot-accept-completion)
+        (define-key copilot-mode-map (kbd "M-<right>") 'copilot-accept-completion-by-word)
+        (define-key copilot-mode-map (kbd "M-<down>") 'copilot-accept-completion-by-line)
        #+end_src
 *** Other settings
        #+begin_src emacs-lisp
