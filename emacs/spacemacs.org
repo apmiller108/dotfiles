@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2025-08-25 13:44 PM
+#+updated: 2025-09-20 10:33 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -413,7 +413,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         ;; List of search tool executable names. Spacemacs uses the first installed
         ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
         ;; (default '("rg" "ag" "pt" "ack" "grep"))
-        dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
+        dotspacemacs-search-tools '("rg" "ag" "ack" "grep")
         ;; The default package repository used if no explicit repository has been
         ;; specified with an installed package.
         ;; Not used for now. (default nil)
@@ -803,6 +803,8 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ot" 'my/run-current-vuejs-unit-test)
       (spacemacs/set-leader-keys-for-major-mode 'typescript-mode "ot" 'my/run-current-vuejs-unit-test)
 
+      (defvar my/run-js-tests-in-docker nil
+        "If non-nil, run JS tests in a Docker container. Set this in a .dir-locals.el file.")
       (defun my/run-current-vuejs-unit-test ()
         (interactive)
         (compile
