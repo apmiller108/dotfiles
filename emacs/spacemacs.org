@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2025-09-20 10:33 AM
+#+updated: 2025-10-06 08:56 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -144,6 +144,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                   ruby-test-runner 'rspec
                   ruby-insert-encoding-magic-comment nil
                   ruby-enable-ruby-on-rails-support t
+                  ruby-enable-enh-ruby-mode t
                   ruby-align-chained-calls t
                   ruby-backend 'lsp)
             ruby-on-rails
@@ -558,21 +559,16 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       ;; LSP mode insists on setting lsp as the checker. Fine, but I want to
       ;; also use ruby-rubocop when major mode is ruby-mode.
       (add-hook 'lsp-mode-hook
-                (lambda ()
-                  (add-to-list 'lsp-disabled-clients 'ruby-ls)
-                  (add-to-list 'lsp-disabled-clients 'rubocop-ls)
-                  (if (eq major-mode 'ruby-mode)
-                      (flycheck-add-next-checker 'lsp 'ruby-rubocop))))
+          (lambda ()
+            (add-to-list 'lsp-disabled-clients 'ruby-ls)
+            (add-to-list 'lsp-disabled-clients 'rubocop-ls)
+            (when (memq major-mode '(ruby-mode enh-ruby-mode))
+              (flycheck-add-next-checker 'lsp 'ruby-rubocop))))
       (add-hook 'prog-mode-hook
                 (lambda ()
                   (display-fill-column-indicator-mode) ;; For 80 char column line
                   (rainbow-mode)
                   (setq display-line-numbers t)))
-
-      ;; The automatic adding of "end" that pairs with "def" interferes with copilot autocompletion
-      (add-hook 'ruby-mode-hook
-                (lambda ()
-                  (sp-local-pair 'ruby-mode "def" "end" :actions '(wrap navigate))))
 
       (add-hook 'copilot-mode-hook
                 (lambda ()
@@ -902,6 +898,9 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "ob" 'my/rspec-verify-k8s)
       (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "or" 'my/rspec-rerun-k8s)
       (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "ot" 'my/rspec-verify-single-k8s)
+      (spacemacs/set-leader-keys-for-major-mode 'enh-ruby-mode "ob" 'my/rspec-verify-k8s)
+      (spacemacs/set-leader-keys-for-major-mode 'enh-ruby-mode "or" 'my/rspec-rerun-k8s)
+      (spacemacs/set-leader-keys-for-major-mode 'enh-ruby-mode "ot" 'my/rspec-verify-single-k8s)
 
       (defvar my/rspec-last-command nil)
 
