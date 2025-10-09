@@ -25,3 +25,10 @@ Layout/HashAlignment:
   EnforcedColonStyle: key
   EnforcedHashRocketStyle: key
   EnforcedLastArgumentHashStyle: always_inspect
+
+RSpec/ExampleLength:
+  CountAsOne:
+    - 'array'
+    - 'hash'
+    - 'heredoc'
+    - 'method_call'
