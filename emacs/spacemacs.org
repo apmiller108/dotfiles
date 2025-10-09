@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2025-10-06 08:56 AM
+#+updated: 2025-10-09 09:15 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -575,6 +575,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                   ;; Copilot mode keys
                   (define-key copilot-mode-map (kbd "M-<up>") 'copilot-accept-completion)
                   (define-key copilot-mode-map (kbd "M-<right>") 'copilot-accept-completion-by-word)
+                  (define-key copilot-mode-map (kbd "M-<left>") 'copilot-next-completion)
                   (define-key copilot-mode-map (kbd "M-<down>") 'copilot-accept-completion-by-line)))
 
       (require 'ansi-color)
