@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2025-11-21 10:03 AM
+#+updated: 2025-12-02 13:07 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -556,14 +556,10 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       (add-hook 'vue-mode-hook
                 (lambda ()
                   (flycheck-add-mode 'javascript-eslint 'vue-mode))) ;; Add eslint as a selectable checker in vue-mode
-      ;; LSP mode insists on setting lsp as the checker. Fine, but I want to
-      ;; also use ruby-rubocop when major mode is ruby-mode.
       (add-hook 'lsp-mode-hook
           (lambda ()
             (add-to-list 'lsp-disabled-clients 'ruby-ls)
-            (add-to-list 'lsp-disabled-clients 'rubocop-ls)
-            (when (memq major-mode '(ruby-mode enh-ruby-mode))
-              (flycheck-add-next-checker 'lsp 'ruby-rubocop))))
+            (add-to-list 'lsp-disabled-clients 'rubocop-ls)))
       (add-hook 'prog-mode-hook
                 (lambda ()
                   (display-fill-column-indicator-mode) ;; For 80 char column line
@@ -592,8 +588,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
        ;; Disable certain smart parens keywords in ruby mode
       (with-eval-after-load 'smartparens-ruby
         (dolist (kw '("class" "module" "def"))
-          (sp-local-pair 'enh-ruby-mode kw "end" :actions '(wrap))))
-
+          (sp-local-pair 'enh-ruby-mode kw "end" :actions nil)))
        #+end_src
 *** Keys
        #+begin_src emacs-lisp
