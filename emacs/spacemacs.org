@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2025-12-04 11:29 AM
+#+updated: 2026-02-05 12:09 PM
 
 This is my ~.spacemacs~ configuration.
 
@@ -574,6 +574,17 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                   (define-key copilot-mode-map (kbd "M-<right>") 'copilot-accept-completion-by-word)
                   (define-key copilot-mode-map (kbd "M-<left>") 'copilot-next-completion)
                   (define-key copilot-mode-map (kbd "M-<down>") 'copilot-accept-completion-by-line)))
+
+      (defun my-ruby-disable-lsp-completion ()
+        "Disable lsp-mode completion in the current Ruby buffer. Temp fix for issues that causes 100% CPU usage."
+        ;; https://github.com/Shopify/ruby-lsp/issues/3903
+        (setq-local lsp-completion-provider :none))
+
+      (add-hook 'ruby-mode-hook #'my-ruby-disable-lsp-completion)
+
+      ;; If you ever use these Ruby modes, enable as needed:
+      ;; (add-hook 'ruby-ts-mode-hook #'my-ruby-disable-lsp-completion)  ; Emacs 29+
+      ;; (add-hook 'enh-ruby-mode-hook #'my-ruby-disable-lsp-completion)
 
       (require 'ansi-color)
       (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter) ;; color support compiliation output
