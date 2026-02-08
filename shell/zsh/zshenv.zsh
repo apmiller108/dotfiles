@@ -1,5 +1,6 @@
 export PATH=/usr/local/bin:$PATH
 
+
 # For https://github.com/robbert-vdh/yabridge (run Windows VSTs on Linux)
 export PATH=$HOME/.local/share/yabridge:$PATH
 
@@ -16,7 +17,9 @@ fi
 
 export PATH="$HOME/.emacs.d/bin:$PATH" # for Doom emacs
 
+# for user installed binaries TODO move bin to .local/bin and remove this
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
