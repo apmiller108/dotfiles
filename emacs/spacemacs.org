@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2026-02-18 13:46 PM
+#+updated: 2026-02-27 10:18 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -73,11 +73,13 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                  c-c++-backend 'lsp-ccls
                  c-c++-lsp-enable-semantic-highlight 'rainbow
                  c-c++-dap-adapters '(dap-lldb dap-cpptools))
+          (claude-code :variables
+                       claude-code-ide-window-side 'right
+                       claude-code-ide-window-width 100)
           colors
           csv
           (dap :variables
                dap-auto-configure-features '(expressions repl))
-          dash
           docker
           emacs-lisp
           git
@@ -90,7 +92,6 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                       javascript-import-tool 'import-js
                       javascript-backend 'lsp
                       javascript-lsp-linter nil)
-          (llm-client :variable llm-client-enable-gptel t)
           lsp
           major-modes ;; adds support for "extra languages" including arduino
           markdown
@@ -133,11 +134,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
           [[https://pandoc.org/installing.html][pandoc]] program installed.
 
           #+begin_src emacs-lisp
-            (plantuml :variables
-                      plantuml-default-exec-mode 'jar)
             python
-            (ranger :variables
-                    ranger-show-preview t)
             (react)
             (ruby :variables
                   ruby-version-manager 'rbenv
