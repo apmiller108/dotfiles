@@ -586,7 +586,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
        ;; Disable certain smart parens keywords in ruby mode
       (with-eval-after-load 'smartparens-ruby
-        (dolist (kw '("class" "module" "def"))
+        (dolist (kw '("class" "module" "def" "do" "if" "unless" "while" "until" "begin" "case" "for"))
           (sp-local-pair 'enh-ruby-mode kw "end" :actions nil)))
        #+end_src
 *** Keys
