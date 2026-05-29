@@ -1,8 +1,11 @@
 # See also https://alacritty.org/config-alacritty.html for how to config this
 
+[general]
+live_config_reload = true
+
 [colors]
-cursor = { text = "CellBackground", cursor = "#A1C6EA" }
-selection = { text = "CellBackground", cursor = "#A1C6EA" }
+cursor = { text = "CellBackground", background = "#A1C6EA" }
+selection = { text = "CellBackground", background = "#A1C6EA" }
 
 # Color theme (Tokyo Night Storm variant)
 # Original Source https//github.com/zatchheems/tokyo-night-alacritty-theme
@@ -37,7 +40,11 @@ style = { shape = "Beam", blinking = "Off" }
 thickness = 0.3
 
 [font]
-size = 14
+size = 14.0
+
+[font.normal]
+family = "JetBrains Mono" 
+style = "Regular"
 
 [hints]
 

@@ -17,10 +17,6 @@ fi
 
 export PATH="$HOME/.emacs.d/bin:$PATH" # for Doom emacs
 
-# for user installed binaries TODO move bin to .local/bin and remove this
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -49,6 +45,11 @@ if command -v rbenv &> /dev/null
 then
   eval "$(rbenv init -)"
 fi
+
+# For user installed binaries TODO move bin to .local/bin and remove this
+# Deliberately putting this after rbenv init so I can override rbenv shims with my own binaries if I want to
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # For pyenv https://github.com/pyenv/pyenv
 export PYENV_ROOT="$HOME/.pyenv"
