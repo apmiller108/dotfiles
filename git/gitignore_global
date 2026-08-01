@@ -25,3 +25,4 @@ test_determination_letter*.pdf
 
 # Ignore vetur.config.js https://vuejs.github.io/vetur/reference/#example
 vetur.config.js
+**/.claude/settings.local.json
