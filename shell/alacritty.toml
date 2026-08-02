@@ -64,3 +64,8 @@ save_to_clipboard = true
 padding.x = 10
 padding.y = 0
 option_as_alt = "Both" # Mac only; Need this so I can use ALT as Meta in Emacs
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"
