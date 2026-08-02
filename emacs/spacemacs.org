@@ -21,6 +21,12 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
   After re-tangling, use ~SPC f e R~ to reload the config.
 
+  To tangle from the command line on a fresh system without launching Emacs interactively:
+  #+begin_src sh :tangle no
+    emacs --batch -Q --eval "(require 'org)" --eval "(org-babel-tangle-file \"~/dotfiles/emacs/spacemacs.org\")"
+  #+end_src
+
+
 ** Opening Comment
   #+begin_src emacs-lisp +n
     ;; -*- MODE: EMACS-LISP -*-
