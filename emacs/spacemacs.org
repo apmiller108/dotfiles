@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2026-02-27 10:18 AM
+#+updated: 2026-07-02 10:49 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -550,6 +550,25 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
       ;; lsp-mode
       (setq lsp-signature-auto-activate nil) ;; disables auto signature help. See https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
+
+      (add-to-list 'display-buffer-alist
+                   '("\\*compilation\\*"
+                     (display-buffer-reuse-window display-buffer-at-bottom)
+                     (window-height . 0.3)
+                     (reusable-frames . visible)))
+
+      ;; `compile' with comint enabled (the `t' arg, needed for interactive
+      ;; debuggers like pry) runs through a code path in `compilation-start'
+      ;; that bypasses the `display-buffer-alist' rule above. Force the same
+      ;; bottom placement with `display-buffer-overriding-action', which takes
+      ;; precedence over everything. Use this instead of a raw `(compile cmd t)'
+      ;; anywhere the output should dock at the bottom.
+      (defun my/compile-comint (command)
+        "Run COMMAND via `compile' in comint mode, docked at the frame bottom."
+        (let ((display-buffer-overriding-action
+               '((display-buffer-reuse-window display-buffer-at-bottom)
+                 (window-height . 0.3))))
+          (compile command t)))
     #+end_src
 *** Hooks
     #+begin_src emacs-lisp
@@ -810,15 +829,14 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
         "If non-nil, run JS tests in a Docker container. Set this in a .dir-locals.el file.")
       (defun my/run-current-vuejs-unit-test ()
         (interactive)
-        (compile
+        (my/compile-comint
          (concat
           (cond (my/run-js-tests-in-docker
                  (concat "docker exec " my/docker-container-name " ./node_modules/vitest/vitest.mjs "))
                 (t
                  (concat "cd " (my/dap-debug-determine-project-root) " && " "./node_modules/vitest/vitest.mjs ")))
           "run "
-          (file-relative-name buffer-file-name my/dap-debug-project-root))
-          t))
+          (file-relative-name buffer-file-name my/dap-debug-project-root))))
     #+end_src
 *** Open project file in VScode
     Open file in VScode using the projectile project root as the folder (ie,
@@ -881,12 +899,11 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       (defun my/eslint-check-buffer ()
         "run eslint on current buffer"
         (interactive)
-        (compile
+        (my/compile-comint
          (concat
           (my/dap-debug-determine-project-root)
           "node_modules/.bin/eslint "
-          (buffer-file-name))
-         t))
+          (buffer-file-name))))
     #+end_src
 *** RSpec tests in Kubernetes cluster
     This depends on having ~kubectl~ cli utility installed and the following
@@ -931,28 +948,25 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
       (defun my/rspec-verify-k8s ()
         "Run the specs in the current buffer"
         (interactive)
-        (compile
-         (my/rspec-k8s-cmd (file-relative-name buffer-file-name my/dap-debug-project-root) "")
-         t))
+        (my/compile-comint
+         (my/rspec-k8s-cmd (file-relative-name buffer-file-name my/dap-debug-project-root) "")))
 
       (defun my/rspec-verify-single-k8s ()
         "Run the specs at point in the current buffer"
         (interactive)
-        (compile
+        (my/compile-comint
          (my/rspec-k8s-cmd
           (concat (file-relative-name buffer-file-name my/dap-debug-project-root)
                   ":"
                   (number-to-string (line-number-at-pos)))
-          "")
-         t))
+          "")))
 
       (defun my/rspec-rerun-k8s ()
         "Re-run the last RSpec command"
         (interactive)
         (if (not my/rspec-last-command)
             (error "No last command to run")
-          (compile my/rspec-last-command t))
-        )
+          (my/compile-comint my/rspec-last-command)))
     #+end_src
 *** Vue
     This is forces lsp-mode to find typescript where it should be
