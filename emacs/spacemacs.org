@@ -1,6 +1,6 @@
 #+title: spacemacs
 #+date: 2021-07-08 17:54 PM
-#+updated: 2026-07-02 10:49 AM
+#+updated: 2026-08-10 10:00 AM
 
 This is my ~.spacemacs~ configuration.
 
@@ -550,6 +550,10 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
 
       ;; lsp-mode
       (setq lsp-signature-auto-activate nil) ;; disables auto signature help. See https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
+      ;; Use the project's node_modules typescript/tsserver rather than an
+      ;; lsp-managed global copy. Volar (vue-semantic-server) delegates all
+      ;; TypeScript work to ts-ls, so this applies to .ts, .js, and .vue buffers.
+      (setq lsp-clients-typescript-prefer-use-project-ts-server t)
 
       (add-to-list 'display-buffer-alist
                    '("\\*compilation\\*"
