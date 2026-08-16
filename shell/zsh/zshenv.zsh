@@ -73,7 +73,7 @@ fi
 eval "$(fzf --zsh)"
 
 # if on linux setup linuxbrew
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+if [[ "$OSTYPE" == "linux-gnu"* ]] && [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
   # Linux-specific commands
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi

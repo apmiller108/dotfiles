@@ -96,8 +96,7 @@ FILES_TO_LINK=(
 
   # Editors & Environments
   "vim/vimrc:.vimrc"
-  "doom:.doom.d"
-  "emacs/private:.emacs.d/private"
+  "emacs/private:spacemacs/private"
 
   # Language REPLs & Tools
   "irb/irbrc:.irbrc"
