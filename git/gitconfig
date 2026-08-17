@@ -41,7 +41,6 @@
 	required = true
 	process = git-lfs filter-process
 [init]
-  templatedir = ~/.git_template
 	defaultBranch = main
 [fetch]
   prune = true
