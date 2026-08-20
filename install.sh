@@ -88,6 +88,9 @@ FILES_TO_LINK=(
   "shell/tmux.conf:.tmux.conf"
   "shell/alacritty.toml:.config/alacritty/alacritty.toml"
 
+  # AI Agents
+  "agents/statusline.sh:.claude/statusline.sh"
+
   # Git Configuration
   "git/gitconfig:.gitconfig"
   "git/gitignore_global:.gitignore_global"
