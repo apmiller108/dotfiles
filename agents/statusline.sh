@@ -45,7 +45,7 @@ if git -C "$cwd" --no-optional-locks rev-parse --is-inside-work-tree >/dev/null 
 fi
 
 model=$(jq -r '.model.display_name // "unknown"' <<<"$input")
-used=$(jq -r '.context_window.current_usage // empty' <<<"$input")
+used=$(jq -r '.context_window.total_input_tokens // empty' <<<"$input")
 remaining_pct=$(jq -r '.context_window.remaining_percentage // empty' <<<"$input")
 effort=$(jq -r 'if .effort == null then empty elif (.effort|type)=="object" then (.effort.level // empty) else .effort end' <<<"$input")
 

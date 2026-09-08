@@ -87,6 +87,7 @@ FILES_TO_LINK=(
   "shell/zshrc:.zshrc"
   "shell/tmux.conf:.tmux.conf"
   "shell/alacritty.toml:.config/alacritty/alacritty.toml"
+  "shell/ghostty.conf:.config/ghostty/config.ghostty"
 
   # AI Agents
   "agents/statusline.sh:.claude/statusline.sh"
