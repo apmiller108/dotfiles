@@ -573,6 +573,7 @@ Programming". This is done with [[https://www.gnu.org/software/emacs/][GNU Emacs
                '((display-buffer-reuse-window display-buffer-at-bottom)
                  (window-height . 0.3))))
           (compile command t)))
+      (setq lsp-clients-typescript-prefer-use-project-ts-server t) ;; use project local tsserver when available
     #+end_src
 *** Hooks
     #+begin_src emacs-lisp
